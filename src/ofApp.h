@@ -29,18 +29,6 @@ class ofApp : public ofBaseApp
 	void gotMessage(ofMessage msg);
 
 	ofImage bgImage;
-/*    ofxUIScrollableCanvas *gui0;
-    ofxUIScrollableCanvas *gui1;
-    ofxUIScrollableCanvas *gui2;
-    ofxUIScrollableCanvas *gui3;
-    ofxUIScrollableCanvas *gui4;
-    ofxUIScrollableCanvas *gui5;
-    ofxUIScrollableCanvas *gui6;
-    ofxUIScrollableCanvas *gui7;
-    ofxUIScrollableCanvas *gui8;
-    ofxUIScrollableCanvas *gui9;
-    ofxUISuperCanvas *gui5;
-*/
 
 	ofxUISuperCanvas *gui0;
 	ofxUISuperCanvas *gui1;
@@ -54,8 +42,6 @@ class ofApp : public ofBaseApp
     ofxUISuperCanvas *gui9;
     ofxUISuperCanvas *gui10;
     ofxUISuperCanvas *gui11;
-
-//    ofxUITabBar *guiTabBar;
 
 	void guiEvent(ofxUIEventArgs &e);
 
@@ -75,7 +61,7 @@ class ofApp : public ofBaseApp
 
     ofxOscSender sender;
     ofTrueTypeFont font;
-    ofVideoGrabber vid;
+
 };
 
 #endif

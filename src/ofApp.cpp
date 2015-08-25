@@ -230,9 +230,9 @@ void ofApp::setup()
 //----GUI6------------------------------------------------------
 
     gui6 = new ofxUISuperCanvas("Capture & CV");
-    gui6->setPosition(420, 50);
+    gui6->setPosition(1050, 50);
 //    gui6->setDimensions(150, ofGetHeight());
-    gui6->setVisible(false);
+    gui6->setVisible(true);
     gui6->addSpacer();
     gui6->addLabel("Kinect");
     gui6->addSpacer();
@@ -263,9 +263,9 @@ void ofApp::setup()
 //----GUI7------------------------------------------------------
 
     gui7 = new ofxUISuperCanvas("Draw");
-    gui7->setPosition(210, 50);
+    gui7->setPosition(1260, 50);
 //    gui7->setDimensions(150, ofGetHeight());
-    gui7->setVisible(false);
+    gui7->setVisible(true);
     gui7->addSpacer();
     gui7->addLabel("Slideshow");
     gui7->addSpacer();
@@ -300,8 +300,8 @@ void ofApp::setup()
     gui8 = new ofxUISuperCanvas("Quad");
 //    gui8->setDimensions(150, ofGetHeight());
 //    gui3->setScrollAreaToScreen();
-    gui8->setPosition(630, 50);
-    gui8->setVisible(false);
+    gui8->setPosition(1470, 50);
+    gui8->setVisible(true);
     gui8->addMinimalSlider("active quad", 0.0, 72.0, 3.0);
     gui8->addSpacer();
     gui8->addLabel("rectangular crop");
@@ -336,8 +336,8 @@ void ofApp::setup()
 
     gui9 = new ofxUISuperCanvas("Global");
     //gui9->setDimensions(150, ofGetHeight());
-    gui9->setPosition(840, 50);
-    gui9->setVisible(false);
+    gui9->setPosition(1680, 50);
+    gui9->setVisible(true);
     gui9->addSpacer();
     gui9->addLabel("Placement");
     gui9->addSpacer();
@@ -358,8 +358,8 @@ void ofApp::setup()
     //----GUI11
 
     gui11 = new ofxUISuperCanvas("Input");
-    gui11->setPosition(0, 50);
-    gui11->setVisible(false);
+    gui11->setPosition(0, 650);
+    gui11->setVisible(true);
     gui11->addSpacer();
     gui11->addLabel("3D Model");
     gui11->addSpacer();
@@ -430,7 +430,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v on/off")
+    else if(name == "v on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -439,7 +439,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v load")
+    else if(name == "v load")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -448,7 +448,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v x scale")
+    else if(name == "v x scale")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -457,7 +457,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v y scale")
+    else if(name == "v y scale")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -466,7 +466,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v fit")
+    else if(name == "v fit")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -475,7 +475,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v keep aspect")
+    else if(name == "v keep aspect")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -484,7 +484,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v hflip")
+    else if(name == "v hflip")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -493,7 +493,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v vflip")
+    else if(name == "v vflip")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -502,7 +502,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v red")
+    else if(name == "v red")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -511,7 +511,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v green")
+    else if(name == "v green")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -520,7 +520,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v blue")
+    else if(name == "v blue")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -529,7 +529,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v alpha")
+    else if(name == "v alpha")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -538,7 +538,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "audio")
+    else if(name == "audio")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -547,7 +547,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "speed")
+    else if(name == "speed")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -556,7 +556,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v loop")
+    else if(name == "v loop")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -565,7 +565,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "v greenscreen")
+    else if(name == "v greenscreen")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -576,7 +576,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     }
         //greenscreen
 
-    if(name == "threshold")
+    else if(name == "threshold")
     {
     ofxUICircleSlider *csliderValue = (ofxUICircleSlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -585,7 +585,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(csliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "gs red")
+    else if(name == "gs red")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -594,7 +594,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "gs green")
+    else if(name == "gs green")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -603,7 +603,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "gs blue")
+    else if(name == "gs blue")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -612,7 +612,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "gs alpha")
+    else if(name == "gs alpha")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -623,7 +623,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     }
 
     //Kinect
-    if(name == "k on/off")
+    else if(name == "k on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -632,7 +632,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k close/open")
+    else if(name == "k close/open")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -641,7 +641,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k show img")
+    else if(name == "k show img")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -650,7 +650,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k grayscale")
+    else if(name == "k grayscale")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -659,7 +659,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k mask")
+    else if(name == "k mask")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -668,7 +668,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k detect")
+    else if(name == "k detect")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -677,7 +677,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k scale x")
+    else if(name == "k scale x")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -686,7 +686,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k scale y")
+    else if(name == "k scale y")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -695,7 +695,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k threshold near")
+    else if(name == "k threshold near")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -704,7 +704,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k threshold far")
+    else if(name == "k threshold far")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -713,7 +713,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k angle")
+    else if(name == "k angle")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -722,7 +722,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k blur")
+    else if(name == "k blur")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -731,7 +731,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k smooth")
+    else if(name == "k smooth")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -740,16 +740,16 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k simplify")
+    else if(name == "k simplelse ify")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
     ofxOscMessage m;
-    m.setAddress("/active/kinect/contour/simplify");
+    m.setAddress("/active/kinect/contour/simplelse ify");
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k min blob")
+    else if(name == "k min blob")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -758,7 +758,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k max blob")
+    else if(name == "k max blob")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -767,7 +767,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k red")
+    else if(name == "k red")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -776,7 +776,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k green")
+    else if(name == "k green")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -785,7 +785,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k blue")
+    else if(name == "k blue")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -794,7 +794,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "k alpha")
+    else if(name == "k alpha")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -808,7 +808,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 
 
     //slideshow
-    if(name == "sh on/off")
+    else if(name == "sh on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -817,7 +817,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "sh load")
+    else if(name == "sh load")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -827,7 +827,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     sender.sendMessage(m);
     }
 
-    if(name == "sh fit")
+    else if(name == "sh fit")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -836,7 +836,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "sh aspect ratio")
+    else if(name == "sh aspect ratio")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -845,7 +845,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "sh greenscreen")
+    else if(name == "sh greenscreen")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -856,7 +856,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     }
 
 
-    if(name == "sh duration")
+    else if(name == "sh duration")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -865,7 +865,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-/*    if(name == "show/hide")
+    else if(name == "show/hide")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -874,10 +874,10 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-*/
+
     //timeline
 
-    if(name == "use timeline")
+    else if(name == "use timeline")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -886,7 +886,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "seconds")
+    else if(name == "seconds")
     {
     ofxUIMinimalSlider *sliderValue = (ofxUIMinimalSlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -895,7 +895,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "tl tint")
+    else if(name == "tl tint")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -904,7 +904,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "tl color")
+    else if(name == "tl color")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -913,7 +913,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "tl alpha")
+    else if(name == "tl alpha")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -922,7 +922,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "tl 4 slides")
+    else if(name == "tl 4 slides")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -934,7 +934,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 
     //camera
 
-    if(name == "c on/off")
+    else if(name == "c on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -943,7 +943,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "c load")
+    else if(name == "c load")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -952,7 +952,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "c scale x")
+    else if(name == "c scale x")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -961,7 +961,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "c scale y")
+    else if(name == "c scale y")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -970,7 +970,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "c fit")
+    else if(name == "c fit")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -979,7 +979,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "c aspect ratio")
+    else if(name == "c aspect ratio")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -988,7 +988,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "c hflip")
+    else if(name == "c hflip")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -997,7 +997,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "c vflip")
+    else if(name == "c vflip")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1006,7 +1006,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "c red")
+    else if(name == "c red")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1015,7 +1015,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "c green")
+    else if(name == "c green")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1024,7 +1024,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "c blue")
+    else if(name == "c blue")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1033,7 +1033,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "c alpha")
+    else if(name == "c alpha")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1042,7 +1042,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "cam audio")
+    else if(name == "cam audio")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1051,7 +1051,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "c greenscreen")
+    else if(name == "c greenscreen")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1060,7 +1060,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "camera 0")
+    else if(name == "camera 0")
     {
     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1073,7 +1073,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(ddl->getValue());
     sender.sendMessage(m);
     }
-    if(name == "camera 1")
+    else if(name == "camera 1")
     {
     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1086,7 +1086,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(ddl->getValue());
     sender.sendMessage(m);
     }
-    if(name == "camera 2")
+    else if(name == "camera 2")
     {
     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1099,7 +1099,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(ddl->getValue());
     sender.sendMessage(m);
     }
-    if(name == "camera 3")
+    else if(name == "camera 3")
     {
     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1116,7 +1116,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 
     //image
 
-    if(name == "i on/off")
+    else if(name == "i on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1125,7 +1125,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "i load")
+    else if(name == "i load")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1134,7 +1134,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "i fit")
+    else if(name == "i fit")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1143,7 +1143,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "i aspect ratio")
+    else if(name == "i aspect ratio")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1152,7 +1152,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "i scale x")
+    else if(name == "i scale x")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1161,7 +1161,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "i scale y")
+    else if(name == "i scale y")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1170,7 +1170,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "i hflip")
+    else if(name == "i hflip")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1179,7 +1179,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "i vflip")
+    else if(name == "i vflip")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1188,7 +1188,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "i greenscreen")
+    else if(name == "i greenscreen")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1197,7 +1197,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "i red")
+    else if(name == "i red")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1206,7 +1206,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "i green")
+    else if(name == "i green")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1215,7 +1215,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "i blue")
+    else if(name == "i blue")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1224,7 +1224,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "i alpha")
+    else if(name == "i alpha")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1235,7 +1235,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     }
 
     //placement
-    if(name == "move x")
+    else if(name == "move x")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1244,7 +1244,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-     if(name == "move y")
+     else if(name == "move y")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1253,7 +1253,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "width")
+    else if(name == "width")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1262,7 +1262,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "height")
+    else if(name == "height")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1271,7 +1271,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "reset")
+    else if(name == "reset")
     {
     ofxUIButton *button = (ofxUIButton *) e.getButton();
     cout << "got event from: " << name << endl;
@@ -1283,7 +1283,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 
     //edge blend
 
-    if(name == "eb on/off")
+    else if(name == "eb on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1292,7 +1292,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-     if(name == "power")
+     else if(name == "power")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1301,7 +1301,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "gamma")
+    else if(name == "gamma")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1310,7 +1310,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "luminance")
+    else if(name == "luminance")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1319,7 +1319,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "left edge")
+    else if(name == "left edge")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1328,7 +1328,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "right edge")
+    else if(name == "right edge")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1337,7 +1337,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "top edge")
+    else if(name == "top edge")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1346,7 +1346,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "bottom edge")
+    else if(name == "bottom edge")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1358,7 +1358,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 
      //blend modes
 
-     if(name == "bm on/off")
+     else if(name == "bm on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1367,7 +1367,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-     if(name == "screen")
+     else if(name == "screen")
     {
     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1380,7 +1380,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(ddl->getValue());
     sender.sendMessage(m);
     }
-    if(name == "add")
+    else if(name == "add")
     {
     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1393,7 +1393,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(ddl->getValue());
     sender.sendMessage(m);
     }
-    if(name == "subtract")
+    else if(name == "subtract")
     {
     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1406,7 +1406,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(ddl->getValue());
     sender.sendMessage(m);
     }
-    if(name == "multiply")
+    else if(name == "multiply")
     {
     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1422,7 +1422,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 
     //solid color
 
-    if(name == "sc on/off")
+    else if(name == "sc on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1431,7 +1431,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "sc red")
+    else if(name == "sc red")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1440,7 +1440,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "sc green")
+    else if(name == "sc green")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1449,7 +1449,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "sc blue")
+    else if(name == "sc blue")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1458,7 +1458,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "sc alpha")
+    else if(name == "sc alpha")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1470,7 +1470,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 
     //Projection
 
-    if(name == "live resync")
+    else if(name == "live resync")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1479,7 +1479,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "live stop/start")
+    else if(name == "live stop/start")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1488,7 +1488,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "direct save")
+    else if(name == "direct save")
     {
     ofxUIButton *button = (ofxUIButton *) e.getButton();
     cout << "got event from: " << name << endl;
@@ -1497,7 +1497,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(button->getValue());
     sender.sendMessage(m);
     }
-    if(name == "direct load")
+    else if(name == "direct load")
     {
     ofxUIButton *button = (ofxUIButton *) e.getButton();
     cout << "got event from: " << name << endl;
@@ -1506,7 +1506,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(button->getValue());
     sender.sendMessage(m);
     }
-    if(name == "load file")
+    else if(name == "load file")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1515,7 +1515,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "save file")
+    else if(name == "save file")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1524,7 +1524,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "live fc on/off")
+    else if(name == "live fc on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1533,7 +1533,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "display gui")
+    else if(name == "display gui")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1543,7 +1543,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     sender.sendMessage(m);
     }
 
-/*    if(name == "modesetup on/off")
+/*    else if(name == "modesetup on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1555,7 +1555,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 */
     //mask
 
-    if(name == "m on/off")
+    else if(name == "m on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1564,7 +1564,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "m invert")
+    else if(name == "m invert")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1573,7 +1573,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "mask edit on/off")
+    else if(name == "mask edit on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1584,7 +1584,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     }
 
     //Deform
-    if(name == "d on/off")
+    else if(name == "d on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1593,7 +1593,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "bezier")
+    else if(name == "bezier")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1602,7 +1602,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "spherize light")
+    else if(name == "spherize light")
     {
     ofxUIButton *button = (ofxUIButton *) e.getButton();
     cout << "got event from: " << name << endl;
@@ -1611,7 +1611,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(button->getValue());
     sender.sendMessage(m);
     }
-    if(name == "spherize strong")
+    else if(name == "spherize strong")
     {
     ofxUIButton *button = (ofxUIButton *) e.getButton();
     cout << "got event from: " << name << endl;
@@ -1620,7 +1620,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(button->getValue());
     sender.sendMessage(m);
     }
-    if(name == "bezier reset")
+    else if(name == "bezier reset")
     {
     ofxUIButton *button = (ofxUIButton *) e.getButton();
     cout << "got event from: " << name << endl;
@@ -1629,7 +1629,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(button->getValue());
     sender.sendMessage(m);
     }
-    if(name == "grid")
+    else if(name == "grid")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1638,7 +1638,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "rows num")
+    else if(name == "rows num")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1647,7 +1647,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "columns num")
+    else if(name == "columns num")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1656,7 +1656,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "edit")
+    else if(name == "edit")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1668,7 +1668,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 
     //crop
 
-    if(name == "top")
+    else if(name == "top")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1677,7 +1677,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "right")
+    else if(name == "right")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1686,7 +1686,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "left")
+    else if(name == "left")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1695,7 +1695,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "bottom")
+    else if(name == "bottom")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1704,7 +1704,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "x")
+    else if(name == "x")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1713,7 +1713,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "y")
+    else if(name == "y")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1722,7 +1722,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "radius")
+    else if(name == "radius")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1732,7 +1732,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     sender.sendMessage(m);
     }
     //active surface
-    if(name == "Number")
+    else if(name == "Number")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1742,7 +1742,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     sender.sendMessage(m);
     }
     //transition
-    if(name == "tr on/off")
+    else if(name == "tr on/off")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1751,7 +1751,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "tr red")
+    else if(name == "tr red")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1760,7 +1760,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "tr green")
+    else if(name == "tr green")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1769,7 +1769,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "tr blue")
+    else if(name == "tr blue")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1778,7 +1778,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "tr alpha")
+    else if(name == "tr alpha")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1787,7 +1787,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "tr duration")
+    else if(name == "tr duration")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1797,7 +1797,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     sender.sendMessage(m);
     }
     //3d model
-    if(name == "3d load")
+    else if(name == "3d load")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1806,7 +1806,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-    if(name == "3d scale x")
+    else if(name == "3d scale x")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1815,7 +1815,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "3d scale y")
+    else if(name == "3d scale y")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1824,7 +1824,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "3d scale z")
+    else if(name == "3d scale z")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1833,7 +1833,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "3d rotate x")
+    else if(name == "3d rotate x")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1842,7 +1842,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "3d rotate y")
+    else if(name == "3d rotate y")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1851,7 +1851,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "3d rotate z")
+    else if(name == "3d rotate z")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1860,7 +1860,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "3d move x")
+    else if(name == "3d move x")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1869,7 +1869,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "3d move y")
+    else if(name == "3d move y")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1878,7 +1878,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "3d move z")
+    else if(name == "3d move z")
     {
     ofxUISlider *sliderValue = (ofxUISlider *) e.getSlider();
     cout << "got event from: " << name << endl;
@@ -1887,7 +1887,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addFloatArg(sliderValue->getValue());
     sender.sendMessage(m);
     }
-    if(name == "animation")
+    else if(name == "animation")
     {
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1896,7 +1896,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
-        if(name == "smooth")
+        else if(name == "smooth")
     {
     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1906,7 +1906,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(ddl->getValue());
     sender.sendMessage(m);
     }
-    if(name == "wire")
+    else if(name == "wire")
     {
     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
     cout << "got event from: " << name << endl;
@@ -1916,7 +1916,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(ddl->getValue());
     sender.sendMessage(m);
     }
-    if(name == "dots")
+    else if(name == "dots")
     {
     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
     cout << "got event from: " << name << endl;
