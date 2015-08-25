@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
+    ofSetFrameRate(60);
 	ofBackground(50, 100, 50, 255);
 	//ofEnableSmoothing();
     ofSetCircleResolution(60);
