@@ -13,11 +13,6 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  ../../../libs/poco/include/Poco/Timestamp.h \
  ../../../libs/poco/include/Poco/File_UNIX.h \
  ../../../libs/openFrameworks/utils/ofLog.h \
- ../../../libs/poco/include/Poco/ErrorHandler.h \
- ../../../libs/poco/include/Poco/Exception.h \
- ../../../libs/poco/include/Poco/Mutex.h \
- ../../../libs/poco/include/Poco/ScopedLock.h \
- ../../../libs/poco/include/Poco/Mutex_POSIX.h \
  ../../../libs/openFrameworks/types/ofTypes.h \
  ../../../libs/openFrameworks/types/ofColor.h \
  ../../../libs/openFrameworks/math/ofMath.h \
@@ -25,6 +20,10 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  ../../../libs/openFrameworks/math/ofVec3f.h \
  ../../../libs/openFrameworks/math/ofVec2f.h \
  ../../../libs/openFrameworks/math/ofVec4f.h \
+ ../../../libs/poco/include/Poco/Mutex.h \
+ ../../../libs/poco/include/Poco/Exception.h \
+ ../../../libs/poco/include/Poco/ScopedLock.h \
+ ../../../libs/poco/include/Poco/Mutex_POSIX.h \
  ../../../libs/openFrameworks/utils/ofSystemUtils.h \
  ../../../libs/openFrameworks/utils/ofThread.h \
  ../../../libs/poco/include/Poco/AtomicCounter.h \
@@ -36,9 +35,6 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  ../../../libs/poco/include/Poco/Event_POSIX.h \
  ../../../libs/poco/include/Poco/RefCountedObject.h \
  ../../../libs/poco/include/Poco/AutoPtr.h \
- ../../../libs/openFrameworks/utils/ofThreadChannel.h \
- ../../../libs/poco/include/Poco/Condition.h \
- ../../../libs/poco/include/Poco/ScopedUnlock.h \
  ../../../libs/openFrameworks/utils/ofURLFileLoader.h \
  ../../../libs/openFrameworks/events/ofEvents.h \
  ../../../libs/openFrameworks/events/ofEventUtils.h \
@@ -59,21 +55,18 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  ../../../libs/poco/include/Poco/PriorityExpire.h \
  ../../../libs/poco/include/Poco/FunctionPriorityDelegate.h \
  ../../../libs/openFrameworks/events/ofDelegate.h \
- ../../../libs/openFrameworks/utils/ofTimer.h \
- ../../../libs/openFrameworks/utils/ofFpsCounter.h \
+ ../../../libs/poco/include/Poco/Condition.h \
+ ../../../libs/poco/include/Poco/ScopedUnlock.h \
  ../../../libs/openFrameworks/utils/ofUtils.h \
  ../../../libs/poco/include/Poco/Path.h \
  ../../../libs/openFrameworks/types/ofBaseTypes.h \
  ../../../libs/openFrameworks/types/ofRectangle.h \
- ../../../libs/openFrameworks/math/ofMatrix4x4.h \
- ../../../libs/openFrameworks/math/ofQuaternion.h \
  ../../../libs/openFrameworks/3d/ofMesh.h \
  ../../../libs/openFrameworks/gl/ofGLUtils.h \
  ../../../libs/openFrameworks/graphics/ofPixels.h \
+ ../../../libs/openFrameworks/math/ofMatrix4x4.h \
+ ../../../libs/openFrameworks/math/ofQuaternion.h \
  ../../../libs/openFrameworks/utils/ofXml.h \
- ../../../libs/openFrameworks/types/ofParameter.h \
- ../../../libs/openFrameworks/types/ofParameterGroup.h \
- ../../../libs/poco/include/Poco/Any.h \
  ../../../libs/poco/include/Poco/DOM/Document.h \
  ../../../libs/poco/include/Poco/XML/XML.h \
  ../../../libs/poco/include/Poco/DOM/AbstractContainerNode.h \
@@ -119,6 +112,9 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  ../../../libs/poco/include/Poco/DOM/NamedNodeMap.h \
  ../../../libs/poco/include/Poco/DOM/ChildNodesList.h \
  ../../../libs/poco/include/Poco/DOM/NodeList.h \
+ ../../../libs/openFrameworks/types/ofParameter.h \
+ ../../../libs/openFrameworks/types/ofParameterGroup.h \
+ ../../../libs/poco/include/Poco/Any.h \
  ../../../libs/openFrameworks/math/ofVectorMath.h \
  ../../../libs/openFrameworks/math/ofMatrix3x3.h \
  ../../../libs/openFrameworks/communication/ofSerial.h \
@@ -128,26 +124,19 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  ../../../libs/openFrameworks/gl/ofVboMesh.h \
  ../../../libs/openFrameworks/gl/ofVbo.h \
  ../../../libs/openFrameworks/gl/ofGLUtils.h \
- ../../../libs/openFrameworks/gl/ofBufferObject.h \
  ../../../libs/openFrameworks/gl/ofGLRenderer.h \
  ../../../libs/openFrameworks/graphics/ofPolyline.h \
- ../../../libs/openFrameworks/graphics/of3dGraphics.h \
- ../../../libs/openFrameworks/3d/of3dPrimitives.h \
+ ../../../libs/openFrameworks/graphics/ofGraphics.h \
+ ../../../libs/openFrameworks/utils/ofMatrixStack.h \
+ ../../../libs/openFrameworks/gl/ofLight.h \
  ../../../libs/openFrameworks/3d/ofNode.h \
  ../../../libs/openFrameworks/3d/of3dUtils.h \
- ../../../libs/openFrameworks/app/ofAppRunner.h \
- ../../../libs/openFrameworks/app/ofWindowSettings.h \
- ../../../libs/openFrameworks/app/ofMainLoop.h \
- ../../../libs/openFrameworks/app/ofAppBaseWindow.h \
- ../../../libs/openFrameworks/app/ofBaseApp.h \
- ../../../libs/openFrameworks/graphics/ofBitmapFont.h \
- ../../../libs/openFrameworks/utils/ofMatrixStack.h \
- ../../../libs/openFrameworks/graphics/ofGraphics.h \
- ../../../libs/openFrameworks/graphics/ofPath.h \
- ../../../libs/openFrameworks/graphics/ofTessellator.h \
- ../../../libs/openFrameworks/gl/ofLight.h \
+ ../../../libs/openFrameworks/graphics/of3dGraphics.h \
+ ../../../libs/openFrameworks/3d/of3dPrimitives.h \
  ../../../libs/openFrameworks/gl/ofMaterial.h \
  ../../../libs/openFrameworks/gl/ofShader.h \
+ ../../../libs/poco/include/Poco/RegularExpression.h \
+ ../../../libs/openFrameworks/app/ofAppBaseWindow.h \
  ../../../libs/openFrameworks/gl/ofGLProgrammableRenderer.h \
  ../../../libs/openFrameworks/graphics/ofCairoRenderer.h \
  /usr/include/cairo/cairo-features.h /usr/include/cairo/cairo-pdf.h \
@@ -155,23 +144,22 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  /usr/include/cairo/cairo-features.h \
  /usr/include/cairo/cairo-deprecated.h /usr/include/cairo/cairo-svg.h \
  /usr/include/cairo/cairo.h \
+ ../../../libs/openFrameworks/graphics/ofPath.h \
+ ../../../libs/openFrameworks/graphics/ofTessellator.h \
  ../../../libs/openFrameworks/graphics/ofImage.h \
  ../../../libs/openFrameworks/graphics/ofRendererCollection.h \
  ../../../libs/openFrameworks/graphics/ofTrueTypeFont.h \
- ../../../libs/openFrameworks/app/ofAppGLFWWindow.h \
- ../../../libs/glfw/include/GLFW/glfw3.h \
- ../../../libs/openFrameworks/app/ofAppGlutWindow.h \
+ ../../../libs/openFrameworks/app/ofBaseApp.h \
+ ../../../libs/openFrameworks/app/ofAppRunner.h \
  ../../../libs/openFrameworks/sound/ofSoundStream.h \
  ../../../libs/openFrameworks/sound/ofBaseSoundStream.h \
  ../../../libs/openFrameworks/sound/ofRtAudioSoundStream.h \
- ../../../libs/openFrameworks/sound/ofSoundBuffer.h \
  ../../../libs/openFrameworks/sound/ofSoundPlayer.h \
  ../../../libs/openFrameworks/sound/ofBaseSoundPlayer.h \
  ../../../libs/openFrameworks/sound/ofOpenALSoundPlayer.h \
  ../../../libs/kiss/include/kiss_fft.h \
  ../../../libs/kiss/include/kiss_fftr.h \
  ../../../libs/kiss/include/kiss_fft.h \
- ../../../libs/openFrameworks/sound/ofSoundBuffer.h \
  ../../../libs/openFrameworks/video/ofVideoGrabber.h \
  ../../../libs/openFrameworks/video/ofGstVideoGrabber.h \
  ../../../libs/openFrameworks/video/ofGstUtils.h \
@@ -318,35 +306,10 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  /usr/include/gstreamer-1.0/gst/gstutils.h \
  /usr/include/gstreamer-1.0/gst/gstparse.h \
  /usr/include/gstreamer-1.0/gst/gstcompat.h \
- /usr/include/gstreamer-1.0/gst/video/video.h \
- /usr/include/gstreamer-1.0/gst/video/video-format.h \
- /usr/include/gstreamer-1.0/gst/video/video-enumtypes.h \
- /usr/include/gstreamer-1.0/gst/video/video-chroma.h \
- /usr/include/gstreamer-1.0/gst/video/video-color.h \
- /usr/include/gstreamer-1.0/gst/video/video-info.h \
- /usr/include/gstreamer-1.0/gst/video/video-frame.h \
- /usr/include/gstreamer-1.0/gst/video/colorbalancechannel.h \
- /usr/include/gstreamer-1.0/gst/video/colorbalance.h \
- /usr/include/gstreamer-1.0/gst/video/gstvideodecoder.h \
- /usr/include/gstreamer-1.0/gst/base/gstadapter.h \
- /usr/include/gstreamer-1.0/gst/video/gstvideoutils.h \
- /usr/include/gstreamer-1.0/gst/video/gstvideoencoder.h \
- /usr/include/gstreamer-1.0/gst/video/gstvideofilter.h \
- /usr/include/gstreamer-1.0/gst/base/gstbasetransform.h \
- /usr/include/gstreamer-1.0/gst/video/gstvideometa.h \
- /usr/include/gstreamer-1.0/gst/video/gstvideopool.h \
- /usr/include/gstreamer-1.0/gst/video/gstvideosink.h \
- /usr/include/gstreamer-1.0/gst/base/gstbasesink.h \
- /usr/include/gstreamer-1.0/gst/video/navigation.h \
- /usr/include/gstreamer-1.0/gst/video/video-blend.h \
- /usr/include/gstreamer-1.0/gst/video/video-event.h \
- /usr/include/gstreamer-1.0/gst/video/videoorientation.h \
- /usr/include/gstreamer-1.0/gst/video/video-overlay-composition.h \
- /usr/include/gstreamer-1.0/gst/video/videooverlay.h \
  ../../../libs/openFrameworks/video/ofVideoPlayer.h \
  ../../../libs/openFrameworks/video/ofGstVideoPlayer.h \
  ../../../libs/openFrameworks/3d/ofCamera.h \
- ../../../libs/openFrameworks/3d/ofEasyCam.h src/testApp.h \
+ ../../../libs/openFrameworks/3d/ofEasyCam.h src/ofApp.h \
  ../../../addons/ofxUI/src/ofxUI.h \
  ../../../addons/ofxUI/src/ofxUIDefines.h \
  ../../../addons/ofxXmlSettings/src/ofxXmlSettings.h \
@@ -407,14 +370,14 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
  ../../../addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.h \
  ../../../addons/ofxOsc/libs/oscpack/src/osc/OscTypes.h \
  ../../../addons/ofxOsc/libs/oscpack/src/osc/OscException.h \
- ../../../addons/ofxOsc/libs/oscpack/src/ip/UdpSocket.h \
- ../../../addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h \
- ../../../addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.h \
  ../../../addons/ofxOsc/src/ofxOscBundle.h \
  ../../../addons/ofxOsc/src/ofxOscReceiver.h \
  ../../../addons/ofxOsc/libs/oscpack/src/osc/OscPacketListener.h \
  ../../../addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.h \
- ../../../addons/ofxOsc/libs/oscpack/src/osc/../ip/PacketListener.h
+ ../../../addons/ofxOsc/libs/oscpack/src/osc/../ip/PacketListener.h \
+ ../../../addons/ofxOsc/libs/oscpack/src/ip/UdpSocket.h \
+ ../../../addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h \
+ ../../../addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.h
 
 ../../../libs/openFrameworks/ofMain.h:
 
@@ -444,16 +407,6 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 ../../../libs/openFrameworks/utils/ofLog.h:
 
-../../../libs/poco/include/Poco/ErrorHandler.h:
-
-../../../libs/poco/include/Poco/Exception.h:
-
-../../../libs/poco/include/Poco/Mutex.h:
-
-../../../libs/poco/include/Poco/ScopedLock.h:
-
-../../../libs/poco/include/Poco/Mutex_POSIX.h:
-
 ../../../libs/openFrameworks/types/ofTypes.h:
 
 ../../../libs/openFrameworks/types/ofColor.h:
@@ -467,6 +420,14 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 ../../../libs/openFrameworks/math/ofVec2f.h:
 
 ../../../libs/openFrameworks/math/ofVec4f.h:
+
+../../../libs/poco/include/Poco/Mutex.h:
+
+../../../libs/poco/include/Poco/Exception.h:
+
+../../../libs/poco/include/Poco/ScopedLock.h:
+
+../../../libs/poco/include/Poco/Mutex_POSIX.h:
 
 ../../../libs/openFrameworks/utils/ofSystemUtils.h:
 
@@ -489,12 +450,6 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 ../../../libs/poco/include/Poco/RefCountedObject.h:
 
 ../../../libs/poco/include/Poco/AutoPtr.h:
-
-../../../libs/openFrameworks/utils/ofThreadChannel.h:
-
-../../../libs/poco/include/Poco/Condition.h:
-
-../../../libs/poco/include/Poco/ScopedUnlock.h:
 
 ../../../libs/openFrameworks/utils/ofURLFileLoader.h:
 
@@ -536,9 +491,9 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 ../../../libs/openFrameworks/events/ofDelegate.h:
 
-../../../libs/openFrameworks/utils/ofTimer.h:
+../../../libs/poco/include/Poco/Condition.h:
 
-../../../libs/openFrameworks/utils/ofFpsCounter.h:
+../../../libs/poco/include/Poco/ScopedUnlock.h:
 
 ../../../libs/openFrameworks/utils/ofUtils.h:
 
@@ -548,23 +503,17 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 ../../../libs/openFrameworks/types/ofRectangle.h:
 
-../../../libs/openFrameworks/math/ofMatrix4x4.h:
-
-../../../libs/openFrameworks/math/ofQuaternion.h:
-
 ../../../libs/openFrameworks/3d/ofMesh.h:
 
 ../../../libs/openFrameworks/gl/ofGLUtils.h:
 
 ../../../libs/openFrameworks/graphics/ofPixels.h:
 
+../../../libs/openFrameworks/math/ofMatrix4x4.h:
+
+../../../libs/openFrameworks/math/ofQuaternion.h:
+
 ../../../libs/openFrameworks/utils/ofXml.h:
-
-../../../libs/openFrameworks/types/ofParameter.h:
-
-../../../libs/openFrameworks/types/ofParameterGroup.h:
-
-../../../libs/poco/include/Poco/Any.h:
 
 ../../../libs/poco/include/Poco/DOM/Document.h:
 
@@ -656,6 +605,12 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 ../../../libs/poco/include/Poco/DOM/NodeList.h:
 
+../../../libs/openFrameworks/types/ofParameter.h:
+
+../../../libs/openFrameworks/types/ofParameterGroup.h:
+
+../../../libs/poco/include/Poco/Any.h:
+
 ../../../libs/openFrameworks/math/ofVectorMath.h:
 
 ../../../libs/openFrameworks/math/ofMatrix3x3.h:
@@ -674,45 +629,31 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 ../../../libs/openFrameworks/gl/ofGLUtils.h:
 
-../../../libs/openFrameworks/gl/ofBufferObject.h:
-
 ../../../libs/openFrameworks/gl/ofGLRenderer.h:
 
 ../../../libs/openFrameworks/graphics/ofPolyline.h:
 
-../../../libs/openFrameworks/graphics/of3dGraphics.h:
+../../../libs/openFrameworks/graphics/ofGraphics.h:
 
-../../../libs/openFrameworks/3d/of3dPrimitives.h:
+../../../libs/openFrameworks/utils/ofMatrixStack.h:
+
+../../../libs/openFrameworks/gl/ofLight.h:
 
 ../../../libs/openFrameworks/3d/ofNode.h:
 
 ../../../libs/openFrameworks/3d/of3dUtils.h:
 
-../../../libs/openFrameworks/app/ofAppRunner.h:
+../../../libs/openFrameworks/graphics/of3dGraphics.h:
 
-../../../libs/openFrameworks/app/ofWindowSettings.h:
-
-../../../libs/openFrameworks/app/ofMainLoop.h:
-
-../../../libs/openFrameworks/app/ofAppBaseWindow.h:
-
-../../../libs/openFrameworks/app/ofBaseApp.h:
-
-../../../libs/openFrameworks/graphics/ofBitmapFont.h:
-
-../../../libs/openFrameworks/utils/ofMatrixStack.h:
-
-../../../libs/openFrameworks/graphics/ofGraphics.h:
-
-../../../libs/openFrameworks/graphics/ofPath.h:
-
-../../../libs/openFrameworks/graphics/ofTessellator.h:
-
-../../../libs/openFrameworks/gl/ofLight.h:
+../../../libs/openFrameworks/3d/of3dPrimitives.h:
 
 ../../../libs/openFrameworks/gl/ofMaterial.h:
 
 ../../../libs/openFrameworks/gl/ofShader.h:
+
+../../../libs/poco/include/Poco/RegularExpression.h:
+
+../../../libs/openFrameworks/app/ofAppBaseWindow.h:
 
 ../../../libs/openFrameworks/gl/ofGLProgrammableRenderer.h:
 
@@ -734,25 +675,25 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 /usr/include/cairo/cairo.h:
 
+../../../libs/openFrameworks/graphics/ofPath.h:
+
+../../../libs/openFrameworks/graphics/ofTessellator.h:
+
 ../../../libs/openFrameworks/graphics/ofImage.h:
 
 ../../../libs/openFrameworks/graphics/ofRendererCollection.h:
 
 ../../../libs/openFrameworks/graphics/ofTrueTypeFont.h:
 
-../../../libs/openFrameworks/app/ofAppGLFWWindow.h:
+../../../libs/openFrameworks/app/ofBaseApp.h:
 
-../../../libs/glfw/include/GLFW/glfw3.h:
-
-../../../libs/openFrameworks/app/ofAppGlutWindow.h:
+../../../libs/openFrameworks/app/ofAppRunner.h:
 
 ../../../libs/openFrameworks/sound/ofSoundStream.h:
 
 ../../../libs/openFrameworks/sound/ofBaseSoundStream.h:
 
 ../../../libs/openFrameworks/sound/ofRtAudioSoundStream.h:
-
-../../../libs/openFrameworks/sound/ofSoundBuffer.h:
 
 ../../../libs/openFrameworks/sound/ofSoundPlayer.h:
 
@@ -765,8 +706,6 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 ../../../libs/kiss/include/kiss_fftr.h:
 
 ../../../libs/kiss/include/kiss_fft.h:
-
-../../../libs/openFrameworks/sound/ofSoundBuffer.h:
 
 ../../../libs/openFrameworks/video/ofVideoGrabber.h:
 
@@ -1086,56 +1025,6 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 /usr/include/gstreamer-1.0/gst/gstcompat.h:
 
-/usr/include/gstreamer-1.0/gst/video/video.h:
-
-/usr/include/gstreamer-1.0/gst/video/video-format.h:
-
-/usr/include/gstreamer-1.0/gst/video/video-enumtypes.h:
-
-/usr/include/gstreamer-1.0/gst/video/video-chroma.h:
-
-/usr/include/gstreamer-1.0/gst/video/video-color.h:
-
-/usr/include/gstreamer-1.0/gst/video/video-info.h:
-
-/usr/include/gstreamer-1.0/gst/video/video-frame.h:
-
-/usr/include/gstreamer-1.0/gst/video/colorbalancechannel.h:
-
-/usr/include/gstreamer-1.0/gst/video/colorbalance.h:
-
-/usr/include/gstreamer-1.0/gst/video/gstvideodecoder.h:
-
-/usr/include/gstreamer-1.0/gst/base/gstadapter.h:
-
-/usr/include/gstreamer-1.0/gst/video/gstvideoutils.h:
-
-/usr/include/gstreamer-1.0/gst/video/gstvideoencoder.h:
-
-/usr/include/gstreamer-1.0/gst/video/gstvideofilter.h:
-
-/usr/include/gstreamer-1.0/gst/base/gstbasetransform.h:
-
-/usr/include/gstreamer-1.0/gst/video/gstvideometa.h:
-
-/usr/include/gstreamer-1.0/gst/video/gstvideopool.h:
-
-/usr/include/gstreamer-1.0/gst/video/gstvideosink.h:
-
-/usr/include/gstreamer-1.0/gst/base/gstbasesink.h:
-
-/usr/include/gstreamer-1.0/gst/video/navigation.h:
-
-/usr/include/gstreamer-1.0/gst/video/video-blend.h:
-
-/usr/include/gstreamer-1.0/gst/video/video-event.h:
-
-/usr/include/gstreamer-1.0/gst/video/videoorientation.h:
-
-/usr/include/gstreamer-1.0/gst/video/video-overlay-composition.h:
-
-/usr/include/gstreamer-1.0/gst/video/videooverlay.h:
-
 ../../../libs/openFrameworks/video/ofVideoPlayer.h:
 
 ../../../libs/openFrameworks/video/ofGstVideoPlayer.h:
@@ -1144,7 +1033,7 @@ obj/linux64/Debug/src/main.o: src/main.cpp \
 
 ../../../libs/openFrameworks/3d/ofEasyCam.h:
 
-src/testApp.h:
+src/ofApp.h:
 
 ../../../addons/ofxUI/src/ofxUI.h:
 
@@ -1266,12 +1155,6 @@ src/testApp.h:
 
 ../../../addons/ofxOsc/libs/oscpack/src/osc/OscException.h:
 
-../../../addons/ofxOsc/libs/oscpack/src/ip/UdpSocket.h:
-
-../../../addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h:
-
-../../../addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.h:
-
 ../../../addons/ofxOsc/src/ofxOscBundle.h:
 
 ../../../addons/ofxOsc/src/ofxOscReceiver.h:
@@ -1281,3 +1164,9 @@ src/testApp.h:
 ../../../addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.h:
 
 ../../../addons/ofxOsc/libs/oscpack/src/osc/../ip/PacketListener.h:
+
+../../../addons/ofxOsc/libs/oscpack/src/ip/UdpSocket.h:
+
+../../../addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h:
+
+../../../addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.h:
