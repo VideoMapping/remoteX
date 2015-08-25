@@ -188,7 +188,10 @@ void ofApp::setup()
     gui4->addLabel("");
     gui4->addLabel("");
     gui4->addSpacer();
-
+    gui4->addToggle( "s on/off", false);
+    gui4->addMinimalSlider("s num", 0.0, 3, 1);
+    gui4->addMinimalSlider("b num", 0.0, 3, 1);
+    gui4->addSpacer();
 
     gui4->addMinimalSlider("c scale x", 0.1, 10.0, 1);
     gui4->addMinimalSlider("c scale y", 0.1, 10.0, 1);
@@ -394,6 +397,50 @@ void ofApp::setup()
 
 
    // guiTabBar->loadSettings("settings/", "ui-");
+
+   //----gui12--------------------------------------------------------
+
+    gui12 = new ofxUISuperCanvas("Capture & CV");
+    gui12->setPosition(210, 650);
+    gui12->setVisible(true);
+    gui12->addSpacer();
+    gui12->addLabel("Sampler");
+    gui12->addSpacer();
+
+
+   // float dimx = (gui12->getGlobalCanvasWidth() - gui12->getPadding()*7.0)*0.5;
+
+    vector<string> sampler_cam_num;
+    sampler_cam_num.push_back("sampler cam 0");
+    sampler_cam_num.push_back("sampler cam 1");
+    sampler_cam_num.push_back("sampler cam 2");
+    sampler_cam_num.push_back("sampler cam 3");
+
+
+    gui12->addDropDownList("sampler cam num", sampler_cam_num, float (gui12->getGlobalCanvasWidth() - gui12->getPadding()*7.0)*0.75);
+    gui12->addLabel("");
+    gui12->addLabel("");
+    gui12->addLabel("");
+    gui12->addLabel("");
+    gui12->addSpacer();
+
+
+   /* gui12->addMinimalSlider("c scale x", 0.1, 10.0, 1);
+    gui12->addMinimalSlider("c scale y", 0.1, 10.0, 1);*/
+    gui12->addToggle( "s record", false);
+    gui12->addToggle( "s playany", false);
+    gui12->addToggle( "s pause", false);
+    gui12->addToggle( "b clear", false);
+    gui12->addMinimalSlider("b buffer num", 0.0, 3.0, 1.0);
+    gui12->addToggle( "b play0", false);
+    gui12->addToggle( "b play1", false);
+    gui12->addToggle( "b play2", false);
+    gui12->addToggle( "b play3", false);
+    gui12->addSpacer();
+    gui12->autoSizeToFitWidgets();
+    //gui12->getRect()->setWidth(ofGetWidth());
+    ofAddListener(gui12->newGUIEvent,this,&ofApp::guiEvent);
+
 
 }
 

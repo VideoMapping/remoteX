@@ -42,6 +42,7 @@ class ofApp : public ofBaseApp
     ofxUISuperCanvas *gui9;
     ofxUISuperCanvas *gui10;
     ofxUISuperCanvas *gui11;
+    ofxUISuperCanvas *gui12;
 
 	void guiEvent(ofxUIEventArgs &e);
 
