@@ -2000,7 +2000,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
     ofxOscMessage m;
-    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/record/"+ofToString(SharedSamplerBufferIndex));
+    m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/record/"+ofToString(SharedSamplerBufferIndex));
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
@@ -2009,7 +2009,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
     ofxOscMessage m;
-    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/play");
+    m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/play");
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
@@ -2018,7 +2018,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
     ofxOscMessage m;
-    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/pause");
+    m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/pause");
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
@@ -2027,7 +2027,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
     ofxOscMessage m;
-    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/clear");
+    m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/clear");
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
@@ -2036,7 +2036,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
     ofxOscMessage m;
-    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/playbuffer");
+    m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/playbuffer/0");
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
@@ -2045,7 +2045,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
     ofxOscMessage m;
-    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/playbuffer");
+    m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/playbuffer/1");
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
@@ -2054,7 +2054,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
     ofxOscMessage m;
-    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/playbuffer");
+    m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/playbuffer/2");
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
@@ -2063,7 +2063,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
     cout << "got event from: " << name << endl;
     ofxOscMessage m;
-    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/playbuffer");
+    m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/playbuffer/3");
     m.addIntArg(toggle->getValue());
     sender.sendMessage(m);
     }
@@ -2072,6 +2072,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     ofxUIRadio *radio = (ofxUIRadio *) e.getToggle();
     cout << "got event from: " << name << endl;
     SharedSamplerIndex=radio->getValue();
+    cout<<"SharedSamplerIndex"<<SharedSamplerIndex<<endl;
 
     }
     else if(name == "b recnum")
@@ -2080,10 +2081,12 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     cout << "got event from: " << name << endl;
     SharedSamplerBufferIndex=radio->getValue();
     ofxOscMessage m;
-    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/record/"+ofToString(SharedSamplerBufferIndex));
+    m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/record/"+ofToString(SharedSamplerBufferIndex));
 
     m.addIntArg(0);
+
     sender.sendMessage(m);
+    cout<<"message "<<m.getAddress()<<endl;
     }
 }
 //[--------------------------------------------------------------
