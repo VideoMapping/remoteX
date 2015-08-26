@@ -3,7 +3,7 @@ lpmtX OSC controller using ofxUI
 
 ![Alt tag](https://raw.github.com/giladx/remoteX/master/bin/data/image/RemoteX by Gil@d.x.png)
 
-on extend or remoed display
+on extend or remote display
 ![Alt tag](https://raw.github.com/giladx/remoteX/master/bin/data/image/bg.png)
 
 
