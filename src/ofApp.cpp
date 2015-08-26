@@ -176,11 +176,16 @@ void ofApp::setup()
     float dime = (gui4->getGlobalCanvasWidth() - gui4->getPadding()*7.0)*0.5;
 
     vector<string> itemos;
-    itemos.push_back("camera 0");
-    itemos.push_back("camera 1");
-    itemos.push_back("camera 2");
-    itemos.push_back("camera 3");
+    itemos.push_back("cam 0");
+    itemos.push_back("cam 1");
+    itemos.push_back("cam 2");
+    itemos.push_back("cam 3");
 
+//sampler radio
+    vector<string> capture;
+    for (int i=0;i<nbOfCam;i++){
+        capture.push_back(ofToString(i));
+    }
 
     gui4->addDropDownList("device num", itemos, dime);
     gui4->addLabel("");
@@ -188,9 +193,10 @@ void ofApp::setup()
     gui4->addLabel("");
     gui4->addLabel("");
     gui4->addSpacer();
+    gui4->addLabel("sampler playback");
     gui4->addToggle( "s on/off", false);
-    gui4->addMinimalSlider("s num", 0.0, 3, 1);
-    gui4->addMinimalSlider("b num", 0.0, 3, 1);
+    gui4->addRadio("sampler num",capture,OFX_UI_ORIENTATION_HORIZONTAL);
+    gui4->addRadio("buffer num",capture,OFX_UI_ORIENTATION_HORIZONTAL);
     gui4->addSpacer();
 
     gui4->addMinimalSlider("c scale x", 0.1, 10.0, 1);
@@ -408,30 +414,18 @@ void ofApp::setup()
     gui12->addSpacer();
 
 
-   // float dimx = (gui12->getGlobalCanvasWidth() - gui12->getPadding()*7.0)*0.5;
 
-    vector<string> sampler_cam_num;
-    sampler_cam_num.push_back("sampler cam 0");
-    sampler_cam_num.push_back("sampler cam 1");
-    sampler_cam_num.push_back("sampler cam 2");
-    sampler_cam_num.push_back("sampler cam 3");
+    gui12->addLabel("cam to record from");
+    gui12->addRadio("s sampnum",capture,OFX_UI_ORIENTATION_HORIZONTAL);
 
 
-    gui12->addDropDownList("sampler cam num", sampler_cam_num, float (gui12->getGlobalCanvasWidth() - gui12->getPadding()*7.0)*0.75);
-    gui12->addLabel("");
-    gui12->addLabel("");
-    gui12->addLabel("");
-    gui12->addLabel("");
+    gui12->addLabel("buffer to record to");
+    gui12->addRadio("b recnum",capture,OFX_UI_ORIENTATION_HORIZONTAL);
     gui12->addSpacer();
-
-
-   /* gui12->addMinimalSlider("c scale x", 0.1, 10.0, 1);
-    gui12->addMinimalSlider("c scale y", 0.1, 10.0, 1);*/
     gui12->addToggle( "s record", false);
     gui12->addToggle( "s playany", false);
     gui12->addToggle( "s pause", false);
     gui12->addToggle( "b clear", false);
-    gui12->addMinimalSlider("b buffer num", 0.0, 3.0, 1.0);
     gui12->addToggle( "b play0", false);
     gui12->addToggle( "b play1", false);
     gui12->addToggle( "b play2", false);
@@ -1973,7 +1967,124 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     m.addIntArg(ddl->getValue());
     sender.sendMessage(m);
     }
+     //sampler
+    else if(name == "s on/off")
+    {
+    ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
+    cout << "got event from: " << name << endl;
+    ofxOscMessage m;
+    m.setAddress("/active/sampler/show");
+    m.addIntArg(toggle->getValue());
+    sender.sendMessage(m);
+    }
+    else if(name == "sampler num")
+    {
+    ofxUIRadio *radio = (ofxUIRadio *) e.getToggle();
+    cout << "got event from: " << name << endl;
+    ofxOscMessage m;
+    m.setAddress("/active/sampler/num");
+    m.addIntArg(radio->getValue());
+    sender.sendMessage(m);
+    }
+    else if(name == "buffer num")
+    {
+    ofxUIRadio *radio = (ofxUIRadio *) e.getToggle();
+    cout << "got event from: " << name << endl;
+    ofxOscMessage m;
+    m.setAddress("/active/sampler/buffernum");
+    m.addIntArg(radio->getValue());
+    sender.sendMessage(m);
+    }
+    else if(name == "s record")
+    {
+    ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
+    cout << "got event from: " << name << endl;
+    ofxOscMessage m;
+    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/record/"+ofToString(SharedSamplerBufferIndex));
+    m.addIntArg(toggle->getValue());
+    sender.sendMessage(m);
+    }
+    else if(name == "s playany")
+    {
+    ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
+    cout << "got event from: " << name << endl;
+    ofxOscMessage m;
+    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/play");
+    m.addIntArg(toggle->getValue());
+    sender.sendMessage(m);
+    }
+    else if(name == "s pause")
+    {
+    ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
+    cout << "got event from: " << name << endl;
+    ofxOscMessage m;
+    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/pause");
+    m.addIntArg(toggle->getValue());
+    sender.sendMessage(m);
+    }
+    else if(name == "b clear")
+    {
+    ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
+    cout << "got event from: " << name << endl;
+    ofxOscMessage m;
+    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/clear");
+    m.addIntArg(toggle->getValue());
+    sender.sendMessage(m);
+    }
+    else if(name == "b play0")
+    {
+    ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
+    cout << "got event from: " << name << endl;
+    ofxOscMessage m;
+    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/playbuffer");
+    m.addIntArg(toggle->getValue());
+    sender.sendMessage(m);
+    }
+    else if(name == "b play1")
+    {
+    ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
+    cout << "got event from: " << name << endl;
+    ofxOscMessage m;
+    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/playbuffer");
+    m.addIntArg(toggle->getValue());
+    sender.sendMessage(m);
+    }
+    else if(name == "b play2")
+    {
+    ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
+    cout << "got event from: " << name << endl;
+    ofxOscMessage m;
+    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/playbuffer");
+    m.addIntArg(toggle->getValue());
+    sender.sendMessage(m);
+    }
+    else if(name == "b play3")
+    {
+    ofxUIToggle *toggle = (ofxUIToggle *) e.getToggle();
+    cout << "got event from: " << name << endl;
+    ofxOscMessage m;
+    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/playbuffer");
+    m.addIntArg(toggle->getValue());
+    sender.sendMessage(m);
+    }
+    else if(name == "s sampnum")
+    {
+    ofxUIRadio *radio = (ofxUIRadio *) e.getToggle();
+    cout << "got event from: " << name << endl;
+    SharedSamplerIndex=radio->getValue();
 
+    }
+    else if(name == "b recnum")
+    {
+    ofxUIRadio *radio = (ofxUIRadio *) e.getToggle();
+    cout << "got event from: " << name << endl;
+    SharedSamplerBufferIndex=radio->getValue();
+    ofxOscMessage m;
+    m.setAddress("/sampler/"+ofToString(SharedSamplerIndex)+"/record/"+ofToString(SharedSamplerBufferIndex));
+
+    m.addIntArg(0);
+    sender.sendMessage(m);
+    }
 }
 //[--------------------------------------------------------------
 void ofApp::exit()

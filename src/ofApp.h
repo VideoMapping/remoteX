@@ -60,6 +60,10 @@ class ofApp : public ofBaseApp
 
     int video_volume;
 
+    //global config vars
+    int nbOfCam=4;
+    int SharedSamplerIndex,SharedSamplerBufferIndex=0;
+
     ofxOscSender sender;
     ofTrueTypeFont font;
 
