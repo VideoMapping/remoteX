@@ -4,7 +4,7 @@
 void ofApp::setup()
 {
     ofSetLogLevel(OF_LOG_VERBOSE);
-    ofSetFrameRate(60);
+    ofSetFrameRate(35);
 	ofBackground(50, 100, 50, 255);
 	//ofEnableSmoothing();
     ofSetCircleResolution(60);
