@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
+    ofSetLogLevel(OF_LOG_VERBOSE);
     ofSetFrameRate(60);
 	ofBackground(50, 100, 50, 255);
 	//ofEnableSmoothing();
@@ -15,42 +16,42 @@ void ofApp::setup()
     video_color_r = 10; video_color_g = 10; video_color_b = 10; video_color_a = 10;
     drawPadding = false;
 
-    ///gui video
+    ///the setups
+    
     videoGroup.setup();
-    videoParametersClass.add(videoGroup.videoParameters);
+    imageGroup.setup();
+    kinectGroup.setup();
 
-    //guiVideo.add(gVlabelVideo.setup("Video input","Video input"));
-    guiVideo.setup(videoParametersClass);
-    guiVideo.setName("Video Input");
+    //video
+    videoParametersClass.add(videoGroup.videoParameters);    
+    guiVideoPanel.setup(videoParametersClass);
+    guiVideoPanel.setName("Video Input");
+    videoPage.setup("Video");
+    videoPage.add(&guiVideoPanel);
+    //image
+    imageParametersClass.add(imageGroup.imageParameters);    
+    guiImagePanel.setup(imageParametersClass);
+    guiImagePanel.setName("Image Input");
+    imagePage.setup("Image");
+    imagePage.add(&guiImagePanel);
+    //kinect
+    kinectParametersClass.add(kinectGroup.kinectParameters);    
+    guiKinectPanel.setup(kinectParametersClass);
+    guiKinectPanel.setName("Kinect Input");
+    kinectPage.setup("Kinect");
+    kinectPage.add(&guiKinectPanel);
+
+    inputPages.setup("Inputs", "",40);
+    inputPages.setSize(500, 300);
+    inputPages.add(&videoPage);
+    inputPages.add(&imagePage);
+    inputPages.add(&kinectPage);
 
     ofAddListener(videoParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(imageParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(kinectParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
 
 
-    //--GUI1--------------------------------------------------------
-
-    gui1 = new ofxUISuperCanvas("Draw");
-    gui1->setPosition(210, 50);
-    gui1->setVisible(true);
-    gui1->addSpacer();
-    gui1->addLabel("Image");
-    gui1->addSpacer();
-    gui1->addToggle( "i on/off", false);
-    gui1->addToggle( "i load", false);
-    gui1->addMinimalSlider("i scale x", 0.1, 10.0, 1);
-    gui1->addMinimalSlider("i scale y", 0.1, 10.0, 1);
-    gui1->addToggle( "i fit", false);
-    gui1->addToggle( "i aspect ratio", false);
-    gui1->addToggle( "i hflip", false);
-    gui1->addToggle( "i vflip", false);
-    gui1->addToggle( "i greenscreen", false);
-    gui1->addMinimalSlider("i red", 0.0, 1.0, 1.0);
-    gui1->addMinimalSlider("i green", 0.0, 1.0, 1.0);
-    gui1->addMinimalSlider("i blue", 0.0, 1.0, 1.0);
-    gui1->addMinimalSlider("i alpha", 0.0, 1.0, 1.0);
-    gui1->addSpacer();
-    gui1->autoSizeToFitWidgets();
-//    gui1->getRect()->setWidth(ofGetWidth());
-    ofAddListener(gui1->newGUIEvent,this,&ofApp::guiEvent);
 
     //--GUI2--------------------------------------------------------
 
@@ -421,11 +422,8 @@ void ofApp::update()
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-guiVideo.draw();
-   // bgImage.draw(0,0);
+    inputPages.draw();
 
-/*    ofBackground(red, green, blue, 255);
-*/
 }
 
 void ofApp::guiEvent2(ofAbstractParameter &e){

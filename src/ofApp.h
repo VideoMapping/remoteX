@@ -7,6 +7,8 @@
 #include "ofxGui.h"
 #include "ofxGuiExtended.h"
 #include "guiVideo.h"
+#include "guiImage.h"
+#include "guiKinect.h"
 
 #define HOST "localhost"
 #define PORT 12345
@@ -46,11 +48,23 @@ class ofApp : public ofBaseApp
     ofxUISuperCanvas *gui10;
     ofxUISuperCanvas *gui11;
     ofxUISuperCanvas *gui12;
-    //GuiVideo Section
-    ofxPanel guiVideo;
-    ofxLabel gVlabelVideo;
+    //VideoPanel
+    ofxPanelExtended guiVideoPanel;
     ofParameterGroup videoParametersClass;
     GuiVideo videoGroup;
+    ofxGuiPage videoPage; 
+    //ImagePanel
+    ofxPanelExtended guiImagePanel;
+    ofParameterGroup imageParametersClass;
+    GuiImage imageGroup;
+    ofxGuiPage imagePage;
+    //KinectPanel
+    ofxPanelExtended guiKinectPanel;
+    ofParameterGroup kinectParametersClass;
+    GuiKinect kinectGroup;
+    ofxGuiPage kinectPage; 
+
+    ofxTabbedPages inputPages; 
 
 	void guiEvent(ofxUIEventArgs &e);
     void guiEvent2(ofAbstractParameter &e);
