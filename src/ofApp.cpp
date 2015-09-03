@@ -474,17 +474,7 @@ guiVideo.draw();
 
 void ofApp::guiEvent2(ofAbstractParameter &e){
 cout << e.getName() << endl;
-  string name = e.getName();
-  
-    if(name == "Video On/Off")
-    {
-    bool toggle = gVtoggleOnOff.operator=();
-    cout << "got event from: " << name << endl;
-    ofxOscMessage m;
-    m.setAddress("/active/video/show");
-    m.addIntArg(toggle);
-    sender.sendMessage(m);
-    }
+
 }
 //--------------------------------------------------------------
 void ofApp::guiEvent(ofxUIEventArgs &e)
