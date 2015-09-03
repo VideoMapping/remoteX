@@ -16,12 +16,30 @@ void ofApp::setup()
     drawPadding = false;
 
 
-    //gui0->loadSettings("gui1Settings.xml");
+    guiVideo.setup();
+    videoParameters.setName("video");
+    guiVideo.add(gVlabelVideo.setup("Video input","Video input"));
+    guiVideo.add(gVtoggleOnOff.setup("Video On/Off",false));
+    guiVideo.add(gVtoggleLoad.setup("Load Video",false));
+    guiVideo.add(gV2SliderScale.setup("Scale",ofVec2f(1,1), ofVec2f(0.1, 0.1), ofVec2f(10,10)));
+    guiVideo.add(gVtoggFit.setup("Fit to quad",false));
+    guiVideo.add(gVtoggKeepAspect.setup("Keep aspect ratio",false));
+    guiVideo.add(gVtoggHflip.setup("Horizontal flip",false));
+    guiVideo.add(gVtoggVflip.setup("Vertical flip",false));
+    guiVideo.add(gVcolor.setup("color",ofColor(255,255,255), ofColor(0, 0), ofColor(255, 255)));
+    guiVideo.add(gVfsliderSpeed.setup("Video Speed",-2.0, 4.0, 1.0));
+    guiVideo.add(gVtoggLoop.setup("Video Loop",false));
+    guiVideo.add(gVtoggGreenscreen.setup("Video Greenscreen",false));
+    guiVideo.add(gVfsliderVolume.setup("Video Audio Volume",0.0, 1.0, 1 &video_volume));
+    videoParameters.add(gVtoggleOnOff.getParameter());
+    videoParameters.add(gVtoggleLoad.getParameter());
+    videoParameters.add(gV2SliderScale.getParameter());
+    ofAddListener(videoParameters.parameterChangedE(),this,&ofApp::guiEvent2);
 
 //--GUI0--------------------------------------------------------
     gui0 = new ofxUISuperCanvas("Input");
     gui0->setPosition(0, 50);
-    gui0->setVisible(true);
+    gui0->setVisible(false);
     gui0->addSpacer();
     gui0->addLabel("Video");
     gui0->addSpacer();
@@ -447,11 +465,26 @@ void ofApp::update()
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-
+guiVideo.draw();
    // bgImage.draw(0,0);
 
 /*    ofBackground(red, green, blue, 255);
 */
+}
+
+void ofApp::guiEvent2(ofAbstractParameter &e){
+cout << e.getName() << endl;
+  string name = e.getName();
+  
+    if(name == "Video On/Off")
+    {
+    bool toggle = gVtoggleOnOff.operator=();
+    cout << "got event from: " << name << endl;
+    ofxOscMessage m;
+    m.setAddress("/active/video/show");
+    m.addIntArg(toggle);
+    sender.sendMessage(m);
+    }
 }
 //--------------------------------------------------------------
 void ofApp::guiEvent(ofxUIEventArgs &e)
