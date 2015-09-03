@@ -1,6 +1,3 @@
-#ifndef OF APP
-#define OF APP
-
 #include "ofMain.h"
 #include "ofxUI.h"
 #include "ofxOsc.h"
@@ -9,6 +6,8 @@
 #include "guiVideo.h"
 #include "guiImage.h"
 #include "guiKinect.h"
+#include "guiCamera.h"
+#include "gui3d.h"
 
 #define HOST "localhost"
 #define PORT 12345
@@ -59,11 +58,36 @@ class ofApp : public ofBaseApp
     GuiImage imageGroup;
     ofxGuiPage imagePage;
     //KinectPanel
-    ofxPanelExtended guiKinectPanel;
     ofParameterGroup kinectParametersClass;
+    ofxPanelExtended guiKinectPanel;
+    ofParameterGroup kinectParametersSecondClass;
+    ofxPanelExtended guiKinectPanel2;
     GuiKinect kinectGroup;
     ofxGuiPage kinectPage; 
+    //CameraPanel
+    ofParameterGroup cameraParametersClass;
+    ofxPanelExtended guiCameraPanel;
+    ofParameterGroup cameraParametersSecondClass;
+    ofxPanelExtended guiCameraPanel2;
+    GuiCamera cameraGroup;
+    ofxGuiPage cameraPage;
+    ofxGuiMatrix matrixCam;
+    //CameraMatrix
+    ofParameter<bool> cam0;
+    ofParameter<bool> cam2;
+    ofParameter<bool> cam3;
+    ofParameter<bool> cam1;
+    ofParameterGroup camMatrixParameters;
+    ofxGuiMatrix matrixSampler; 
+    ofxGuiMatrix matrixBuffer; 
+    //3dPanel
+    ofParameterGroup Parameters3dClass;
+    ofxPanelExtended gui3dPanel;
+    Gui3d Group3d;
+    ofxGuiPage Page3d;
+    ofxGuiMatrix matrix3dRenderModes;
 
+    //Input pages
     ofxTabbedPages inputPages; 
 
 	void guiEvent(ofxUIEventArgs &e);
@@ -91,5 +115,3 @@ class ofApp : public ofBaseApp
     ofTrueTypeFont font;
 
 };
-
-#endif

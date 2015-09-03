@@ -15,6 +15,14 @@ void GuiKinect::setup(){
     kinectParameters.add(gKcolor.set("Kinect  color",ofColor(255,255,255), ofColor(0, 0), ofColor(255, 255)));
     kinectParameters.add(gKtoggGreenscreen.set("Kinect  Greenscreen",false));
 
+    kinectParametersSecond.add(gKfsliderTrshNear.set("k threshold near", 255.0, 0.0, 255.0));
+    kinectParametersSecond.add(gKfsliderTrshFar.set("k threshold far", 0.0,0.0, 255.0));
+    kinectParametersSecond.add(gKfsliderAngle.set("k angle",0.0,-30.0, 30.0));
+    kinectParametersSecond.add(gKfsliderBlur.set("k blur",  3.0,0.0, 10.0));
+    kinectParametersSecond.add(gKfsliderBlobiMin.set("k min blob", 0.01,  0.01,1.0));
+    kinectParametersSecond.add(gKfsliderBlobMax.set("k max blob",  1.0, 0.01,1.0));
+    kinectParametersSecond.add(gKfsliderSmooth.set("k smooth", 10.0,0.0, 20.0));
+    kinectParametersSecond.add(gKfsliderSimplify.set("k simplify", 0.0, 2.0, 0.0));
 }
 
 void GuiKinect::draw(){

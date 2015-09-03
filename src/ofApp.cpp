@@ -21,6 +21,8 @@ void ofApp::setup()
     videoGroup.setup();
     imageGroup.setup();
     kinectGroup.setup();
+    cameraGroup.setup();
+    Group3d.setup();
 
     //video
     videoParametersClass.add(videoGroup.videoParameters);    
@@ -35,21 +37,106 @@ void ofApp::setup()
     imagePage.setup("Image");
     imagePage.add(&guiImagePanel);
     //kinect
-    kinectParametersClass.add(kinectGroup.kinectParameters);    
+    kinectParametersClass.add(kinectGroup.kinectParameters);
+    kinectParametersSecondClass.add(kinectGroup.kinectParametersSecond);    
     guiKinectPanel.setup(kinectParametersClass);
     guiKinectPanel.setName("Kinect Input");
+    guiKinectPanel2.setup(kinectParametersSecondClass,"", 260);
+    guiKinectPanel2.setName("Kinect More");
     kinectPage.setup("Kinect");
     kinectPage.add(&guiKinectPanel);
+    kinectPage.add(&guiKinectPanel2);
+    //Camera
+    cameraParametersClass.add(cameraGroup.cameraParameters);
+    cameraParametersSecondClass.add(cameraGroup.cameraParametersSecond);    
+    guiCameraPanel.setup(cameraParametersClass);
+    guiCameraPanel.setName("Camera Input");
+    //Matrix Cameras
 
-    inputPages.setup("Inputs", "",40);
-    inputPages.setSize(500, 300);
+    matrixCam.setup("Cam Selection",4);
+    vector<ofParameter<bool>> matrix_cams;
+    matrix_cams.push_back(ofParameter<bool>("cam0",false));
+    matrix_cams.push_back(ofParameter<bool>("cam1",false));
+    matrix_cams.push_back(ofParameter<bool>("cam2",false));
+    matrix_cams.push_back(ofParameter<bool>("cam3",false));
+    for(unsigned int i = 0; i < matrix_cams.size(); i++) {
+        matrixCam.add(new ofxMinimalToggle(matrix_cams.at(i)));
+    }
+    matrixCam.setBorderColor(ofColor::blue);
+    matrixCam.setElementHeight(26);
+    matrixCam.allowMultipleActiveToggles(false);
+    guiCameraPanel.add(&matrixCam);
+    //Panel2 guiCamera
+    guiCameraPanel2.setup(cameraParametersSecondClass,"", 260);
+    guiCameraPanel2.setName("Camera Sampler");
+    //matrix sampler
+    vector<ofParameter<bool>> matrix_sampler;
+    matrix_sampler.push_back(ofParameter<bool>("sam0",false));
+    matrix_sampler.push_back(ofParameter<bool>("sam1",false));
+    matrix_sampler.push_back(ofParameter<bool>("sam2",false));
+    matrix_sampler.push_back(ofParameter<bool>("sam3",false));
+    matrixSampler.setup("c Sampler Slot",4);
+    for(unsigned int i = 0; i < matrix_sampler.size(); i++) {
+        matrixSampler.add(new ofxMinimalToggle(matrix_sampler.at(i)));
+    }
+    matrixSampler.setBorderColor(ofColor::blue);
+    matrixSampler.setElementHeight(26);
+    matrixSampler.allowMultipleActiveToggles(false);
+    guiCameraPanel2.add(&matrixSampler);
+    //sampler buffer
+    vector<ofParameter<bool>> matrix_buffer;
+    matrix_buffer.push_back(ofParameter<bool>("buf0",false));
+    matrix_buffer.push_back(ofParameter<bool>("buf1",false));
+    matrix_buffer.push_back(ofParameter<bool>("buf2",false));
+    matrix_buffer.push_back(ofParameter<bool>("buf3",false));
+    matrixBuffer.setup("c Buffer Slot",4);
+    for(unsigned int i = 0; i < matrix_buffer.size(); i++) {
+        matrixBuffer.add(new ofxMinimalToggle(matrix_buffer.at(i)));
+    }
+    matrixBuffer.setBorderColor(ofColor::blue);
+    matrixBuffer.setElementHeight(26);
+    matrixBuffer.allowMultipleActiveToggles(false);
+    guiCameraPanel2.add(&matrixBuffer);
+    //cameraPage
+    cameraPage.setup("Camera");
+    cameraPage.add(&guiCameraPanel);
+    cameraPage.add(&guiCameraPanel2);
+    //3d
+    Parameters3dClass.add(Group3d.Parameters3d);    
+    vector<ofParameter<bool>> matrix_renderModes;
+    matrix_renderModes.push_back(ofParameter<bool>("smooth",false));
+    matrix_renderModes.push_back(ofParameter<bool>("wire",false));
+    matrix_renderModes.push_back(ofParameter<bool>("dots",false));
+    matrix3dRenderModes.setup("c Buffer Slot",4);
+    for(unsigned int i = 0; i < matrix_renderModes.size(); i++) {
+        matrix3dRenderModes.add(new ofxMinimalToggle(matrix_renderModes.at(i)));
+    }
+    matrix3dRenderModes.setElementHeight(26);
+    matrix3dRenderModes.allowMultipleActiveToggles(false);
+    gui3dPanel.setup(Parameters3dClass);
+    gui3dPanel.setName("3d Input");
+    gui3dPanel.add(&matrix3dRenderModes);
+    Page3d.setup("3d");
+    Page3d.add(&gui3dPanel);
+    //input pages
+    inputPages.setup("Inputs", "",20,20);
+    inputPages.setSize(480, 330);
     inputPages.add(&videoPage);
     inputPages.add(&imagePage);
     inputPages.add(&kinectPage);
+    inputPages.add(&cameraPage);
+    inputPages.add(&Page3d);
 
     ofAddListener(videoParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
     ofAddListener(imageParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
     ofAddListener(kinectParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(kinectParametersSecondClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(cameraParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(cameraParametersSecondClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(Parameters3dClass.parameterChangedE(),this,&ofApp::guiEvent2);
+
+
+
 
 
 
@@ -141,53 +228,10 @@ void ofApp::setup()
 //----GUI4--------------------------------------------------------
 
     gui4 = new ofxUISuperCanvas("Capture & CV");
-    gui4->setPosition(420, 50);
-    gui4->setVisible(true);
-    gui4->addSpacer();
-    gui4->addLabel("Camera");
-    gui4->addSpacer();
-    gui4->addToggle( "c on/off", false);
-
-    float dime = (gui4->getGlobalCanvasWidth() - gui4->getPadding()*7.0)*0.5;
-
-    vector<string> itemos;
-    itemos.push_back("cam 0");
-    itemos.push_back("cam 1");
-    itemos.push_back("cam 2");
-    itemos.push_back("cam 3");
-
-//sampler radio
-    vector<string> capture;
-    for (int i=0;i<nbOfCam;i++){
-        capture.push_back(ofToString(i));
-    }
-
-    gui4->addDropDownList("device num", itemos, dime);
-    gui4->addLabel("");
-    gui4->addLabel("");
-    gui4->addLabel("");
-    gui4->addLabel("");
-    gui4->addSpacer();
-    gui4->addLabel("sampler playback");
-    gui4->addToggle( "s on/off", false);
-    gui4->addRadio("sampler num",capture,OFX_UI_ORIENTATION_HORIZONTAL);
-    gui4->addRadio("buffer num",capture,OFX_UI_ORIENTATION_HORIZONTAL);
-    gui4->addSpacer();
-
-    gui4->addMinimalSlider("c scale x", 0.1, 10.0, 1);
-    gui4->addMinimalSlider("c scale y", 0.1, 10.0, 1);
-    gui4->addToggle( "c fit", false);
-    gui4->addToggle( "c aspect ratio", false);
-    gui4->addToggle( "c hflip", false);
-    gui4->addToggle( "c vflip", false);
-    gui4->addMinimalSlider("c red", 0.0, 1.0, 1.0);
-    gui4->addMinimalSlider("c green", 0.0, 1.0, 1.0);
-    gui4->addMinimalSlider("c blue", 0.0, 1.0, 1.0);
-    gui4->addMinimalSlider("c alpha", 0.0, 1.0, 1.0);
-    gui4->addToggle( "c greenscreen", false);
-    gui4->addSpacer();
     gui4->addLabel("Greenscreen");
     gui4->addSpacer();
+    gui4->setPosition(420, 50);
+    gui4->setVisible(true);
 	gui4->addMinimalSlider("threshold", 0.0, 255.0, 10.0);
     gui4->addMinimalSlider("gs red", 0.0, 1.0, 0.0);
     gui4->addMinimalSlider("gs green", 0.0, 1.0, 0.0);
@@ -204,7 +248,7 @@ void ofApp::setup()
     gui5 = new ofxUISuperCanvas("Active Quad");
     gui5->setDimensions(750, 50);
     gui5->setPosition(0, 0);
-    gui5->setVisible(true);
+    gui5->setVisible(false);
     gui5->addMinimalSlider("Number", 0.0, 72.0, 3.0 , 350 , 20);
     gui5->addSpacer();
     gui5->autoSizeToFitWidgets();
@@ -213,41 +257,12 @@ void ofApp::setup()
 
 //----GUI6------------------------------------------------------
 
-    gui6 = new ofxUISuperCanvas("Capture & CV");
-    gui6->setPosition(1050, 50);
-//    gui6->setDimensions(150, ofGetHeight());
-    gui6->setVisible(true);
-    gui6->addSpacer();
-    gui6->addLabel("Kinect");
-    gui6->addSpacer();
-    gui6->addToggle("k on/off", false);
-    gui6->addToggle("k close/open", false);
-    gui6->addToggle("k show img", false);
-    gui6->addToggle("k grayscale", false);
-    gui6->addToggle("k mask", false);
-    gui6->addToggle("k detect", false);
-    gui6->addMinimalSlider("k scale x", 0.1, 10.0, 1.0);
-    gui6->addMinimalSlider("k scale y", 0.1, 10.0, 1.0);
-    gui6->addMinimalSlider("k red", 0.0, 1.0, 1.0);
-    gui6->addMinimalSlider("k green", 0.0, 1.0, 1.0);
-    gui6->addMinimalSlider("k blue", 0.0, 1.0, 1.0);
-    gui6->addMinimalSlider("k alpha", 0.0, 1.0, 1.0);
-    gui6->addMinimalSlider("k threshold near", 0.0, 255.0, 255.0);
-    gui6->addMinimalSlider("k threshold far", 0.0, 255.0, 0.0);
-    gui6->addMinimalSlider("k angle", -30.0, 30.0, 0.0);
-    gui6->addMinimalSlider("k blur", 0.0, 10.0,  3.0);
-    gui6->addMinimalSlider("k min blob", 0.01, 1.0, 0.01);
-    gui6->addMinimalSlider("k max blob", 0.01, 1.0, 1.0);
-    gui6->addMinimalSlider("k smooth", 0.0, 20.0, 10.0);
-    gui6->addMinimalSlider("k simplify", 0.0, 2.0, 0.0);
-    gui6->addSpacer();
-    gui6->autoSizeToFitWidgets();
-    ofAddListener(gui6->newGUIEvent,this,&ofApp::guiEvent);
+
 
 //----GUI7------------------------------------------------------
 
     gui7 = new ofxUISuperCanvas("Draw");
-    gui7->setPosition(1260, 50);
+    gui7->setPosition(1000, 50);
 //    gui7->setDimensions(150, ofGetHeight());
     gui7->setVisible(true);
     gui7->addSpacer();
@@ -320,7 +335,7 @@ void ofApp::setup()
 
     gui9 = new ofxUISuperCanvas("Global");
     //gui9->setDimensions(150, ofGetHeight());
-    gui9->setPosition(1680, 50);
+    gui9->setPosition(1300, 50);
     gui9->setVisible(true);
     gui9->addSpacer();
     gui9->addLabel("Placement");
@@ -339,44 +354,8 @@ void ofApp::setup()
     ofAddListener(gui9->newGUIEvent,this,&ofApp::guiEvent);
    // guiTabBar->loadSettings("settings/", "ui-");
 
-    //----GUI11
 
-    gui11 = new ofxUISuperCanvas("Input");
-    gui11->setPosition(0, 650);
-    gui11->setVisible(true);
-    gui11->addSpacer();
-    gui11->addLabel("3D Model");
-    gui11->addSpacer();
-    gui11->addToggle("3d load", false);
-    gui11->addMinimalSlider("3d scale x", 0.1, 20.0, 1.0);
-    gui11->addMinimalSlider("3d scale y", 0.1, 20.0, 1.0);
-    gui11->addMinimalSlider("3d scale z", 0.1, 20.0, 1.0);
-    gui11->addMinimalSlider("3d rotate x", 0.0, 360.0, 0.0);
-    gui11->addMinimalSlider("3d rotate y", 0.0, 360.0, 0.0);
-    gui11->addMinimalSlider("3d rotate z", 0.0, 360.0, 0.0);
-    gui11->addMinimalSlider("3d move x", 0.0, 3600.0, 612.0);
-    gui11->addMinimalSlider("3d move y", 0.0, 3600.0, 612.0);
-    gui11->addMinimalSlider("3d move z", -3600.0, 3600.0, 0.0);
-
-    gui11->addToggle("animation", true);
-
-    float dima = (gui11->getGlobalCanvasWidth() - gui11->getPadding()*7.0)*0.5;
-
-    vector<string> itemus;
-    itemus.push_back("smooth");
-    itemus.push_back("wire");
-    itemus.push_back("dots");
-
-    gui11->addDropDownList("render mode", itemus, dima);
-    gui11->addLabel("");
-    gui11->addLabel("");
-    gui11->addLabel("");
-    gui11->addSpacer();
-
-    gui11->autoSizeToFitWidgets();
-    ofAddListener(gui11->newGUIEvent,this,&ofApp::guiEvent);
-
-
+    
    // guiTabBar->loadSettings("settings/", "ui-");
 
    //----gui12--------------------------------------------------------
@@ -391,11 +370,11 @@ void ofApp::setup()
 
 
     gui12->addLabel("cam to record from");
-    gui12->addRadio("s sampnum",capture,OFX_UI_ORIENTATION_HORIZONTAL);
+    //gui12->addRadio("s sampnum",capture,OFX_UI_ORIENTATION_HORIZONTAL);
 
 
     gui12->addLabel("buffer to record to");
-    gui12->addRadio("b recnum",capture,OFX_UI_ORIENTATION_HORIZONTAL);
+    //gui12->addRadio("b recnum",capture,OFX_UI_ORIENTATION_HORIZONTAL);
     gui12->addSpacer();
     gui12->addToggle( "s record", false);
     gui12->addToggle( "s playany", false);
@@ -427,7 +406,7 @@ void ofApp::draw()
 }
 
 void ofApp::guiEvent2(ofAbstractParameter &e){
-cout << e.getName() << endl;
+cout << "Ev2"+e.getName() << endl;
 
 }
 //--------------------------------------------------------------
