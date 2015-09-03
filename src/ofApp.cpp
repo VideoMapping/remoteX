@@ -15,60 +15,16 @@ void ofApp::setup()
     video_color_r = 10; video_color_g = 10; video_color_b = 10; video_color_a = 10;
     drawPadding = false;
 
+    ///gui video
+    videoGroup.setup();
+    videoParametersClass.add(videoGroup.videoParameters);
 
-    guiVideo.setup();
-    videoParameters.setName("video");
-    guiVideo.add(gVlabelVideo.setup("Video input","Video input"));
-    guiVideo.add(gVtoggleOnOff.setup("Video On/Off",false));
-    guiVideo.add(gVtoggleLoad.setup("Load Video",false));
-    guiVideo.add(gV2SliderScale.setup("Scale",ofVec2f(1,1), ofVec2f(0.1, 0.1), ofVec2f(10,10)));
-    guiVideo.add(gVtoggFit.setup("Fit to quad",false));
-    guiVideo.add(gVtoggKeepAspect.setup("Keep aspect ratio",false));
-    guiVideo.add(gVtoggHflip.setup("Horizontal flip",false));
-    guiVideo.add(gVtoggVflip.setup("Vertical flip",false));
-    guiVideo.add(gVcolor.setup("color",ofColor(255,255,255), ofColor(0, 0), ofColor(255, 255)));
-    guiVideo.add(gVfsliderSpeed.setup("Video Speed",-2.0, 4.0, 1.0));
-    guiVideo.add(gVtoggLoop.setup("Video Loop",false));
-    guiVideo.add(gVtoggGreenscreen.setup("Video Greenscreen",false));
-    guiVideo.add(gVfsliderVolume.setup("Video Audio Volume",0.0, 1.0, 1 &video_volume));
-    videoParameters.add(gVtoggleOnOff.getParameter());
-    videoParameters.add(gVtoggleLoad.getParameter());
-    videoParameters.add(gV2SliderScale.getParameter());
-    ofAddListener(videoParameters.parameterChangedE(),this,&ofApp::guiEvent2);
+    //guiVideo.add(gVlabelVideo.setup("Video input","Video input"));
+    guiVideo.setup(videoParametersClass);
+    guiVideo.setName("Video Input");
 
-//--GUI0--------------------------------------------------------
-    gui0 = new ofxUISuperCanvas("Input");
-    gui0->setPosition(0, 50);
-    gui0->setVisible(false);
-    gui0->addSpacer();
-    gui0->addLabel("Video");
-    gui0->addSpacer();
-    gui0->addFPSSlider("fps");
-    gui0->addToggle( "v on/off", false);
-    gui0->addToggle( "v load", false);
-    gui0->addMinimalSlider("v x scale", 0.1, 10.0, 1.0);
-    gui0->addMinimalSlider("v y scale", 0.1, 10.0, 1.0);
-    gui0->addToggle("v fit", false);
-    gui0->addToggle("v keep aspect", false);
-    gui0->addToggle("v hflip", false );
-    gui0->addToggle("v vflip", false );
-    gui0->addMinimalSlider("v red", 0.0, 1.0, 1.0);
-    gui0->addMinimalSlider("v green", 0.0, 1.0, 1.0);
-    gui0->addMinimalSlider("v blue", 0.0, 1.0, 1.0);
-    gui0->addMinimalSlider("v alpha", 0.0, 1.0, 1.0);
-    gui0->addMinimalSlider("speed", -2.0, 4.0, 1.0);
-    gui0->addToggle( "v loop", true);
-    gui0->addToggle( "v greenscreen", false);
-    gui0->addSpacer();
-    gui0->addLabel("Audio");
-    gui0->addSpacer();
-	gui0->addMinimalSlider("audio", 0.0, 1.0, 1 &video_volume);
-    gui0->addSpacer();
+    ofAddListener(videoParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
 
-    gui0->autoSizeToFitWidgets();
-
-    //gui0->getRect()->setWidth(ofGetWidth());
-    ofAddListener(gui0->newGUIEvent,this,&ofApp::guiEvent);
 
     //--GUI1--------------------------------------------------------
 
@@ -2134,7 +2090,7 @@ void ofApp::keyPressed(int key)
     case 'p':
         {
             drawPadding = !drawPadding;
-            gui0->setDrawWidgetPadding(drawPadding);
+
             gui1->setDrawWidgetPadding(drawPadding);
             gui2->setDrawWidgetPadding(drawPadding);
             gui3->setDrawWidgetPadding(drawPadding);
@@ -2150,7 +2106,7 @@ void ofApp::keyPressed(int key)
 
         case 'a':
         {
-        gui0->setVisible(true);
+
         gui1->setVisible(true);
         gui4->setVisible(true);
         gui3->setVisible(true);
@@ -2167,7 +2123,7 @@ void ofApp::keyPressed(int key)
 
         case 'q':
         {
-        gui0->setVisible(false);
+
         gui1->setVisible(false);
         gui4->setVisible(false);
         gui3->setVisible(false);
@@ -2183,7 +2139,7 @@ void ofApp::keyPressed(int key)
              break;
         case 's':
             {
-            gui0->saveSettings("gui0Settings.xml");
+            //gui0->saveSettings("gui0Settings.xml");
             gui1->saveSettings("gui1Settings.xml");
             gui2->saveSettings("gui2Settings.xml");
             gui3->saveSettings("gui3Settings.xml");
@@ -2196,7 +2152,7 @@ void ofApp::keyPressed(int key)
             }
         case 'l':
             {
-                gui0->loadSettings("gui0Settings.xml");
+                //gui0->loadSettings("gui0Settings.xml");
                 gui1->loadSettings("gui1Settings.xml");
                 gui2->loadSettings("gui2Settings.xml");
                 gui3->loadSettings("gui3Settings.xml");
@@ -2210,7 +2166,7 @@ void ofApp::keyPressed(int key)
               break;
         case '1':
             {
-                gui0->setMinified(true);
+                //gui0->setMinified(true);
                 gui1->setMinified(true);
                 gui2->setMinified(true);
                 gui3->setMinified(true);
@@ -2226,7 +2182,7 @@ void ofApp::keyPressed(int key)
 
             case '2':
             {
-                gui0->setMinified(false);
+                //gui0->setMinified(false);
                 gui1->setMinified(false);
                 gui2->setMinified(false);
                 gui3->setMinified(false);
@@ -2266,9 +2222,7 @@ void ofApp::keyReleased(int key){
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y )
 {
-/*
-    gui0->getRect()->setHeight(y);
-*/
+
 }
 
 //--------------------------------------------------------------

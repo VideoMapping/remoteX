@@ -5,6 +5,8 @@
 #include "ofxUI.h"
 #include "ofxOsc.h"
 #include "ofxGui.h"
+#include "ofxGuiExtended.h"
+#include "guiVideo.h"
 
 #define HOST "localhost"
 #define PORT 12345
@@ -47,20 +49,9 @@ class ofApp : public ofBaseApp
     //GuiVideo Section
     ofxPanel guiVideo;
     ofxLabel gVlabelVideo;
-    ofxToggle gVtoggleOnOff;
-    ofxToggle gVtoggleLoad;
-    ofxVec2Slider gV2SliderScale;
-    ofxToggle gVtoggFit;
-    ofxToggle gVtoggKeepAspect;
-    ofxToggle gVtoggHflip;
-    ofxToggle gVtoggVflip;
-    ofxColorSlider gVcolor;
-    ofxFloatSlider gVfsliderSpeed;
-    ofxToggle gVtoggLoop;
-    ofxToggle gVtoggGreenscreen;
-    ofxLabel gVlabelAudio;
-    ofxFloatSlider gVfsliderVolume;
-    ofParameterGroup videoParameters;
+    ofParameterGroup videoParametersClass;
+    GuiVideo videoGroup;
+
 	void guiEvent(ofxUIEventArgs &e);
     void guiEvent2(ofAbstractParameter &e);
 

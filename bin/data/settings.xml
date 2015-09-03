@@ -1,0 +1,15 @@
+<group>
+	<Video_input>Video input</Video_input>
+	<Video_On_Off>0</Video_On_Off>
+	<Load_Video>0</Load_Video>
+	<Scale>1, 1</Scale>
+	<Fit_to_quad>0</Fit_to_quad>
+	<Keep_aspect_ratio>0</Keep_aspect_ratio>
+	<Horizontal_flip>0</Horizontal_flip>
+	<Vertical_flip>0</Vertical_flip>
+	<color>255, 255, 255, 255</color>
+	<Video_Speed>-2</Video_Speed>
+	<Video_Loop>0</Video_Loop>
+	<Video_Greenscreen>0</Video_Greenscreen>
+	<Video_Audio_Volume>0</Video_Audio_Volume>
+</group>
