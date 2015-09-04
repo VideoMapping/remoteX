@@ -402,8 +402,9 @@ void ofApp::draw()
 }
 
 void ofApp::guiEvent2(ofAbstractParameter &e){
-cout << "Ev2"+e.getName() +" " +e.get()<< endl;
+cout << "Ev2"+e.getName() +" " +e.toString()<< endl;
 
+//e.get();
 }
 //--------------------------------------------------------------
 void ofApp::guiEvent(ofxUIEventArgs &e)
