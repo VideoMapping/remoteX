@@ -11,7 +11,7 @@ void GuiSlideshow::setup(){
     slideshowParameters.add(gStoggVflip.set("sh vertical flip",false));
     slideshowParameters.add(gScolor.set("sh color",ofColor(255,255,255), ofColor(0, 0), ofColor(255, 255)));
     slideshowParameters.add(gStoggGreenscreen.set("sh Greenscreen",false));
-    slideshowSCParameters.add(gStoggTSOnOff.set("solid colors on_off",false));
+    slideshowSCParameters.add(gStoggSCOnOff.set("solid colors on_off",false));
     slideshowSCParameters.add(gScolorSC.set("Solid Colors",ofColor(255,255,255), ofColor(0, 0), ofColor(255, 255)));
     slideshowTSParameters.add(gStoggTSOnOff.set("Transition colors on_off",false));
     slideshowTSParameters.add(gScolorTS.set("Transition Colors",ofColor(255,255,255), ofColor(0, 0), ofColor(255, 255)));

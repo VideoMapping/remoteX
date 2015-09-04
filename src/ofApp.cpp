@@ -329,7 +329,7 @@ void ofApp::setupInputPages(){
     matrixBuffer.allowMultipleActiveToggles(false);
     guiCameraPanel2.add(&matrixBuffer);
     //cameraPage
-    cameraPage.setup("Camera");
+    cameraPage.setup("Camera/v4l2/syphon");
     cameraPage.add(&guiCameraPanel);
     cameraPage.add(&guiCameraPanel2);
     //3d

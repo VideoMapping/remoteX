@@ -22,7 +22,7 @@ void GuiKinect::setup(){
     kinectParametersSecond.add(gKfsliderBlobiMin.set("k min blob", 0.01,  0.01,1.0));
     kinectParametersSecond.add(gKfsliderBlobMax.set("k max blob",  1.0, 0.01,1.0));
     kinectParametersSecond.add(gKfsliderSmooth.set("k smooth", 10.0,0.0, 20.0));
-    kinectParametersSecond.add(gKfsliderSimplify.set("k simplify", 0.0, 2.0, 0.0));
+    kinectParametersSecond.add(gKfsliderSimplify.set("k simplify", 0.0,  0.0,2.0));
 }
 
 void GuiKinect::draw(){
