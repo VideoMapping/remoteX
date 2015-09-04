@@ -16,152 +16,40 @@ void ofApp::setup()
     video_color_r = 10; video_color_g = 10; video_color_b = 10; video_color_a = 10;
     drawPadding = false;
 
-    ///the setups
-    
-    videoGroup.setup();
-    imageGroup.setup();
-    kinectGroup.setup();
-    cameraGroup.setup();
-    Group3d.setup();
 
-    //video
-    videoParametersClass.add(videoGroup.videoParameters);    
-    guiVideoPanel.setup(videoParametersClass);
-    guiVideoPanel.setName("Video Input");
-    videoPage.setup("Video");
-    videoPage.add(&guiVideoPanel);
-    //image
-    imageParametersClass.add(imageGroup.imageParameters);    
-    guiImagePanel.setup(imageParametersClass);
-    guiImagePanel.setName("Image Input");
-    imagePage.setup("Image");
-    imagePage.add(&guiImagePanel);
-    //kinect
-    kinectParametersClass.add(kinectGroup.kinectParameters);
-    kinectParametersSecondClass.add(kinectGroup.kinectParametersSecond);    
-    guiKinectPanel.setup(kinectParametersClass);
-    guiKinectPanel.setName("Kinect Input");
-    guiKinectPanel2.setup(kinectParametersSecondClass,"", 260);
-    guiKinectPanel2.setName("Kinect More");
-    kinectPage.setup("Kinect");
-    kinectPage.add(&guiKinectPanel);
-    kinectPage.add(&guiKinectPanel2);
-    //Camera
-    cameraParametersClass.add(cameraGroup.cameraParameters);
-    cameraParametersSecondClass.add(cameraGroup.cameraParametersSecond);    
-    guiCameraPanel.setup(cameraParametersClass);
-    guiCameraPanel.setName("Camera Input");
-    //Matrix Cameras
+    setupInputPages();
+    //Options
+    optionGroup.setup();
+    optionParametersClass.add(optionGroup.optionParameters);
+    optionParametersClass.add(optionGroup.optionProjectParameters);    
+    guiOptionPanel.setup(optionParametersClass,"",500,100);
+    guiOptionPanel.setName("Options");
 
-    matrixCam.setup("Cam Selection",4);
-    vector<ofParameter<bool>> matrix_cams;
-    matrix_cams.push_back(ofParameter<bool>("cam0",false));
-    matrix_cams.push_back(ofParameter<bool>("cam1",false));
-    matrix_cams.push_back(ofParameter<bool>("cam2",false));
-    matrix_cams.push_back(ofParameter<bool>("cam3",false));
-    for(unsigned int i = 0; i < matrix_cams.size(); i++) {
-        matrixCam.add(new ofxMinimalToggle(matrix_cams.at(i)));
+    //QuadSelection
+    vector<ofParameter<bool>> matrix_quads;
+    for(int i=0;i<=72;i++){
+        matrix_quads.push_back(ofParameter<bool>("quad"+i,false));
     }
-    matrixCam.setBorderColor(ofColor::blue);
-    matrixCam.setElementHeight(26);
-    matrixCam.allowMultipleActiveToggles(false);
-    guiCameraPanel.add(&matrixCam);
-    //Panel2 guiCamera
-    guiCameraPanel2.setup(cameraParametersSecondClass,"", 260);
-    guiCameraPanel2.setName("Camera Sampler");
-    //matrix sampler
-    vector<ofParameter<bool>> matrix_sampler;
-    matrix_sampler.push_back(ofParameter<bool>("sam0",false));
-    matrix_sampler.push_back(ofParameter<bool>("sam1",false));
-    matrix_sampler.push_back(ofParameter<bool>("sam2",false));
-    matrix_sampler.push_back(ofParameter<bool>("sam3",false));
-    matrixSampler.setup("c Sampler Slot",4);
-    for(unsigned int i = 0; i < matrix_sampler.size(); i++) {
-        matrixSampler.add(new ofxMinimalToggle(matrix_sampler.at(i)));
+    matrixQuadSelection.setup("Select quad",32);
+    for(unsigned int i = 0; i < matrix_quads.size(); i++) {
+        quadSelectionParametersClass.add(matrix_quads.at(i));
     }
-    matrixSampler.setBorderColor(ofColor::blue);
-    matrixSampler.setElementHeight(26);
-    matrixSampler.allowMultipleActiveToggles(false);
-    guiCameraPanel2.add(&matrixSampler);
-    //sampler buffer
-    vector<ofParameter<bool>> matrix_buffer;
-    matrix_buffer.push_back(ofParameter<bool>("buf0",false));
-    matrix_buffer.push_back(ofParameter<bool>("buf1",false));
-    matrix_buffer.push_back(ofParameter<bool>("buf2",false));
-    matrix_buffer.push_back(ofParameter<bool>("buf3",false));
-    matrixBuffer.setup("c Buffer Slot",4);
-    for(unsigned int i = 0; i < matrix_buffer.size(); i++) {
-        matrixBuffer.add(new ofxMinimalToggle(matrix_buffer.at(i)));
-    }
-    matrixBuffer.setBorderColor(ofColor::blue);
-    matrixBuffer.setElementHeight(26);
-    matrixBuffer.allowMultipleActiveToggles(false);
-    guiCameraPanel2.add(&matrixBuffer);
-    //cameraPage
-    cameraPage.setup("Camera");
-    cameraPage.add(&guiCameraPanel);
-    cameraPage.add(&guiCameraPanel2);
-    //3d
-    Parameters3dClass.add(Group3d.Parameters3d);    
-    vector<ofParameter<bool>> matrix_renderModes;
-    matrix_renderModes.push_back(ofParameter<bool>("smooth",false));
-    matrix_renderModes.push_back(ofParameter<bool>("wire",false));
-    matrix_renderModes.push_back(ofParameter<bool>("dots",false));
-    matrix3dRenderModes.setup("c Buffer Slot",4);
-    for(unsigned int i = 0; i < matrix_renderModes.size(); i++) {
-        matrix3dRenderModes.add(new ofxMinimalToggle(matrix_renderModes.at(i)));
-    }
-    matrix3dRenderModes.setElementHeight(26);
-    matrix3dRenderModes.allowMultipleActiveToggles(false);
-    gui3dPanel.setup(Parameters3dClass);
-    gui3dPanel.setName("3d Input");
-    gui3dPanel.add(&matrix3dRenderModes);
-    Page3d.setup("3d");
-    Page3d.add(&gui3dPanel);
-    //input pages
-    inputPages.setup("Inputs", "",20,20);
-    inputPages.setSize(480, 330);
-    inputPages.add(&videoPage);
-    inputPages.add(&imagePage);
-    inputPages.add(&kinectPage);
-    inputPages.add(&cameraPage);
-    inputPages.add(&Page3d);
 
-    ofAddListener(videoParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(imageParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(kinectParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(kinectParametersSecondClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(cameraParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(cameraParametersSecondClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(Parameters3dClass.parameterChangedE(),this,&ofApp::guiEvent2);
-
-
-
-
-
-
+    guiQuadSelectionPanel.setup("Quads","",10,10);
+    matrixQuadSelection.setWidthElements(20);
+    guiQuadSelectionPanel.add(&matrixQuadSelection);
+    guiQuadSelectionPanel.setAlignHorizontal();
+    guiQuadSelectionPanel.setSize(1000,200);
     //--GUI2--------------------------------------------------------
 
     gui2 = new ofxUISuperCanvas("Global");
     gui2->setPosition(840, 50);
     gui2->setVisible(true);
-    gui2->addSpacer();
-    gui2->addLabel("Live Projection");
-    gui2->addSpacer();
-    gui2->addToggle("live stop/start", false);
-    gui2->addToggle("live resync", false);
-    gui2->addToggle("live fc on/off", false);
+
     gui2->addToggle("display gui", true);
 //    gui2->addToggle("modesetup on/off", false);
     gui2->addToggle("mpe", false);
-    gui2->addSpacer();
-    gui2->addLabel("Project");
-    gui2->addSpacer();
-    gui2->addButton("direct save", false);
-    gui2->addButton("direct load", false);
-    gui2->addToggle("save file", false);
-    gui2->addToggle("load file", false);
-    gui2->addSpacer();
+
     gui2->addLabel("Edge Blend");
     gui2->addSpacer();
     gui2->addToggle( "eb on/off", false);
@@ -261,40 +149,6 @@ void ofApp::setup()
 
 //----GUI7------------------------------------------------------
 
-    gui7 = new ofxUISuperCanvas("Draw");
-    gui7->setPosition(1000, 50);
-//    gui7->setDimensions(150, ofGetHeight());
-    gui7->setVisible(true);
-    gui7->addSpacer();
-    gui7->addLabel("Slideshow");
-    gui7->addSpacer();
-    gui7->addToggle("sh on/off", false);
-    gui7->addToggle("sh load", false);
-    gui7->addMinimalSlider("sh duration", 0.1, 15.0, 1.0);
-    gui7->addToggle("sh fit", false);
-    gui7->addToggle("sh aspect ratio", false);
-    gui7->addToggle("sh greenscreen", false);
-    gui7->addSpacer();
-    gui7->addLabel("Solid Color");
-    gui7->addSpacer();
-    gui7->addToggle( "sc on/off", false);
-    gui7->addMinimalSlider("sc red", 0.0, 1.0, 0.0);
-    gui7->addMinimalSlider("sc green", 0.0, 1.0, 0.0);
-    gui7->addMinimalSlider("sc blue", 0.0, 1.0, 0.0);
-    gui7->addMinimalSlider("sc alpha", 0.0, 1.0, 0.0);
-    gui7->addSpacer();
-    gui7->addLabel("Transition");
-    gui7->addSpacer();
-    gui7->addToggle("tr on/off",false);
-    gui7->addMinimalSlider("tr red", 0.0, 1.0, 0.0);
-    gui7->addMinimalSlider("tr green", 0.0, 1.0, 0.0);
-    gui7->addMinimalSlider("tr blue", 0.0, 1.0, 0.0);
-    gui7->addMinimalSlider("tr alpha", 0.0, 1.0, 0.0);
-    gui7->addMinimalSlider("tr duration", 0.1, 60.0, 1.0);
-    gui7->addSpacer();
-    gui7->autoSizeToFitWidgets();
-    ofAddListener(gui7->newGUIEvent,this,&ofApp::guiEvent);
-
 //----GUI8------------------------------------------------------
     gui8 = new ofxUISuperCanvas("Quad");
 //    gui8->setDimensions(150, ofGetHeight());
@@ -391,7 +245,147 @@ void ofApp::setup()
 
 
 }
+void ofApp::setupInputPages(){
+    ///the setups
+    
+    videoGroup.setup();
+    imageGroup.setup();
+    kinectGroup.setup();
+    cameraGroup.setup();
+    Group3d.setup();
+    slideshowGroup.setup();
 
+    //video
+    videoParametersClass.add(videoGroup.videoParameters);    
+    guiVideoPanel.setup(videoParametersClass);
+    guiVideoPanel.setName("Video Input");
+    videoPage.setup("Video");
+    videoPage.add(&guiVideoPanel);
+    //image
+    imageParametersClass.add(imageGroup.imageParameters);    
+    guiImagePanel.setup(imageParametersClass);
+    guiImagePanel.setName("Image Input");
+    imagePage.setup("Image");
+    imagePage.add(&guiImagePanel);
+    //kinect
+    kinectParametersClass.add(kinectGroup.kinectParameters);
+    kinectParametersSecondClass.add(kinectGroup.kinectParametersSecond);    
+    guiKinectPanel.setup(kinectParametersClass);
+    guiKinectPanel.setName("Kinect Input");
+    guiKinectPanel2.setup(kinectParametersSecondClass,"", 220);
+    guiKinectPanel2.setName("Kinect More");
+    kinectPage.setup("Kinect");
+    kinectPage.add(&guiKinectPanel);
+    kinectPage.add(&guiKinectPanel2);
+    //Camera
+    cameraParametersClass.add(cameraGroup.cameraParameters);
+    cameraParametersSecondClass.add(cameraGroup.cameraParametersSecond);    
+    guiCameraPanel.setup(cameraParametersClass);
+    guiCameraPanel.setName("Camera Input");
+    //Matrix Cameras
+
+    matrixCam.setup("Cam Selection",4);
+    vector<ofParameter<bool>> matrix_cams;
+    matrix_cams.push_back(ofParameter<bool>("cam0",false));
+    matrix_cams.push_back(ofParameter<bool>("cam1",false));
+    matrix_cams.push_back(ofParameter<bool>("cam2",false));
+    matrix_cams.push_back(ofParameter<bool>("cam3",false));
+    for(unsigned int i = 0; i < matrix_cams.size(); i++) {
+        matrixCam.add(new ofxMinimalToggle(matrix_cams.at(i)));
+    }
+    matrixCam.setBorderColor(ofColor::blue);
+    matrixCam.setElementHeight(26);
+    matrixCam.allowMultipleActiveToggles(false);
+    guiCameraPanel.add(&matrixCam);
+    //Panel2 guiCamera
+    guiCameraPanel2.setup(cameraParametersSecondClass,"", 220);
+    guiCameraPanel2.setName("Camera Sampler");
+    //matrix sampler
+    vector<ofParameter<bool>> matrix_sampler;
+    matrix_sampler.push_back(ofParameter<bool>("sam0",false));
+    matrix_sampler.push_back(ofParameter<bool>("sam1",false));
+    matrix_sampler.push_back(ofParameter<bool>("sam2",false));
+    matrix_sampler.push_back(ofParameter<bool>("sam3",false));
+    matrixSampler.setup("c Sampler Slot",4);
+    for(unsigned int i = 0; i < matrix_sampler.size(); i++) {
+        matrixSampler.add(new ofxMinimalToggle(matrix_sampler.at(i)));
+    }
+    matrixSampler.setBorderColor(ofColor::blue);
+    matrixSampler.setElementHeight(26);
+    matrixSampler.allowMultipleActiveToggles(false);
+    guiCameraPanel2.add(&matrixSampler);
+    //sampler buffer
+    vector<ofParameter<bool>> matrix_buffer;
+    matrix_buffer.push_back(ofParameter<bool>("buf0",false));
+    matrix_buffer.push_back(ofParameter<bool>("buf1",false));
+    matrix_buffer.push_back(ofParameter<bool>("buf2",false));
+    matrix_buffer.push_back(ofParameter<bool>("buf3",false));
+    matrixBuffer.setup("c Buffer Slot",4);
+    for(unsigned int i = 0; i < matrix_buffer.size(); i++) {
+        matrixBuffer.add(new ofxMinimalToggle(matrix_buffer.at(i)));
+    }
+    matrixBuffer.setBorderColor(ofColor::blue);
+    matrixBuffer.setElementHeight(26);
+    matrixBuffer.allowMultipleActiveToggles(false);
+    guiCameraPanel2.add(&matrixBuffer);
+    //cameraPage
+    cameraPage.setup("Camera");
+    cameraPage.add(&guiCameraPanel);
+    cameraPage.add(&guiCameraPanel2);
+    //3d
+    Parameters3dClass.add(Group3d.Parameters3d);    
+    vector<ofParameter<bool>> matrix_renderModes;
+    matrix_renderModes.push_back(ofParameter<bool>("smooth",false));
+    matrix_renderModes.push_back(ofParameter<bool>("wire",false));
+    matrix_renderModes.push_back(ofParameter<bool>("dots",false));
+    matrix3dRenderModes.setup("c Buffer Slot",4);
+    for(unsigned int i = 0; i < matrix_renderModes.size(); i++) {
+        matrix3dRenderModes.add(new ofxMinimalToggle(matrix_renderModes.at(i)));
+    }
+    matrix3dRenderModes.setElementHeight(26);
+    matrix3dRenderModes.allowMultipleActiveToggles(false);
+    gui3dPanel.setup(Parameters3dClass);
+    gui3dPanel.setName("3d Input");
+    gui3dPanel.add(&matrix3dRenderModes);
+    Page3d.setup("3d");
+    Page3d.add(&gui3dPanel);
+    //Slideshow
+    slideshowParametersClass.add(slideshowGroup.slideshowParameters);  
+    guiSlideshowPanel.setup(slideshowParametersClass);
+    guiSlideshowPanel.setName("Slideshow Input");
+    slideshowParametersClassSC.add(slideshowGroup.slideshowSCParameters);  
+    guiSlideshowPanelSC.setup(slideshowParametersClassSC,"", 220);
+    guiSlideshowPanelSC.setName("Solid Colors");
+    slideshowParametersClassTS.add(slideshowGroup.slideshowTSParameters);  
+    guiSlideshowPanelTS.setup(slideshowParametersClassTS,"", 220,200);
+    guiSlideshowPanelTS.setName("Transition");
+
+    slideshowPage.setup("Slideshow");
+    slideshowPage.add(&guiSlideshowPanel);
+    slideshowPage.add(&guiSlideshowPanelSC);
+    slideshowPage.add(&guiSlideshowPanelTS);
+    //input pages
+    inputPages.setup("Inputs", "",20,100);
+    inputPages.setSize(440, 540);
+    inputPages.add(&videoPage);
+    inputPages.add(&imagePage);
+    inputPages.add(&kinectPage);
+    inputPages.add(&cameraPage);
+    inputPages.add(&Page3d);
+    inputPages.add(&slideshowPage);
+
+    // Input listeners
+    ofAddListener(videoParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(imageParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(kinectParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(kinectParametersSecondClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(cameraParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(cameraParametersSecondClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(Parameters3dClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(slideshowParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(slideshowParametersClassSC.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(slideshowParametersClassTS.parameterChangedE(),this,&ofApp::guiEvent2);
+}
 //--------------------------------------------------------------
 void ofApp::update()
 {
@@ -402,11 +396,13 @@ void ofApp::update()
 void ofApp::draw()
 {
     inputPages.draw();
+    guiOptionPanel.draw();
+    guiQuadSelectionPanel.draw();
 
 }
 
 void ofApp::guiEvent2(ofAbstractParameter &e){
-cout << "Ev2"+e.getName() << endl;
+cout << "Ev2"+e.getName() +" " +e.get()<< endl;
 
 }
 //--------------------------------------------------------------

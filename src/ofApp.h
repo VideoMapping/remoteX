@@ -8,6 +8,8 @@
 #include "guiKinect.h"
 #include "guiCamera.h"
 #include "gui3d.h"
+#include "guiSlideshow.h"
+#include "guiOptions.h"
 
 #define HOST "localhost"
 #define PORT 12345
@@ -18,6 +20,7 @@ class ofApp : public ofBaseApp
 	public:
 
     void setup();
+    void setupInputPages();
 	void update();
 	void draw();
 	void exit();
@@ -86,9 +89,27 @@ class ofApp : public ofBaseApp
     Gui3d Group3d;
     ofxGuiPage Page3d;
     ofxGuiMatrix matrix3dRenderModes;
-
+    //SlideshowPanel
+    ofxPanelExtended guiSlideshowPanel;
+    ofParameterGroup slideshowParametersClass;
+    ofxPanelExtended guiSlideshowPanelSC;
+    ofParameterGroup slideshowParametersClassSC;
+    ofxPanelExtended guiSlideshowPanelTS;
+    ofParameterGroup slideshowParametersClassTS;
+    GuiSlideshow slideshowGroup;
+    ofxGuiPage slideshowPage;
     //Input pages
     ofxTabbedPages inputPages; 
+
+    //optionsPanel
+    ofxPanelExtended guiOptionPanel;
+    ofParameterGroup optionParametersClass;
+    GuiOption optionGroup;
+    //QuadSelectionPanel
+    ofxPanelExtended guiQuadSelectionPanel;
+    ofParameterGroup quadSelectionParametersClass;
+    ofxGuiMatrix matrixQuadSelection;
+
 
 	void guiEvent(ofxUIEventArgs &e);
     void guiEvent2(ofAbstractParameter &e);
