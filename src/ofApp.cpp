@@ -18,28 +18,58 @@ void ofApp::setup()
 
 
     setupInputPages();
-    //Options
+    //Options----------------------------------------------
     optionGroup.setup();
     optionParametersClass.add(optionGroup.optionParameters);
     optionParametersClass.add(optionGroup.optionProjectParameters);    
     guiOptionPanel.setup(optionParametersClass,"",500,100);
     guiOptionPanel.setName("Options");
+    ofAddListener(optionParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
 
-    //QuadSelection
-    vector<ofParameter<bool>> matrix_quads;
-    for(int i=0;i<=72;i++){
-        matrix_quads.push_back(ofParameter<bool>("quad"+i,false));
-    }
-    matrixQuadSelection.setup("Select quad",32);
-    for(unsigned int i = 0; i < matrix_quads.size(); i++) {
-        quadSelectionParametersClass.add(matrix_quads.at(i));
-    }
+    //QuadSelection----------------------------------------
 
-    guiQuadSelectionPanel.setup("Quads","",10,10);
-    matrixQuadSelection.setWidthElements(20);
-    guiQuadSelectionPanel.add(&matrixQuadSelection);
     guiQuadSelectionPanel.setAlignHorizontal();
     guiQuadSelectionPanel.setSize(1000,200);
+    guiQuadSelectionPanel.setup(quadSelectionParametersClass);
+
+    //ofAddListener(optionParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
+
+    //QuadOptions-------------------------------------------
+    quadOptionsGroup.setup();
+    quadOptionsParametersClass.add(quadOptionsGroup.quadOptionsParameters);
+    guiQuadOptionsPanel.setup(quadOptionsParametersClass);
+    guiQuadOptionsPanel.setName("Quad Transform");
+    quadOptionsParametersClassSecond.add(quadOptionsGroup.quadOptionsParametersSecond);
+    guiQuadOptionsPanel2.setup(quadOptionsParametersClassSecond);
+    guiQuadOptionsPanel2.setName("Effects");
+    quadOptionsTransformPage.setup("Transform");
+    quadOptionsTransformPage.add(&guiQuadOptionsPanel);
+    quadOptionsEffectsPage.setup("Quad Effects");
+    quadOptionsEffectsPage.add(&guiQuadOptionsPanel2);
+    quadOptionsPages.setup("Quad Effects/Transform","",1100,10);
+    quadOptionsPages.add(&quadOptionsTransformPage);
+    quadOptionsPages.add(&quadOptionsEffectsPage);
+    quadOptionsPages.setSize(240, 560);
+    ofAddListener(quadOptionsParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(quadOptionsParametersClassSecond.parameterChangedE(),this,&ofApp::guiEvent2);
+
+    // gui3->addLabel("Blending modes");
+    // gui3->addSpacer();
+    // gui3->addToggle( "bm on/off", false);
+
+    // vector<string> items;
+    // items.push_back("screen");
+    // items.push_back("add");
+    // items.push_back("subtract");
+    // items.push_back("multiply");
+
+
+
+
+
+
+
+
     //--GUI2--------------------------------------------------------
 
     gui2 = new ofxUISuperCanvas("Global");
@@ -50,17 +80,7 @@ void ofApp::setup()
 //    gui2->addToggle("modesetup on/off", false);
     gui2->addToggle("mpe", false);
 
-    gui2->addLabel("Edge Blend");
-    gui2->addSpacer();
-    gui2->addToggle( "eb on/off", false);
-    gui2->addMinimalSlider("power", 0.0, 4.0, 1.0);
-    gui2->addMinimalSlider("gamma", 0.0, 4.0, 1.8);
-    gui2->addMinimalSlider("luminance", -4.0, 4.0, 1.0);
-    gui2->addMinimalSlider("left edge", 0.0, 0.5, 0.3);
-    gui2->addMinimalSlider("right edge", 0.0, 0.5, 0.3);
-    gui2->addMinimalSlider("top edge", 0.0, 0.5, 0.3);
-    gui2->addMinimalSlider("bottom edge", 0.0, 0.5, 0.3);
-    gui2->addSpacer();
+
     gui2->autoSizeToFitWidgets();
     ofAddListener(gui2->newGUIEvent,this,&ofApp::guiEvent);
 
@@ -69,20 +89,8 @@ void ofApp::setup()
 //--GUI3--------------------------------------------------------
 
     gui3 = new ofxUISuperCanvas("Quad");
-    gui3->setPosition(630, 50);
+    gui3->setPosition(750, 150);
     gui3->setVisible(true);
-    gui3->addMinimalSlider("active quad", 0.0, 72.0, 3.0);
-    //textinput->setAutoUnfocus(false);
-    gui3->addSpacer();
-    gui3->addLabel("Surface");
-    gui3->addSpacer();
-    gui3->addToggle( "show/hide", true);
-    gui3->addToggle( "use timeline", true);
-    gui3->addMinimalSlider("seconds", 10, 3600, 100);
-    gui3->addToggle( "tl tint", false);
-    gui3->addToggle( "tl color", false);
-    gui3->addToggle( "tl alpha", false);
-    gui3->addToggle( "tl 4 slides", false);
 
     float dim = (gui3->getGlobalCanvasWidth() - gui3->getPadding()*7.0)*0.5;
 
@@ -98,37 +106,13 @@ void ofApp::setup()
     items.push_back("multiply");
 
     gui3->addDropDownList("blending mode", items, dim);
-    gui3->addLabel("");
-    gui3->addLabel("");
-    gui3->addLabel("");
-    gui3->addLabel("");
-    gui3->addSpacer();
-    gui3->addLabel("Mask");
-    gui3->addSpacer();
-    gui3->addToggle("m on/off", false);
-    gui3->addToggle("m invert", false);
-    gui3->addToggle("mask edit on/off", false);
-    gui3->addSpacer();
+
     gui3->autoSizeToFitWidgets();
     ofAddListener(gui3->newGUIEvent,this,&ofApp::guiEvent);
 
 
 //----GUI4--------------------------------------------------------
 
-    gui4 = new ofxUISuperCanvas("Capture & CV");
-    gui4->addLabel("Greenscreen");
-    gui4->addSpacer();
-    gui4->setPosition(420, 50);
-    gui4->setVisible(true);
-	gui4->addMinimalSlider("threshold", 0.0, 255.0, 10.0);
-    gui4->addMinimalSlider("gs red", 0.0, 1.0, 0.0);
-    gui4->addMinimalSlider("gs green", 0.0, 1.0, 0.0);
-    gui4->addMinimalSlider("gs blue", 0.0, 1.0, 0.0);
-    gui4->addMinimalSlider("gs alpha", 0.0, 1.0, 0.0);
-    gui4->addSpacer();
-    gui4->autoSizeToFitWidgets();
-    //gui4->getRect()->setWidth(ofGetWidth());
-    ofAddListener(gui4->newGUIEvent,this,&ofApp::guiEvent);
 
 
 //----GUI5------------------------------------------------------
@@ -143,53 +127,13 @@ void ofApp::setup()
     //gui5->getRect()->setWidth(ofGetWidth());
     ofAddListener(gui5->newGUIEvent,this,&ofApp::guiEvent);
 
-//----GUI6------------------------------------------------------
 
-
-
-//----GUI7------------------------------------------------------
-
-//----GUI8------------------------------------------------------
-    gui8 = new ofxUISuperCanvas("Quad");
-//    gui8->setDimensions(150, ofGetHeight());
-//    gui3->setScrollAreaToScreen();
-    gui8->setPosition(1470, 50);
-    gui8->setVisible(true);
-    gui8->addMinimalSlider("active quad", 0.0, 72.0, 3.0);
-    gui8->addSpacer();
-    gui8->addLabel("rectangular crop");
-    gui8->addSpacer();
-    gui8->addMinimalSlider("top", 0.0, 1.0, 0.0 );
-    gui8->addMinimalSlider("right", 0.0, 1.0, 0.0 );
-    gui8->addMinimalSlider("left", 0.0, 1.0, 0.0 );
-    gui8->addMinimalSlider("bottom", 0.0, 1.0, 0.0 );
-    gui8->addSpacer();
-    gui8->addLabel("circular crop");
-    gui8->addSpacer();
-    gui8->addMinimalSlider("x", 0.0, 1.0, 0.5 );
-    gui8->addMinimalSlider("y", 0.0, 1.0, 0.5 );
-    gui8->addMinimalSlider("radius", 0.0, 2.0, 0.0 );
-    gui8->addSpacer();
-    gui8->addLabel("Deform");
-    gui8->addSpacer();
-    gui8->addToggle("d on/off", false);
-    gui8->addToggle("bezier", false);
-    gui8->addButton("spherize light", false);
-    gui8->addButton("spherize strong", false);
-    gui8->addButton("bezier reset", false);
-    gui8->addToggle("grid", false);
-    gui8->addMinimalSlider("rows num", 2, 15, 5 );
-    gui8->addMinimalSlider("columns num", 2, 20, 5 );
-    gui8->addToggle("edit", false);
-    gui8->addSpacer();
-    gui8->autoSizeToFitWidgets();
-    ofAddListener(gui8->newGUIEvent,this,&ofApp::guiEvent);
 
 //----GUI9------------------------------------------------------
 
     gui9 = new ofxUISuperCanvas("Global");
     //gui9->setDimensions(150, ofGetHeight());
-    gui9->setPosition(1300, 50);
+    gui9->setPosition(840, 250);
     gui9->setVisible(true);
     gui9->addSpacer();
     gui9->addLabel("Placement");
@@ -215,7 +159,7 @@ void ofApp::setup()
    //----gui12--------------------------------------------------------
 
     gui12 = new ofxUISuperCanvas("Capture & CV");
-    gui12->setPosition(210, 650);
+    gui12->setPosition(510, 350);
     gui12->setVisible(true);
     gui12->addSpacer();
     gui12->addLabel("Sampler");
@@ -365,7 +309,7 @@ void ofApp::setupInputPages(){
     slideshowPage.add(&guiSlideshowPanelSC);
     slideshowPage.add(&guiSlideshowPanelTS);
     //input pages
-    inputPages.setup("Inputs", "",20,100);
+    inputPages.setup("Inputs", "",10,100);
     inputPages.setSize(440, 540);
     inputPages.add(&videoPage);
     inputPages.add(&imagePage);
@@ -395,9 +339,10 @@ void ofApp::update()
 //--------------------------------------------------------------
 void ofApp::draw()
 {
+    guiQuadSelectionPanel.draw();
     inputPages.draw();
     guiOptionPanel.draw();
-    guiQuadSelectionPanel.draw();
+    quadOptionsPages.draw();
 
 }
 
@@ -2059,119 +2004,9 @@ void ofApp::keyPressed(int key)
         m.setAddress("/active/deform/edit");
         sender.sendMessage(m);
         }
-           break;
-
-    case 'p':
-        {
-            drawPadding = !drawPadding;
-
-            gui1->setDrawWidgetPadding(drawPadding);
-            gui2->setDrawWidgetPadding(drawPadding);
-            gui3->setDrawWidgetPadding(drawPadding);
-            gui4->setDrawWidgetPadding(drawPadding);
-            gui5->setDrawWidgetPadding(drawPadding);
-            gui6->setDrawWidgetPadding(drawPadding);
-            gui7->setDrawWidgetPadding(drawPadding);
-            gui8->setDrawWidgetPadding(drawPadding);
-            gui9->setDrawWidgetPadding(drawPadding);
-
-        }
-            break;
-
-        case 'a':
-        {
-
-        gui1->setVisible(true);
-        gui4->setVisible(true);
-        gui3->setVisible(true);
-        gui2->setVisible(true);
-        gui5->setVisible(true);
-        gui6->setVisible(false);
-        gui7->setVisible(false);
-        gui8->setVisible(false);
-        gui9->setVisible(false);
-        gui11->setVisible(false);
-
-        }
-            break;
-
-        case 'q':
-        {
-
-        gui1->setVisible(false);
-        gui4->setVisible(false);
-        gui3->setVisible(false);
-        gui2->setVisible(false);
-        gui5->setVisible(true);
-        gui6->setVisible(true);
-        gui7->setVisible(true);
-        gui8->setVisible(true);
-        gui9->setVisible(true);
-        gui11->setVisible(true);
-        }
-
-             break;
-        case 's':
-            {
-            //gui0->saveSettings("gui0Settings.xml");
-            gui1->saveSettings("gui1Settings.xml");
-            gui2->saveSettings("gui2Settings.xml");
-            gui3->saveSettings("gui3Settings.xml");
-            gui4->saveSettings("gui4Settings.xml");
-            gui5->saveSettings("gui5Settings.xml");
-            gui6->saveSettings("gui6Settings.xml");
-            gui7->saveSettings("gui7Settings.xml");
-            gui8->saveSettings("gui8Settings.xml");
-            gui9->saveSettings("gui9Settings.xml");
-            }
-        case 'l':
-            {
-                //gui0->loadSettings("gui0Settings.xml");
-                gui1->loadSettings("gui1Settings.xml");
-                gui2->loadSettings("gui2Settings.xml");
-                gui3->loadSettings("gui3Settings.xml");
-                gui4->loadSettings("gui4Settings.xml");
-                gui5->loadSettings("gui5Settings.xml");
-                gui6->loadSettings("gui6Settings.xml");
-                gui7->loadSettings("gui7Settings.xml");
-                gui8->loadSettings("gui8Settings.xml");
-                gui9->loadSettings("gui9Settings.xml");
-            }
-              break;
-        case '1':
-            {
-                //gui0->setMinified(true);
-                gui1->setMinified(true);
-                gui2->setMinified(true);
-                gui3->setMinified(true);
-                gui4->setMinified(true);
-//                gui5->setMinified(true);
-                gui6->setMinified(true);
-                gui7->setMinified(true);
-                gui8->setMinified(true);
-                gui9->setMinified(true);
-                gui11->setMinified(true);
-            }
-                  break;
-
-            case '2':
-            {
-                //gui0->setMinified(false);
-                gui1->setMinified(false);
-                gui2->setMinified(false);
-                gui3->setMinified(false);
-                gui4->setMinified(false);
-//                gui5->setMinified(false);
-                gui6->setMinified(false);
-                gui7->setMinified(false);
-                gui8->setMinified(false);
-                gui9->setMinified(false);
-                gui11->setMinified(false);
-
-            }
-                  break;
-        default:
-            break;
+        break;
+    default:
+        break;
     }
 /*     // toggles fullscreen mode
     if(key == 'f')

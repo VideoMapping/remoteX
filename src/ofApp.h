@@ -10,6 +10,7 @@
 #include "gui3d.h"
 #include "guiSlideshow.h"
 #include "guiOptions.h"
+#include "guiQuadOptions.h"
 
 #define HOST "localhost"
 #define PORT 12345
@@ -109,6 +110,15 @@ class ofApp : public ofBaseApp
     ofxPanelExtended guiQuadSelectionPanel;
     ofParameterGroup quadSelectionParametersClass;
     ofxGuiMatrix matrixQuadSelection;
+    //optionsPanel
+    ofxPanelExtended guiQuadOptionsPanel;
+    ofParameterGroup quadOptionsParametersClass;
+    ofxPanelExtended guiQuadOptionsPanel2;
+    ofParameterGroup quadOptionsParametersClassSecond;
+    GuiQuadOptions quadOptionsGroup;
+    ofxGuiPage quadOptionsTransformPage;
+    ofxGuiPage quadOptionsEffectsPage;
+    ofxTabbedPages quadOptionsPages; 
 
 
 	void guiEvent(ofxUIEventArgs &e);
