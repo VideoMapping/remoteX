@@ -1,5 +1,4 @@
 #include "ofMain.h"
-#include "ofxUI.h"
 #include "ofxOsc.h"
 #include "ofxGui.h"
 #include "ofxGuiExtended.h"
@@ -9,6 +8,7 @@
 #include "guiCamera.h"
 #include "gui3d.h"
 #include "guiSlideshow.h"
+#include "guiSampler.h"
 #include "guiOptions.h"
 #include "guiQuadOptions.h"
 
@@ -22,6 +22,8 @@ class ofApp : public ofBaseApp
 
     void setup();
     void setupInputPages();
+    void setupQuadOptionsPages();
+    void setupPreviewVideo();
 	void update();
 	void draw();
 	void exit();
@@ -38,19 +40,6 @@ class ofApp : public ofBaseApp
 
 	ofImage bgImage;
 
-	ofxUISuperCanvas *gui0;
-	ofxUISuperCanvas *gui1;
-    ofxUISuperCanvas *gui2;
-    ofxUISuperCanvas *gui3;
-    ofxUISuperCanvas *gui4;
-    ofxUISuperCanvas *gui5;
-    ofxUISuperCanvas *gui6;
-    ofxUISuperCanvas *gui7;
-    ofxUISuperCanvas *gui8;
-    ofxUISuperCanvas *gui9;
-    ofxUISuperCanvas *gui10;
-    ofxUISuperCanvas *gui11;
-    ofxUISuperCanvas *gui12;
     //VideoPanel
     ofxPanelExtended guiVideoPanel;
     ofParameterGroup videoParametersClass;
@@ -78,9 +67,9 @@ class ofApp : public ofBaseApp
     ofxGuiMatrix matrixCam;
     //CameraMatrix
     ofParameter<bool> cam0;
+    ofParameter<bool> cam1;
     ofParameter<bool> cam2;
     ofParameter<bool> cam3;
-    ofParameter<bool> cam1;
     ofParameterGroup camMatrixParameters;
     ofxGuiMatrix matrixSampler; 
     ofxGuiMatrix matrixBuffer; 
@@ -108,20 +97,41 @@ class ofApp : public ofBaseApp
     GuiOption optionGroup;
     //QuadSelectionPanel
     ofxPanelExtended guiQuadSelectionPanel;
+    ofxPanelExtended guiQuadSelectionPanelSecond;
     ofParameterGroup quadSelectionParametersClass;
     ofxGuiMatrix matrixQuadSelection;
-    //optionsPanel
+    ofxGuiPage quadSelectionPage;
+    //QuadOptionsPanel
     ofxPanelExtended guiQuadOptionsPanel;
     ofParameterGroup quadOptionsParametersClass;
     ofxPanelExtended guiQuadOptionsPanel2;
     ofParameterGroup quadOptionsParametersClassSecond;
-    GuiQuadOptions quadOptionsGroup;
+    ofxGuiMatrix matrixBlendingModes;
+    ofParameterGroup quadOptionsParametersClassGlobalQuad;
+    ofxPanelExtended guiQuadOptionsPanelGlobalQuad;
+    ofxGuiPage quadOptionsGlobalQuadPage;
     ofxGuiPage quadOptionsTransformPage;
     ofxGuiPage quadOptionsEffectsPage;
     ofxTabbedPages quadOptionsPages; 
+    GuiQuadOptions quadOptionsGroup;
+    //SamplerPanel
+    ofxPanelExtended guiSamplerPanel;
+    ofParameterGroup samplerParametersClass;
+    ofxPanelExtended guiSamplerPanel2;
+    ofParameterGroup samplerParametersClassSecond;
+    ofxPanelExtended guiSamplerPanelMatrixCam;
+    ofxPanelExtended guiSamplerPanelMatrixBuf;
+    ofxGuiMatrix matrixSamCam;
+    ofxGuiMatrix matrixSamBuf;
+    ofxGuiPage  samplerPage; 
+    GuiSampler samplerGroup;
+    //previewVideo
 
+    ofVideoGrabber vidGrabber;
+    int camWidth;
+    int camHeight;
 
-	void guiEvent(ofxUIEventArgs &e);
+	//void guiEvent(ofxUIEventArgs &e);
     void guiEvent2(ofAbstractParameter &e);
 
     bool drawPadding;

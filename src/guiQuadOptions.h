@@ -28,15 +28,6 @@ public:
     ofParameter<bool> gQtoggleMaskOnOff;
     ofParameter<bool> gQtoggleMaskInvert;
     ofParameter<bool> gQtoggleMaskEdit;
-    ofParameterGroup quadOptionsEdgeBlendParameters;
-    ofParameter<bool> gQtoggleEbOnOff;
-    ofParameter<float> gQSliderEbPower;
-    ofParameter<float> gQSliderEbGamma;
-    ofParameter<float> gQSliderEbLuminance;
-    ofParameter<float> gQSliderEbEdgesTop;
-    ofParameter<float> gQSliderEbEdgesRight;
-    ofParameter<float> gQSliderEbEdgesLeft;
-    ofParameter<float> gQSliderEbEdgesBottom;
     ofParameterGroup quadOptionsGreenscreenParameters;
     ofParameter<float> gQSliderGsThreshold;
     ofParameter<float> gQSliderGsRed;
@@ -50,9 +41,26 @@ public:
     ofParameter<bool> gQtoggleSuTlColor;
     ofParameter<bool> gQtoggleSuTlAlpha;
     ofParameter<bool> gQtoggleSuTl4Slides;
-
+    ofParameterGroup quadOptionsEdgeBlendParameters;
+    ofParameter<bool> gQtoggleEbOnOff;
+    ofParameter<float> gQSliderEbPower;
+    ofParameter<float> gQSliderEbGamma;
+    ofParameter<float> gQSliderEbLuminance;
+    ofParameter<float> gQSliderEbEdgesTop;
+    ofParameter<float> gQSliderEbEdgesRight;
+    ofParameter<float> gQSliderEbEdgesLeft;
+    ofParameter<float> gQSliderEbEdgesBottom;
+    ofParameterGroup quadOptionsBlendingModesParameters;
+    ofParameter<bool> gQtoggleBmOnOff;
+    ofParameterGroup quadOptionsGlobalQuadParameters;
+    ofParameter<float> gQSliderGcX;
+    ofParameter<float> gQSliderGcY;
+    ofParameter<float> gQSliderGcWidth;
+    ofParameter<float> gQSliderGcHeight;
+    ofParameter<bool> gQtoggleGcReset;
     ofParameterGroup quadOptionsParameters;
     ofParameterGroup quadOptionsParametersSecond;
+
 };
 
 

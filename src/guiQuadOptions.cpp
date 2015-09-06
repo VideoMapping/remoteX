@@ -46,12 +46,21 @@ void GuiQuadOptions::setup(){
     quadOptionsSurfaceParameters.add(gQtoggleSuTlColor.set("tl color",false));
     quadOptionsSurfaceParameters.add(gQtoggleSuTlAlpha.set("tl Alpha",false));
     quadOptionsSurfaceParameters.add(gQtoggleSuTl4Slides.set("tl 4slides",false));
+    quadOptionsBlendingModesParameters.add(gQtoggleBmOnOff.set("Blending Modes On/Off",false));
+    quadOptionsBlendingModesParameters.setName("Blending Modes");
     quadOptionsParameters.add(quadOptionsCropParameters);
     quadOptionsParameters.add(quadOptionsDeformParameters);
     quadOptionsParameters.add(quadOptionsMaskParameters);
     quadOptionsParametersSecond.add(quadOptionsGreenscreenParameters);
     quadOptionsParametersSecond.add(quadOptionsSurfaceParameters);
     quadOptionsParametersSecond.add(quadOptionsEdgeBlendParameters);
+    quadOptionsParametersSecond.add(quadOptionsBlendingModesParameters);
+
+    quadOptionsGlobalQuadParameters.add(gQSliderGcX.set("move x",0.0,-1600.0, 1600.0));
+    quadOptionsGlobalQuadParameters.add(gQSliderGcY.set("move y",0.0,-1600.0, 1600.0));
+    quadOptionsGlobalQuadParameters.add(gQSliderGcWidth.set("width",1280.0,0.0, 2400.0));
+    quadOptionsGlobalQuadParameters.add(gQSliderGcHeight.set("height",1024.0,0.0, 2400.0));
+    quadOptionsGlobalQuadParameters.add(gQtoggleGcReset.set("Reset",false));
 }
 
 void GuiQuadOptions::draw(){
