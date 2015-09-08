@@ -1,5 +1,6 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
+#include "oscMessages.h"
 #include "ofxGui.h"
 #include "ofxGuiExtended.h"
 #include "guiVideo.h"
@@ -23,6 +24,7 @@ class ofApp : public ofBaseApp
     void setup();
     void setupInputPages();
     void setupQuadOptionsPages();
+    void setupQuadSelectionPages();
     void setupPreviewVideo();
 	void update();
 	void draw();
@@ -39,7 +41,7 @@ class ofApp : public ofBaseApp
 	void gotMessage(ofMessage msg);
 
 	ofImage bgImage;
-
+    ofParameterGroup allParameters;
     //VideoPanel
     ofxPanelExtended guiVideoPanel;
     ofParameterGroup videoParametersClass;
@@ -98,7 +100,9 @@ class ofApp : public ofBaseApp
     //QuadSelectionPanel
     ofxPanelExtended guiQuadSelectionPanel;
     ofxPanelExtended guiQuadSelectionPanelSecond;
+    ofxPanelExtended guiQuadSelectionPanelGroup;
     ofParameterGroup quadSelectionParametersClass;
+    ofParameterGroup quadSelectionGroupParametersClass;
     ofxGuiMatrix matrixQuadSelection;
     ofxGuiPage quadSelectionPage;
     //QuadOptionsPanel
@@ -130,10 +134,10 @@ class ofApp : public ofBaseApp
     ofVideoGrabber vidGrabber;
     int camWidth;
     int camHeight;
-
-	//void guiEvent(ofxUIEventArgs &e);
+    //osc
     void guiEvent2(ofAbstractParameter &e);
-
+    ofxOscSender sender;
+    oscMessages  msg;
     bool drawPadding;
     bool bFullscreen;
 
@@ -152,7 +156,7 @@ class ofApp : public ofBaseApp
     int nbOfCam=4;
     int SharedSamplerIndex,SharedSamplerBufferIndex=0;
 
-    ofxOscSender sender;
+
     ofTrueTypeFont font;
 
 };

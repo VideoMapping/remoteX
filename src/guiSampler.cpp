@@ -20,3 +20,10 @@ void GuiSampler::draw(){
 }
 
 
+
+    // gui4->addSpacer();
+    // gui4->addLabel("sampler playback");
+
+    // gui4->addRadio("sampler num",capture,OFX_UI_ORIENTATION_HORIZONTAL);
+    // gui4->addRadio("buffer num",capture,OFX_UI_ORIENTATION_HORIZONTAL);
+    // gui4->addSpacer();

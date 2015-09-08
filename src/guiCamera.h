@@ -23,8 +23,9 @@ public:
     ofParameter<bool> gCtoggVflip;
     ofParameter<ofColor> gCcolor;
     ofParameter<bool> gCtoggGreenscreen;
+    ofParameter<float>  gCfsliderVolume;
     ofParameterGroup cameraParametersSecond;
-    ofParameter<float>  gCtoggleSampler;
+    ofParameter<bool>  gCtoggleSampler;
     ofParameterGroup cameraMatrixParameters;
     ofParameter<bool> cam0;
     ofParameter<bool> cam2;
