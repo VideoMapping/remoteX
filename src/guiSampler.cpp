@@ -2,11 +2,13 @@
 
 void GuiSampler::setup(){
 
+    samplerParameters.add(gSatoggleOnOff.set("Sampler OnOff",false));
     samplerParameters.add(gSatoggleRecord.set("Record",false));
     samplerParameters.add(gSatogglePlayAny.set("PlayAny",false));
     samplerParameters.add(gSatogglePause.set("Pause",false));
     samplerParameters.setName("Sampler");
 
+    bufferParameters.add(gSatoggleClear.set("Clear Buffer",false));
     bufferParameters.add(gSatoggleP0.set("Play 0",false));
     bufferParameters.add(gSatoggleP1.set("Play 1",false));
     bufferParameters.add(gSatoggleP2.set("Play 2",false));

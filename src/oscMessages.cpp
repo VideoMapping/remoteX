@@ -181,435 +181,177 @@ void oscMessages::setSlideshow(ofAbstractParameter &e,ofxOscMessage &m,string ad
      else if(name == "sh Greenscreen")m.setAddress(adress+"/slideshow/greenscreen");     
      else if(name == "sh ts duration")m.setAddress(adress+"/slideshow/duration");
 }
-void oscMessages::setOscMessage(ofAbstractParameter &e,ofxOscMessage &m, int quad){
+void oscMessages::setOscMessageQuadOptions(ofAbstractParameter &e,ofxOscMessage &m, int quad){
      string adress="/surface/"+to_string(quad);
      string name=e.getName();
      cout << "got event from: "+e.getName() +" " +e.toString()<< endl;
 
      setParameters=true;
-     sendOSC=false;
+     sendOSC=true;
 
-}
-//greenscreen---------------------------------------------------
-
-//     else if(name == "threshold")
-//     {
-//     ofxUICircleSlider *csliderValue = (ofxUICircleSlider *) e.getSlider();
-//     m.setAddress(adress+"/greenscreen/threshold");
-//     m.addFloatArg(csliderValue->getValue());
-//     }
-//     else if(name == "gs red")
-//     {
-//     m.setAddress(adress+"/greenscreen/color/1");
-//     //     }
-//     else if(name == "gs green")
-//     {
-//     m.setAddress(adress+"/greenscreen/color/2");
-//     //     }
-//     else if(name == "gs blue")
-//     {
-//     m.setAddress(adress+"/greenscreen/color/3");
-//     //     }
-//     else if(name == "gs alpha")
-//     {
-//     m.setAddress(adress+"/greenscreen/color/4");
-//     //     }
-
-//     //timeline
-
-//     else if(name == "use timeline")
-//     {
-//     m.setAddress("/projection/timeline/toggle");
-//     }
-//     else if(name == "seconds")
-//     {
-//     ofxUIMinimalSlider *sliderValue = (ofxUIMinimalSlider *) e.getSlider();
-//     m.setAddress("/projection/timeline/duration");
-//     //     }
-//     else if(name == "tl tint")
-//     {
-//     m.setAddress(adress+"/timeline/tint");
-//     }
-//     else if(name == "tl color")
-//     {
-//     m.setAddress(adress+"/timeline/color");
-//     }
-//     else if(name == "tl alpha")
-//     {
-//     m.setAddress(adress+"/timeline/alpha");
-//     }
-//     else if(name == "tl 4 slides")
-//     {
-//     m.setAddress(adress+"/timeline/slides");
-//     }
+//QuadOptions
+     //GreenScreen
+     if(name == "gs threshold")m.setAddress(adress+"/greenscreen/threshold");
+     else if(name == "gs color")m.setAddress(adress+"/greenscreen/color/1234");
+     //timeline
+     else if(name == "use Timeline")m.setAddress("/projection/timeline/toggle");
+     else if(name == "Timeline seconds")m.setAddress("/projection/timeline/duration");
+     else if(name == "tl tint")m.setAddress(adress+"/timeline/tint");
+     else if(name == "tl color")m.setAddress(adress+"/timeline/color");
+     else if(name == "tl alpha")m.setAddress(adress+"/timeline/alpha");
+     else if(name == "tl 4 slides")m.setAddress(adress+"/timeline/slides");
 
 
+//edge blend
+
+     else if(name == "Edge Blend On/Off")m.setAddress(adress+"/edgeblend/show");
+     else if(name == "eb ower")m.setAddress(adress+"/edgeblend/power");
+     else if(name == "eb gamma")m.setAddress(adress+"/edgeblend/gamma");
+     else if(name == "eb luminance")m.setAddress(adress+"/edgeblend/luminance");
+     else if(name == "eb left")m.setAddress(adress+"/edgeblend/amount/left");
+     else if(name == "eb right")m.setAddress(adress+"/edgeblend/amount/right");
+     else if(name == "eb top")m.setAddress(adress+"/edgeblend/amount/top");
+     else if(name == "eb bottom")m.setAddress(adress+"/edgeblend/amount/bottom");
+
+//blend modes
+
+      else if(name == "Blending Modes On/Off")m.setAddress(adress+"/blendmodes/show");
+      else if(name == "screen"){
+          setParameters=false;
+          m.setAddress(adress+"/blendmodes/mode");
+          m.addIntArg(0);
+          m.addIntArg(1);
+     }
+    else if(name == "add"){
+          setParameters=false;
+          m.setAddress(adress+"/blendmodes/mode");
+          m.addIntArg(0);
+          m.addIntArg(1);
+     }
+     else if(name == "subtract"){
+          setParameters=false;
+          m.setAddress(adress+"/blendmodes/mode");
+          m.addIntArg(0);
+          m.addIntArg(1);
+     }
+     else if(name == "multiply"){
+          setParameters=false;
+          m.setAddress(adress+"/blendmodes/mode");
+          m.addIntArg(0);
+          m.addIntArg(1);
+     }
+//solid color
+     else if(name == "sh solid colors onOff")m.setAddress(adress+"/solid/show");
+     else if(name == "sh Solid Colors")m.setAddress(adress+"/solid/color/1234");
 
 
-
-
-//     //placement
-//     else if(name == "move x")
-//     {
-//     m.setAddress(adress+"/placement/x");
-//     m.addIntArg(sliderValue->getValue());
-//     }
-//      else if(name == "move y")
-//     {
-//     m.setAddress(adress+"/placement/y");
-//     m.addIntArg(sliderValue->getValue());
-//     }
-//     else if(name == "width")
-//     {
-//     m.setAddress(adress+"/placement/w");
-//     m.addIntArg(sliderValue->getValue());
-//     }
-//     else if(name == "height")
-//     {
-//     m.setAddress(adress+"/placement/h");
-//     m.addIntArg(sliderValue->getValue());
-//     }
-//     else if(name == "reset")
-//     {
-//     ofxUIButton *button = (ofxUIButton *) e.getButton();
-//     m.setAddress(adress+"/placement/reset");
-//     m.addIntArg(button->getValue());
-//     }
-
-//     //edge blend
-
-//     else if(name == "eb on/off")
-//     {
-//     m.setAddress(adress+"/edgeblend/show");
-//     }
-//      else if(name == "power")
-//     {
-//     m.setAddress(adress+"/edgeblend/power");
-//     //     }
-//     else if(name == "gamma")
-//     {
-//     m.setAddress(adress+"/edgeblend/gamma");
-//     //     }
-//     else if(name == "luminance")
-//     {
-//     m.setAddress(adress+"/edgeblend/luminance");
-//     //     }
-//     else if(name == "left edge")
-//     {
-//     m.setAddress(adress+"/edgeblend/amount/left");
-//     //     }
-//     else if(name == "right edge")
-//     {
-//     m.setAddress(adress+"/edgeblend/amount/right");
-//     //     }
-//     else if(name == "top edge")
-//     {
-//     m.setAddress(adress+"/edgeblend/amount/top");
-//     //     }
-//     else if(name == "bottom edge")
-//     {
-//     m.setAddress(adress+"/edgeblend/amount/bottom");
-//     //     }
-
-//      //blend modes
-
-//      else if(name == "bm on/off")
-//     {
-//     m.setAddress(adress+"/blendmodes/show");
-//     }
-//      else if(name == "screen")
-//     {
-//     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
-//     m.setAddress(adress+"/blendmodes/mode");
-//     m.addIntArg(0);
-//     //m.addIntArg(1);
-//     //m.addIntArg(3);
-//     //m.addIntArg(4);
-//     m.addIntArg(ddl->getValue());
-//     }
-//     else if(name == "add")
-//     {
-//     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
-//     m.setAddress(adress+"/blendmodes/mode");
-//     m.addIntArg(1);
-//     //m.addIntArg(1);
-//     //m.addIntArg(3);
-//     //m.addIntArg(4);
-//     m.addIntArg(ddl->getValue());
-//     }
-//     else if(name == "subtract")
-//     {
-//     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
-//     m.setAddress(adress+"/blendmodes/mode");
-//     m.addIntArg(2);
-//     //m.addIntArg(1);
-//     //m.addIntArg(3);
-//     //m.addIntArg(4);
-//     m.addIntArg(ddl->getValue());
-//     }
-//     else if(name == "multiply")
-//     {
-//     ofxUIDropDownList *ddl = (ofxUIDropDownList *) e.getToggle();
-//     m.setAddress(adress+"/blendmodes/mode");
-//     m.addIntArg(3);
-//     //m.addIntArg(1);
-//     //m.addIntArg(3);
-//     //m.addIntArg(4);
-//     m.addIntArg(ddl->getValue());
-//     }
-
-//     //solid color
-
-//     else if(name == "sc on/off")
-//     {
-//     m.setAddress(adress+"/solid/show");
-//     }
-//     else if(name == "sc red")
-//     {
-//     m.setAddress(adress+"/solid/color/1");
-//     //     }
-//     else if(name == "sc green")
-//     {
-//     m.setAddress(adress+"/solid/color/2");
-//     //     }
-//     else if(name == "sc blue")
-//     {
-//     m.setAddress(adress+"/solid/color/3");
-//     //     }
-//     else if(name == "sc alpha")
-//     {
-//     m.setAddress(adress+"/solid/color/4");
-//     //     }
-
-//     //Projection
-
-//     else if(name == "live resync")
-//     {
-//     m.setAddress("/projection/resync");
-//     }
-//     else if(name == "live stop/start")
-//     {
-//     m.setAddress("/projection/stop");
-//     }
-//     else if(name == "direct save")
-//     {
-//     ofxUIButton *button = (ofxUIButton *) e.getButton();
-//     m.setAddress("/projection/save");
-//     m.addIntArg(button->getValue());
-//     }
-//     else if(name == "direct load")
-//     {
-//     ofxUIButton *button = (ofxUIButton *) e.getButton();
-//     m.setAddress("/projection/load");
-//     m.addIntArg(button->getValue());
-//     }
-//     else if(name == "load file")
-//     {
-//     m.setAddress("/projection/loadfile");
-//     }
-//     else if(name == "save file")
-//     {
-//     m.setAddress("/projection/savefile");
-//     }
-//     else if(name == "live fc on/off")
-//     {
-//     m.setAddress("/projection/fullscreen/toggle");
-//     }
-//     else if(name == "display gui")
-//     {
-//     m.setAddress("/projection/gui/toggle");
-//     }
-
-// /*    else if(name == "modesetup on/off")
-//     {
-//     m.setAddress("/projection/mode/setup/toggle");
-//     }
+// /*    else if(name == "modesetup on/off")m.setAddress("/projection/mode/setup/toggle");
 // */
-//     //mask
+//mask
 
-//     else if(name == "m on/off")
-//     {
-//     m.setAddress(adress+"/mask/show");
-//     }
-//     else if(name == "m invert")
-//     {
-//     m.setAddress(adress+"/mask/invert");
-//     }
-//     else if(name == "mask edit on/off")
-//     {
-//     m.setAddress("/projection/mode/masksetup/toggle");
-//     }
+     else if(name == "m on/off")m.setAddress(adress+"/mask/show");
+     else if(name == "m invert")m.setAddress(adress+"/mask/invert");
+     else if(name == "mask edit on/off")m.setAddress("/projection/mode/masksetup/toggle");
+//Deform
+     else if(name == "Deform On/Off")m.setAddress(adress+"/deform/show");
+     else if(name == "bezier On/Off")m.setAddress(adress+"/deform/bezier");
+     else if(name == "bezier Reset")m.setAddress(adress+"/deform/bezier/reset");
+     else if(name == "spherize light")m.setAddress(adress+"/deform/bezier/spherize/light");
+     else if(name == "spherize strong")m.setAddress(adress+"/deform/bezier/spherize/strong");
+     else if(name == "Grid")m.setAddress(adress+"/deform/grid");
+     else if(name == "Grid rows")m.setAddress(adress+"/deform/grid/rows");
+     else if(name == "Grid columns num")m.setAddress(adress+"/deform/grid/columns");
+     else if(name == "edit")m.setAddress(adress+"/deform/edit");
+//crop
+     else if(name == "rc top")m.setAddress(adress+"/crop/rectangular/top");
+     else if(name == "rc right")m.setAddress(adress+"/crop/rectangular/right");
+     else if(name == "rc left")m.setAddress(adress+"/crop/rectangular/left");
+     else if(name == "rc bottom")m.setAddress(adress+"/crop/rectangular/bottom");
+     else if(name == "cc x")m.setAddress(adress+"/crop/circular/x");
+     else if(name == "cc y")m.setAddress(adress+"/crop/circular/y");
+     else if(name == "cc radius")m.setAddress(adress+"/crop/circular/radius");
+//transition
+     else if(name == "sh Trans colors onOff")m.setAddress(adress+"/solid/trans/show");
+     else if(name == "sh Transition Colors")m.setAddress(adress+"/solid/trans/color/1234");
+     else if(name == "sh ts duration")m.setAddress(adress+"/solid/trans/duration");
 
-//     //Deform
-//     else if(name == "d on/off")
-//     {
-//     m.setAddress(adress+"/deform/show");
-//     }
-//     else if(name == "bezier")
-//     {
-//     m.setAddress(adress+"/deform/bezier");
-//     }
-//     else if(name == "spherize light")
-//     {
-//     ofxUIButton *button = (ofxUIButton *) e.getButton();
-//     m.setAddress(adress+"/deform/bezier/spherize/light");
-//     m.addIntArg(button->getValue());
-//     }
-//     else if(name == "spherize strong")
-//     {
-//     ofxUIButton *button = (ofxUIButton *) e.getButton();
-//     m.setAddress(adress+"/deform/bezier/spherize/strong");
-//     m.addIntArg(button->getValue());
-//     }
-//     else if(name == "bezier reset")
-//     {
-//     ofxUIButton *button = (ofxUIButton *) e.getButton();
-//     m.setAddress(adress+"/deform/bezier/reset");
-//     m.addIntArg(button->getValue());
-//     }
-//     else if(name == "grid")
-//     {
-//     m.setAddress(adress+"/deform/grid");
-//     }
-//     else if(name == "rows num")
-//     {
-//     m.setAddress(adress+"/deform/grid/rows");
-//     //     }
-//     else if(name == "columns num")
-//     {
-//     m.setAddress(adress+"/deform/grid/columns");
-//     //     }
-//     else if(name == "edit")
-//     {
-//     m.setAddress(adress+"/deform/edit");
-//     }
+     if(setParameters)setTheParameters(e,m);
+}
+void oscMessages::setOscMessage(ofAbstractParameter &e,ofxOscMessage &m, int quad){
+     string adress="";
+     string name=e.getName();
+     cout << "got event from: "+e.getName() +" " +e.toString()<< endl;
 
-//     //crop
+     setParameters=true;
+     sendOSC=true;
 
-//     else if(name == "top")
-//     {
-//     m.setAddress(adress+"/crop/rectangular/top");
-//     //     }
-//     else if(name == "right")
-//     {
-//     m.setAddress(adress+"/crop/rectangular/right");
-//     //     }
-//     else if(name == "left")
-//     {
-//     m.setAddress(adress+"/crop/rectangular/left");
-//     //     }
-//     else if(name == "bottom")
-//     {
-//     m.setAddress(adress+"/crop/rectangular/bottom");
-//     //     }
-//     else if(name == "x")
-//     {
-//     m.setAddress(adress+"/crop/circular/x");
-//     //     }
-//     else if(name == "y")
-//     {
-//     m.setAddress(adress+"/crop/circular/y");
-//     //     }
-//     else if(name == "radius")
-//     {
-//     m.setAddress(adress+"/crop/circular/radius");
-//     //     }
-//     //active surface
-//     else if(name == "Number")
-//     {
-//     m.setAddress(adress+"/set");
-//     //     }
-//     //transition
-//     else if(name == "tr on/off")
-//     {
-//     m.setAddress(adress+"/solid/trans/show");
-//     }
-//     else if(name == "tr red")
-//     {
-//     m.setAddress(adress+"/solid/trans/color/1");
-//     //     }
-//     else if(name == "tr green")
-//     {
-//     m.setAddress(adress+"/solid/trans/color/2");
-//     //     }
-//     else if(name == "tr blue")
-//     {
-//     m.setAddress(adress+"/solid/trans/color/3");
-//     //     }
-//     else if(name == "tr alpha")
-//     {
-//     m.setAddress(adress+"/solid/trans/color/4");
-//     //     }
-//     else if(name == "tr duration")
-//     {
-//     m.setAddress(adress+"/solid/trans/duration");
-//     //     }
+     if(setParameters)setTheParameters(e,m);
+     //GLobalplacement
+     if (name == "move x")m.setAddress(adress+"/placement/x");
+     else if(name == "move y")m.setAddress(adress+"/placement/y");
+     else if(name == "width")m.setAddress(adress+"/placement/w");
+     else if(name == "height")m.setAddress(adress+"/placement/h");
+     else if(name == "reset")m.setAddress(adress+"/placement/reset");
+//Projection
+   else if(name == "live resync")m.setAddress("/projection/resync");
+   else if(name == "live On/Off")m.setAddress("/projection/stop");
+   else if(name == "fullscreen on/off")m.setAddress("/projection/fullscreen/toggle");
+   else if(name == "Gui On/Off")m.setAddress("/projection/gui/toggle");
+   else if(name == "Direct save")m.setAddress("/projection/save");
+   else if(name == "Direct load")m.setAddress("/projection/load");
+   else if(name == "Load file")m.setAddress("/projection/loadfile");
+   else if(name == "Save file")m.setAddress("/projection/savefile");
+     //sampler
+     else if(name == "Sampler OnOff")m.setAddress(adress+"/sampler/show");
+     else if(name == "s c0"){
+          m.setAddress(adress+"/sampler/num");
+          m.addIntArg(0);
+          setParameters=false;
+     }
+     else if(name == "s c1"){
+          m.setAddress(adress+"/sampler/num");
+          m.addIntArg(1);
+          setParameters=false;
+     }
+     else if(name == "s c2"){
+          m.setAddress(adress+"/sampler/num");
+          m.addIntArg(2);
+          setParameters=false;
+     }
+     else if(name == "s c3"){
+          m.setAddress(adress+"/sampler/num");
+          m.addIntArg(3);
+          setParameters=false;
+     }
+     else if(name == "s b0"){
+          m.setAddress(adress+"/sampler/buffernum");
+          m.addIntArg(0);
+          setParameters=false;
+     }
+     else if(name == "s b1"){
+          m.setAddress(adress+"/sampler/buffernum");
+          m.addIntArg(1);
+          setParameters=false;
+     }
+     else if(name == "s b2"){
+          m.setAddress(adress+"/sampler/buffernum");
+          m.addIntArg(2);
+          setParameters=false;
+     }
+     else if(name == "s b3"){
+          m.setAddress(adress+"/sampler/buffernum");
+          m.addIntArg(3);
+          setParameters=false;
+     }
 
-//      //sampler
-//     else if(name == "s on/off")
-//     {
-//     m.setAddress(adress+"/sampler/show");
-//     }
-//     else if(name == "sampler num")
-//     {
-//     ofxUIRadio *radio = (ofxUIRadio *) e.getToggle();
-//     m.setAddress(adress+"/sampler/num");
-//     m.addIntArg(radio->getValue());
-//     }
-//     else if(name == "buffer num")
-//     {
-//     ofxUIRadio *radio = (ofxUIRadio *) e.getToggle();
-//     m.setAddress(adress+"/sampler/buffernum");
-//     m.addIntArg(radio->getValue());
-//     }
-//     else if(name == "s record")
-//     {
-//     m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/record/"+ofToString(SharedSamplerBufferIndex));
-//     }
-//     else if(name == "s playany")
-//     {
-//     m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/play");
-//     }
-//     else if(name == "s pause")
-//     {
-//     m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/pause");
-//     }
-//     else if(name == "b clear")
-//     {
-//     m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/clear");
-//     }
-//     else if(name == "b play0")
-//     {
-//     m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/playbuffer/0");
-//     }
-//     else if(name == "b play1")
-//     {
-//     m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/playbuffer/1");
-//     }
-//     else if(name == "b play2")
-//     {
-//     m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/playbuffer/2");
-//     }
-//     else if(name == "b play3")
-//     {
-//     m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/playbuffer/3");
-//     }
+//     else if(name == "Record")m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/record/"+ofToString(SharedSamplerBufferIndex));
+//     else if(name == "PlayAny")m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/play");
+//     else if(name == "Pause")m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/pause");
+//     else if(name == "Clear Buffer")m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/clear");
+//     else if(name == "Play 0")m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/playbuffer/0");
+//     else if(name == "Play 1")m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/playbuffer/1");
+//     else if(name == "Play 2")m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/playbuffer/2");
+//     else if(name == "Play 3")m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/playbuffer/3");
 //     else if(name == "s sampnum")
-//     {
-//     ofxUIRadio *radio = (ofxUIRadio *) e.getToggle();
-//     SharedSamplerIndex=radio->getValue();
-//     cout<<"SharedSamplerIndex"<<SharedSamplerIndex<<endl;
-
-//     }
-//     else if(name == "b recnum")
-//     {
-//     ofxUIRadio *radio = (ofxUIRadio *) e.getToggle();
-//     SharedSamplerBufferIndex=radio->getValue();
-//     m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/record/"+ofToString(SharedSamplerBufferIndex));
-
-//     m.addIntArg(0);
-
-//     cout<<"message "<<m.getAddress()<<endl;
-//     }
-//}
-//[--------------------------------------------------------------
+//     else if(name == "b recnum")m.setAddress("/sharedsampler/"+ofToString(SharedSamplerIndex)+"/record/"+ofToString(SharedSamplerBufferIndex));
+}

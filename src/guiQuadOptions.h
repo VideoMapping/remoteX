@@ -30,9 +30,7 @@ public:
     ofParameter<bool> gQtoggleMaskEdit;
     ofParameterGroup quadOptionsGreenscreenParameters;
     ofParameter<float> gQSliderGsThreshold;
-    ofParameter<float> gQSliderGsRed;
-    ofParameter<float> gQSliderGsGreen;
-    ofParameter<float> gQSliderGsBlue;
+    ofParameter<ofColor> gQSliderGsColors;
     ofParameterGroup quadOptionsSurfaceParameters;
     ofParameter<bool> gQtoggleSuShowHide;
     ofParameter<bool> gQtoggleSuTimeline;

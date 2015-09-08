@@ -4,7 +4,9 @@
 class oscMessages {
 public:
 	void setOscMessageInputs(ofAbstractParameter &e,ofxOscMessage &m,int quad);
+	void setOscMessageQuadOptions(ofAbstractParameter &e,ofxOscMessage &m, int quad);
 	void setOscMessage(ofAbstractParameter &e,ofxOscMessage &m,int quad);
+
 	void setActiveQuad(ofxOscMessage &m,int quad);
 	void setVideo(ofAbstractParameter &e,ofxOscMessage &m,string adress);
 	void setImage(ofAbstractParameter &e,ofxOscMessage &m,string adress);

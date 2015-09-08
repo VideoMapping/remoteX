@@ -97,7 +97,7 @@ void ofApp::setupPreviewVideo(){
     vidGrabber.setDesiredFrameRate(30);
     vidGrabber.setVerbose(false);
     //vidGrabber.setPixelFormat(parseDesiredPixelFormat("RGB"));
-    //vidGrabber.initGrabber(camWidth, camHeight);
+    vidGrabber.initGrabber(camWidth, camHeight);
 }
 void ofApp::setupQuadSelectionPages(){
      //QuadSelection----------------------------------------
@@ -194,9 +194,9 @@ void ofApp::setupQuadOptionsPages(){
     quadOptionsPages.setDefaultBackgroundColor(ofColor(0xff,0xa5,0x8d,100));
 
     //EventListeners
-    ofAddListener(quadOptionsParametersClass.parameterChangedE(),this,&ofApp::guiEvent);
-    ofAddListener(quadOptionsParametersClassSecond.parameterChangedE(),this,&ofApp::guiEvent);
-    ofAddListener(quadOptionsParametersClassGlobalQuad.parameterChangedE(),this,&ofApp::guiEvent);
+    ofAddListener(quadOptionsParametersClass.parameterChangedE(),this,&ofApp::guiEventQuadOptions);
+    ofAddListener(quadOptionsParametersClassSecond.parameterChangedE(),this,&ofApp::guiEventQuadOptions);
+    ofAddListener(quadOptionsParametersClassGlobalQuad.parameterChangedE(),this,&ofApp::guiEventQuadOptions);
 
 }
 void ofApp::setupInputPages(){
@@ -357,6 +357,17 @@ void ofApp::draw()
     //vidGrabber.draw(460,100);
     samplerPage.draw();
 
+}
+void ofApp::guiEventQuadOptions(ofAbstractParameter &e){
+        for(unsigned int i=0;i<quadSelectionParametersClass.size();i++){
+
+            if(quadSelectionParametersClass.getBool(i)){
+                ofxOscMessage q;
+                msg.setOscMessageQuadOptions(e,q,i);
+                if(msg.sendOSC){sender.sendMessage(q);
+                cout << q.getAddress() +" " +q.getArgAsString(0)<< endl;}
+        }
+    }
 }
 void ofApp::guiEvent(ofAbstractParameter &e){
         for(unsigned int i=0;i<quadSelectionParametersClass.size();i++){

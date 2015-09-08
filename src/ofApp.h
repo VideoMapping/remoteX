@@ -138,6 +138,7 @@ class ofApp : public ofBaseApp
     void guiEvent(ofAbstractParameter &e);
     void guiEventInputs(ofAbstractParameter &e);
     void guiEventQuad(ofAbstractParameter &e);
+    void guiEventQuadOptions(ofAbstractParameter &e);
     ofxOscSender sender;
     oscMessages  msg;
     bool drawPadding;
