@@ -3,14 +3,19 @@
 
 class oscMessages {
 public:
-	void setup(ofParameterGroup g);
-	void setOscMessage(ofAbstractParameter &e,ofxOscMessage &m);
+	void setOscMessageInputs(ofAbstractParameter &e,ofxOscMessage &m,int quad);
+	void setOscMessage(ofAbstractParameter &e,ofxOscMessage &m,int quad);
 	void setActiveQuad(ofxOscMessage &m,int quad);
-	void setVideo(ofAbstractParameter &e,ofxOscMessage &m);
-	void setImage(ofAbstractParameter &e,ofxOscMessage &m);
-	void setKinect(ofAbstractParameter &e,ofxOscMessage &m);
-	void setCamera(ofAbstractParameter &e,ofxOscMessage &m);
-	void set3d(ofAbstractParameter &e,ofxOscMessage &m);
-	void setSlideshow(ofAbstractParameter &e,ofxOscMessage &m);
-	ofParameterGroup allParameters;
+	void setVideo(ofAbstractParameter &e,ofxOscMessage &m,string adress);
+	void setImage(ofAbstractParameter &e,ofxOscMessage &m,string adress);
+	void setKinect(ofAbstractParameter &e,ofxOscMessage &m,string adress);
+	void setCamera(ofAbstractParameter &e,ofxOscMessage &m,string adress);
+	void set3d(ofAbstractParameter &e,ofxOscMessage &m,string adress);
+	void setSlideshow(ofAbstractParameter &e,ofxOscMessage &m,string adress);
+
+	bool sendOSC;
+private:
+	bool setParameters;
+	void setTheParameters(ofAbstractParameter &e,ofxOscMessage &m);
+
 };

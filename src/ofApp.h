@@ -105,6 +105,7 @@ class ofApp : public ofBaseApp
     ofParameterGroup quadSelectionGroupParametersClass;
     ofxGuiMatrix matrixQuadSelection;
     ofxGuiPage quadSelectionPage;
+    unsigned int activeQuad;
     //QuadOptionsPanel
     ofxPanelExtended guiQuadOptionsPanel;
     ofParameterGroup quadOptionsParametersClass;
@@ -123,10 +124,9 @@ class ofApp : public ofBaseApp
     ofParameterGroup samplerParametersClass;
     ofxPanelExtended guiSamplerPanel2;
     ofParameterGroup samplerParametersClassSecond;
-    ofxPanelExtended guiSamplerPanelMatrixCam;
-    ofxPanelExtended guiSamplerPanelMatrixBuf;
+    ofParameterGroup samplerParametersClassCamBuf;
     ofxGuiMatrix matrixSamCam;
-    ofxGuiMatrix matrixSamBuf;
+    ofxGuiMatrix matrixBufferSam;
     ofxGuiPage  samplerPage; 
     GuiSampler samplerGroup;
     //previewVideo
@@ -135,7 +135,9 @@ class ofApp : public ofBaseApp
     int camWidth;
     int camHeight;
     //osc
-    void guiEvent2(ofAbstractParameter &e);
+    void guiEvent(ofAbstractParameter &e);
+    void guiEventInputs(ofAbstractParameter &e);
+    void guiEventQuad(ofAbstractParameter &e);
     ofxOscSender sender;
     oscMessages  msg;
     bool drawPadding;

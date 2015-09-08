@@ -32,7 +32,7 @@ void ofApp::setup()
     optionParametersClass.add(optionGroup.optionProjectParameters);    
     guiOptionPanel.setup(optionParametersClass,"",900,100);
     guiOptionPanel.setName("Options");
-    ofAddListener(optionParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(optionParametersClass.parameterChangedE(),this,&ofApp::guiEvent);
 
    
     //Sampler --------------------------------------------------------
@@ -44,66 +44,38 @@ void ofApp::setup()
     //cam
     matrixSamCam.setup("cam to record from",4);
     vector<ofParameter<bool>> matrix_sCam;
-    matrix_sCam.push_back(ofParameter<bool>("s cam0",false));
-    matrix_sCam.push_back(ofParameter<bool>("s cam1",false));
-    matrix_sCam.push_back(ofParameter<bool>("s cam2",false));
-    matrix_sCam.push_back(ofParameter<bool>("s cam3",false));
+    matrix_sCam.push_back(ofParameter<bool>("s c0",false));
+    matrix_sCam.push_back(ofParameter<bool>("s c1",false));
+    matrix_sCam.push_back(ofParameter<bool>("s c2",false));
+    matrix_sCam.push_back(ofParameter<bool>("s c3",false));
     for(unsigned int i = 0; i < matrix_sCam.size(); i++) {
         matrixSamCam.add(new ofxMinimalToggle(matrix_sCam.at(i)));
     }
     matrixSamCam.setElementHeight(26);
     matrixSamCam.allowMultipleActiveToggles(false);
-    guiSamplerPanelMatrixCam.setup("","",0,110);
-    guiSamplerPanelMatrixCam.add(&matrixSamCam);
-    guiSamplerPanelMatrixCam.setShowHeader(false);
-    //buffer
-    matrixSamBuf.setup("buffer to record to",4);
-    vector<ofParameter<bool>> matrix_sBuf;
-    matrix_sBuf.push_back(ofParameter<bool>("s Buf0",false));
-    matrix_sBuf.push_back(ofParameter<bool>("s Buf1",false));
-    matrix_sBuf.push_back(ofParameter<bool>("s Buf2",false));
-    matrix_sBuf.push_back(ofParameter<bool>("s Buf3",false));
-    for(unsigned int i = 0; i < matrix_sBuf.size(); i++) {
-        matrixSamBuf.add(new ofxMinimalToggle(matrix_sBuf.at(i)));
-    }
+    guiSamplerPanel.add(&matrixSamCam);
 
-    matrixSamBuf.setElementHeight(26);
-    matrixSamBuf.allowMultipleActiveToggles(false);
-    guiSamplerPanelMatrixBuf.add(&matrixSamBuf);
-    guiSamplerPanelMatrixBuf.setup("","",220,125);
-    //guiSamplerPanelMatrixBuf.setShowHeader(false);
-    //page
+    //buffer
+       // //sampler buffer
+     vector<ofParameter<bool>> matrix_bufferSam;
+     matrix_bufferSam.push_back(ofParameter<bool>("s b0",false));
+     matrix_bufferSam.push_back(ofParameter<bool>("s b1",false));
+     matrix_bufferSam.push_back(ofParameter<bool>("s b2",false));
+     matrix_bufferSam.push_back(ofParameter<bool>("s b3",false));
+     matrixBufferSam.setup("Buf Slot for recording",4);
+     for(unsigned int i = 0; i < matrix_bufferSam.size(); i++) {
+         matrixBufferSam.add(new ofxMinimalToggle(matrix_bufferSam.at(i)));
+     }
+
+    matrixBufferSam.setElementHeight(26);
+    matrixBufferSam.allowMultipleActiveToggles(false);
+    guiSamplerPanel2.add(&matrixBufferSam);
     samplerPage.setup("sampler", "", 470,440);
     samplerPage.setSize(440,200);
     samplerPage.add(&guiSamplerPanel);
     samplerPage.add(&guiSamplerPanel2);
-    samplerPage.add(&guiSamplerPanelMatrixCam);
-    samplerPage.add(&guiSamplerPanelMatrixBuf);
-    ofAddListener(samplerParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(samplerParametersClassSecond.parameterChangedE(),this,&ofApp::guiEvent2);
-
-    allParameters.add(videoParametersClass);
-    allParameters.add(imageParametersClass);
-    allParameters.add(kinectParametersClass);
-    allParameters.add(kinectParametersSecondClass);
-    allParameters.add(cameraParametersClass);
-    allParameters.add(cameraParametersSecondClass);
-    allParameters.add(camMatrixParameters);
-    allParameters.add(Parameters3dClass);
-    allParameters.add(slideshowParametersClass);
-    allParameters.add(slideshowParametersClassSC);
-    allParameters.add(slideshowParametersClassTS);
-    allParameters.add(optionParametersClass);
-    allParameters.add(quadSelectionParametersClass);
-    allParameters.add(quadSelectionGroupParametersClass);
-    allParameters.add(quadOptionsParametersClass);
-    allParameters.add(quadOptionsParametersClassSecond);
-    allParameters.add(quadOptionsParametersClassGlobalQuad);
-    allParameters.add(samplerParametersClass);
-    allParameters.add(samplerParametersClassSecond);
-    msg.setup(allParameters);
-
-
+    ofAddListener(samplerParametersClass.parameterChangedE(),this,&ofApp::guiEvent);
+    ofAddListener(samplerParametersClassSecond.parameterChangedE(),this,&ofApp::guiEvent);
 
 }
 
@@ -139,20 +111,20 @@ void ofApp::setupQuadSelectionPages(){
 
     vector<ofParameter<bool>> quads;
     for(int i=0;i<72;i++){
-        quads.push_back(ofParameter<bool>("q"+to_string(i),false));
+        quads.push_back(ofParameter<bool>(to_string(i),false));
     }
     for(unsigned int i = 0; i < 36; i++) {
-        if (i==3)guiQuadSelectionPanel.add(new ofxMinimalToggle(quads.at(i).set("q3",true),24, 24));
-        else guiQuadSelectionPanel.add(new ofxMinimalToggle(quads.at(i),24, 24));
+
+        guiQuadSelectionPanel.add(new ofxMinimalToggle(quads.at(i),24, 24));
+        quadSelectionParametersClass.add(quads.at(i));
         //guiQuadSelectionPanel.add(new ofxToggle(quads.at(i).set(to_string(i),false),20, 20));
     }
     for(unsigned int i = 36; i < quads.size(); i++) {
         //guiQuadSelectionPanelSecond.add(new ofxToggle(quads.at(i).set(to_string(i),false),20, 20));
         guiQuadSelectionPanelSecond.add(new ofxMinimalToggle(quads.at(i),24, 24));
-    }
-    for(unsigned int i = 0; i < quads.size(); i++) {
         quadSelectionParametersClass.add(quads.at(i));
     }
+    quadSelectionParametersClass.getBool("3")=true;
     //Groups
     guiQuadSelectionPanelGroup.setup("Groups","",770,00);
     guiQuadSelectionPanelGroup.setAlignHorizontal();
@@ -174,8 +146,9 @@ void ofApp::setupQuadSelectionPages(){
     quadSelectionPage.setDefaultBackgroundColor(ofColor(0xff,0xa5,0x8d,100));
     quadSelectionPage.setDefaultFillColor(ofColor(0xff,0xa5,0x8d,100));
     quadSelectionPage.setSize(1090,90);
-    ofAddListener(quadSelectionParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(quadSelectionGroupParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
+    activeQuad=3;
+    ofAddListener(quadSelectionParametersClass.parameterChangedE(),this,&ofApp::guiEventQuad);
+    ofAddListener(quadSelectionGroupParametersClass.parameterChangedE(),this,&ofApp::guiEventQuad);
 
 
 }
@@ -221,9 +194,9 @@ void ofApp::setupQuadOptionsPages(){
     quadOptionsPages.setDefaultBackgroundColor(ofColor(0xff,0xa5,0x8d,100));
 
     //EventListeners
-    ofAddListener(quadOptionsParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(quadOptionsParametersClassSecond.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(quadOptionsParametersClassGlobalQuad.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(quadOptionsParametersClass.parameterChangedE(),this,&ofApp::guiEvent);
+    ofAddListener(quadOptionsParametersClassSecond.parameterChangedE(),this,&ofApp::guiEvent);
+    ofAddListener(quadOptionsParametersClassGlobalQuad.parameterChangedE(),this,&ofApp::guiEvent);
 
 }
 void ofApp::setupInputPages(){
@@ -279,40 +252,40 @@ void ofApp::setupInputPages(){
     matrixCam.allowMultipleActiveToggles(false);
     guiCameraPanel.add(&matrixCam);
     //Panel2 guiCamera
-    guiCameraPanel2.setup(cameraParametersSecondClass,"", 220);
-    guiCameraPanel2.setName("Camera Sampler");
-    //matrix sampler
-    vector<ofParameter<bool>> matrix_sampler;
-    matrix_sampler.push_back(ofParameter<bool>("Sam0",false));
-    matrix_sampler.push_back(ofParameter<bool>("Sam1",false));
-    matrix_sampler.push_back(ofParameter<bool>("Sam2",false));
-    matrix_sampler.push_back(ofParameter<bool>("Sam3",false));
-    matrixSampler.setup("c Sampler Slot",4);
-    for(unsigned int i = 0; i < matrix_sampler.size(); i++) {
-        matrixSampler.add(new ofxMinimalToggle(matrix_sampler.at(i)));
-    }
+    // guiCameraPanel2.setup(cameraParametersSecondClass,"", 220);
+    // guiCameraPanel2.setName("Camera Sampler");
+    // //matrix sampler
+    // vector<ofParameter<bool>> matrix_sampler;
+    // matrix_sampler.push_back(ofParameter<bool>("Sam0",false));
+    // matrix_sampler.push_back(ofParameter<bool>("Sam1",false));
+    // matrix_sampler.push_back(ofParameter<bool>("Sam2",false));
+    // matrix_sampler.push_back(ofParameter<bool>("Sam3",false));
+    // matrixSampler.setup("c Sampler Slot",4);
+    // for(unsigned int i = 0; i < matrix_sampler.size(); i++) {
+    //     matrixSampler.add(new ofxMinimalToggle(matrix_sampler.at(i)));
+    // }
 
-    matrixSampler.setElementHeight(26);
-    matrixSampler.allowMultipleActiveToggles(false);
-    guiCameraPanel2.add(&matrixSampler);
-    //sampler buffer
-    vector<ofParameter<bool>> matrix_buffer;
-    matrix_buffer.push_back(ofParameter<bool>("Buf0",false));
-    matrix_buffer.push_back(ofParameter<bool>("Buf1",false));
-    matrix_buffer.push_back(ofParameter<bool>("Buf2",false));
-    matrix_buffer.push_back(ofParameter<bool>("Buf3",false));
-    matrixBuffer.setup("c Buffer Slot",4);
-    for(unsigned int i = 0; i < matrix_buffer.size(); i++) {
-        matrixBuffer.add(new ofxMinimalToggle(matrix_buffer.at(i)));
-    }
+    // matrixSampler.setElementHeight(26);
+    // matrixSampler.allowMultipleActiveToggles(false);
+    // guiCameraPanel2.add(&matrixSampler);
+    // //sampler buffer
+    // vector<ofParameter<bool>> matrix_buffer;
+    // matrix_buffer.push_back(ofParameter<bool>("Buf0",false));
+    // matrix_buffer.push_back(ofParameter<bool>("Buf1",false));
+    // matrix_buffer.push_back(ofParameter<bool>("Buf2",false));
+    // matrix_buffer.push_back(ofParameter<bool>("Buf3",false));
+    // matrixBuffer.setup("c Buffer Slot",4);
+    // for(unsigned int i = 0; i < matrix_buffer.size(); i++) {
+    //     matrixBuffer.add(new ofxMinimalToggle(matrix_buffer.at(i)));
+    // }
 
-    matrixBuffer.setElementHeight(26);
-    matrixBuffer.allowMultipleActiveToggles(false);
-    guiCameraPanel2.add(&matrixBuffer);
+    // matrixBuffer.setElementHeight(26);
+    // matrixBuffer.allowMultipleActiveToggles(false);
+    // guiCameraPanel2.add(&matrixBuffer);
     //cameraPage
     cameraPage.setup("Camera/v4l2/syphon");
     cameraPage.add(&guiCameraPanel);
-    cameraPage.add(&guiCameraPanel2);
+    //cameraPage.add(&guiCameraPanel2);
     //3d
     Parameters3dClass.add(Group3d.Parameters3d);    
     vector<ofParameter<bool>> matrix_renderModes;
@@ -356,16 +329,16 @@ void ofApp::setupInputPages(){
     inputPages.add(&slideshowPage);
 
     // Input listeners
-    ofAddListener(videoParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(imageParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(kinectParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(kinectParametersSecondClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(cameraParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(cameraParametersSecondClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(Parameters3dClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(slideshowParametersClass.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(slideshowParametersClassSC.parameterChangedE(),this,&ofApp::guiEvent2);
-    ofAddListener(slideshowParametersClassTS.parameterChangedE(),this,&ofApp::guiEvent2);
+    ofAddListener(videoParametersClass.parameterChangedE(),this,&ofApp::guiEventInputs);
+    ofAddListener(imageParametersClass.parameterChangedE(),this,&ofApp::guiEventInputs);
+    ofAddListener(kinectParametersClass.parameterChangedE(),this,&ofApp::guiEventInputs);
+    ofAddListener(kinectParametersSecondClass.parameterChangedE(),this,&ofApp::guiEventInputs);
+    ofAddListener(cameraParametersClass.parameterChangedE(),this,&ofApp::guiEventInputs);
+    ofAddListener(cameraParametersSecondClass.parameterChangedE(),this,&ofApp::guiEventInputs);
+    ofAddListener(Parameters3dClass.parameterChangedE(),this,&ofApp::guiEventInputs);
+    ofAddListener(slideshowParametersClass.parameterChangedE(),this,&ofApp::guiEventInputs);
+    ofAddListener(slideshowParametersClassSC.parameterChangedE(),this,&ofApp::guiEventInputs);
+    ofAddListener(slideshowParametersClassTS.parameterChangedE(),this,&ofApp::guiEventInputs);
 }
 //--------------------------------------------------------------
 void ofApp::update()
@@ -385,27 +358,49 @@ void ofApp::draw()
     samplerPage.draw();
 
 }
+void ofApp::guiEvent(ofAbstractParameter &e){
+        for(unsigned int i=0;i<quadSelectionParametersClass.size();i++){
 
-void ofApp::guiEvent2(ofAbstractParameter &e){
-ofxOscMessage m;
-msg.setOscMessage(e,m);
-cout<<e.cast<bool>().get()<<endl;
-for(unsigned int i=0;i<quadSelectionParametersClass.size();i++){
-    if (e.getName().find("Load") != string::npos){
-        sender.sendMessage(m);
-    }
-    else if(quadSelectionParametersClass.getBool(i)){
-        ofxOscMessage q;
-        msg.setActiveQuad(q,i);
-        sender.sendMessage(q);
-        sender.sendMessage(m);
-        cout << m.getAddress() +" " +m.getArgAsString(0)<< endl;
+            if(quadSelectionParametersClass.getBool(i)){
+                ofxOscMessage q;
+                msg.setOscMessage(e,q,i);
+                if(msg.sendOSC){sender.sendMessage(q);
+                cout << q.getAddress() +" " +q.getArgAsString(0)<< endl;}
+        }
     }
 }
+void ofApp::guiEventInputs(ofAbstractParameter &e){
+
+    for(unsigned int i=0;i<quadSelectionParametersClass.size();i++){
+        if (e.getName().find("Load") != string::npos&&i==activeQuad){
+            if (e.cast<bool>()){
+                ofxOscMessage m;
+                msg.setOscMessageInputs(e,m,activeQuad);
+                sender.sendMessage(m);
+                cout << m.getAddress() +" "+to_string(m.getArgAsInt(0))<< endl;
+            }
+        }
+        if (e.getName().find("Load") != string::npos&& !e.cast<bool>()){}
+        else if(quadSelectionParametersClass.getBool(i)&&e.getName().find("Load") == string::npos){
+            ofxOscMessage q;
+            msg.setOscMessageInputs(e,q,i);
+            if(msg.sendOSC){sender.sendMessage(q);
+            cout << q.getAddress() +" "+to_string(q.getArgAsInt(0))<< endl;}
+        }
+    } 
 
 
 }
+void ofApp::guiEventQuad(ofAbstractParameter &e){
+    if(e.cast<bool>()){  
+        activeQuad=atoi(e.getName().c_str());
+        ofxOscMessage m;
+        msg.setActiveQuad(m,activeQuad);
+        sender.sendMessage(m);
+        cout << m.getAddress() +" " +to_string(m.getArgAsFloat(0))<< endl;
+    }
   
+}  
 void ofApp::exit()
 {
 //    delete gui0;
