@@ -117,6 +117,9 @@ class ofApp : public ofBaseApp
     ofxGuiPage quadOptionsGlobalQuadPage;
     ofxGuiPage quadOptionsTransformPage;
     ofxGuiPage quadOptionsEffectsPage;
+    ofParameterGroup quadOptionsParametersClassScTs;
+    ofxPanelExtended guiQuadOptionsPanelScTs;
+    ofxGuiPage quadOptionsEffectsPage2;
     ofxTabbedPages quadOptionsPages; 
     GuiQuadOptions quadOptionsGroup;
     //SamplerPanel

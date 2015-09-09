@@ -70,7 +70,7 @@ void ofApp::setup()
     matrixBufferSam.setElementHeight(26);
     matrixBufferSam.allowMultipleActiveToggles(false);
     guiSamplerPanel2.add(&matrixBufferSam);
-    samplerPage.setup("sampler", "", 470,440);
+    samplerPage.setup("sampler", "", 445,445);
     samplerPage.setSize(440,200);
     samplerPage.add(&guiSamplerPanel);
     samplerPage.add(&guiSamplerPanel2);
@@ -175,20 +175,28 @@ void ofApp::setupQuadOptionsPages(){
     matrixBlendingModes.setElementHeight(26);
     matrixBlendingModes.allowMultipleActiveToggles(false);
     guiQuadOptionsPanel2.add(&matrixBlendingModes);
+    //Effects 2
+    quadOptionsParametersClassScTs.add(quadOptionsGroup.quadOptionsParametersThird);
+    guiQuadOptionsPanelScTs.setup(quadOptionsParametersClassScTs);
+    guiQuadOptionsPanelScTs.setName("Effects");
     //Global
     quadOptionsParametersClassGlobalQuad.add(quadOptionsGroup.quadOptionsGlobalQuadParameters);
     guiQuadOptionsPanelGlobalQuad.setup(quadOptionsParametersClassGlobalQuad);
     //Pages
-    quadOptionsTransformPage.setup("Transform");
+    quadOptionsTransformPage.setup("Trans");
     quadOptionsTransformPage.add(&guiQuadOptionsPanel);
-    quadOptionsEffectsPage.setup("Quad Effects");
+    quadOptionsEffectsPage.setup("Effcts");
     quadOptionsEffectsPage.add(&guiQuadOptionsPanel2);
+    quadOptionsEffectsPage2.setup("Effcts2");
+    quadOptionsEffectsPage2.add(&guiQuadOptionsPanelScTs);
     quadOptionsGlobalQuadPage.setup("Global");
     quadOptionsGlobalQuadPage.add(&guiQuadOptionsPanelGlobalQuad);
     //tabbedPage
     quadOptionsPages.setup("Quad Effects/Transform","",1100,10);
+
     quadOptionsPages.add(&quadOptionsTransformPage);
     quadOptionsPages.add(&quadOptionsEffectsPage);
+    quadOptionsPages.add(&quadOptionsEffectsPage2);
     quadOptionsPages.add(&quadOptionsGlobalQuadPage);
     quadOptionsPages.setSize(240, 660);
     quadOptionsPages.setDefaultBackgroundColor(ofColor(0xff,0xa5,0x8d,100));
@@ -251,37 +259,6 @@ void ofApp::setupInputPages(){
     matrixCam.setElementHeight(26);
     matrixCam.allowMultipleActiveToggles(false);
     guiCameraPanel.add(&matrixCam);
-    //Panel2 guiCamera
-    // guiCameraPanel2.setup(cameraParametersSecondClass,"", 220);
-    // guiCameraPanel2.setName("Camera Sampler");
-    // //matrix sampler
-    // vector<ofParameter<bool>> matrix_sampler;
-    // matrix_sampler.push_back(ofParameter<bool>("Sam0",false));
-    // matrix_sampler.push_back(ofParameter<bool>("Sam1",false));
-    // matrix_sampler.push_back(ofParameter<bool>("Sam2",false));
-    // matrix_sampler.push_back(ofParameter<bool>("Sam3",false));
-    // matrixSampler.setup("c Sampler Slot",4);
-    // for(unsigned int i = 0; i < matrix_sampler.size(); i++) {
-    //     matrixSampler.add(new ofxMinimalToggle(matrix_sampler.at(i)));
-    // }
-
-    // matrixSampler.setElementHeight(26);
-    // matrixSampler.allowMultipleActiveToggles(false);
-    // guiCameraPanel2.add(&matrixSampler);
-    // //sampler buffer
-    // vector<ofParameter<bool>> matrix_buffer;
-    // matrix_buffer.push_back(ofParameter<bool>("Buf0",false));
-    // matrix_buffer.push_back(ofParameter<bool>("Buf1",false));
-    // matrix_buffer.push_back(ofParameter<bool>("Buf2",false));
-    // matrix_buffer.push_back(ofParameter<bool>("Buf3",false));
-    // matrixBuffer.setup("c Buffer Slot",4);
-    // for(unsigned int i = 0; i < matrix_buffer.size(); i++) {
-    //     matrixBuffer.add(new ofxMinimalToggle(matrix_buffer.at(i)));
-    // }
-
-    // matrixBuffer.setElementHeight(26);
-    // matrixBuffer.allowMultipleActiveToggles(false);
-    // guiCameraPanel2.add(&matrixBuffer);
     //cameraPage
     cameraPage.setup("Camera/v4l2/syphon");
     cameraPage.add(&guiCameraPanel);
@@ -307,17 +284,9 @@ void ofApp::setupInputPages(){
     slideshowParametersClass.add(slideshowGroup.slideshowParameters);  
     guiSlideshowPanel.setup(slideshowParametersClass);
     guiSlideshowPanel.setName("Slideshow Input");
-    slideshowParametersClassSC.add(slideshowGroup.slideshowSCParameters);  
-    guiSlideshowPanelSC.setup(slideshowParametersClassSC,"", 220);
-    guiSlideshowPanelSC.setName("Solid Colors");
-    slideshowParametersClassTS.add(slideshowGroup.slideshowTSParameters);  
-    guiSlideshowPanelTS.setup(slideshowParametersClassTS,"", 220,200);
-    guiSlideshowPanelTS.setName("Transition");
-
     slideshowPage.setup("Slideshow");
     slideshowPage.add(&guiSlideshowPanel);
-    slideshowPage.add(&guiSlideshowPanelSC);
-    slideshowPage.add(&guiSlideshowPanelTS);
+
     //input pages
     inputPages.setup("Inputs", "",10,100);
     inputPages.setSize(440, 500);

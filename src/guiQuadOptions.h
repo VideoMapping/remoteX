@@ -58,6 +58,12 @@ public:
     ofParameter<bool> gQtoggleGcReset;
     ofParameterGroup quadOptionsParameters;
     ofParameterGroup quadOptionsParametersSecond;
+    ofParameterGroup quadOptionsParametersThird;
+    ofParameter<bool> gQtoggSCOnOff;
+    ofParameter<ofColor> gQcolorSC;
+    ofParameter<bool> gQtoggTSOnOff;
+    ofParameter<ofColor> gQcolorTS;
+    ofParameter<float> gQfsliderTSduration;
 
 };
 
