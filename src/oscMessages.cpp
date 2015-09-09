@@ -73,7 +73,7 @@ void oscMessages::setVideo(ofAbstractParameter &e,ofxOscMessage &m,string adress
      else if(name == "Keep Video aspect ratio")m.setAddress(adress+"/video/keepaspect");     
      else if(name == "Video Horizontal flip")m.setAddress(adress+"/video/hmirror");     
      else if(name == "Video Vertical flip")m.setAddress(adress+"/video/vmirror");
-     else if(name == "Video color")m.setAddress(adress+"/video/color/1234");
+     else if(name == "Video color")m.setAddress(adress+"/video/color");
      else if(name == "Video Audio Volume")m.setAddress(adress+"/video/volume");
      else if(name == "Video Speed")m.setAddress(adress+"/video/speed");
      else if(name == "Video Loop")m.setAddress(adress+"/video/loop");
@@ -92,7 +92,7 @@ void oscMessages::setImage(ofAbstractParameter &e,ofxOscMessage &m,string adress
      else if(name == "Image horizontal flip")m.setAddress(adress+"/img/hmirror");     
      else if(name == "Image vertical flip")m.setAddress(adress+"/img/vmirror");     
      else if(name == "Image Greenscreen")m.setAddress(adress+"/img/greenscreen");
-     else if(name == "Image color")m.setAddress(adress+"/img/color/1234");
+     else if(name == "Image color")m.setAddress(adress+"/img/color");
 
 }
 void oscMessages::setKinect(ofAbstractParameter &e,ofxOscMessage &m,string adress){
@@ -113,7 +113,7 @@ void oscMessages::setKinect(ofAbstractParameter &e,ofxOscMessage &m,string adres
      else if(name == "Kinect simplify")m.setAddress(adress+"/kinect/contour/simplelse ify");
      else if(name == "Kinect min blob")m.setAddress(adress+"/kinect/contour/area/min");
      else if(name == "Kinect max blob")m.setAddress(adress+"/kinect/contour/area/max");
-     else if(name == "Kinect color")m.setAddress(adress+"/kinect/color/1234");
+     else if(name == "Kinect color")m.setAddress(adress+"/kinect/color");
 }
 void oscMessages::setCamera(ofAbstractParameter &e,ofxOscMessage &m,string adress){
      string name=e.getName();
@@ -125,7 +125,7 @@ void oscMessages::setCamera(ofAbstractParameter &e,ofxOscMessage &m,string adres
      else if(name == "Keep Camera aspect ratio")m.setAddress(adress+"/cam/keepaspect");     
      else if(name == "Camera horizontal flip")m.setAddress(adress+"/cam/hmirror");     
      else if(name == "Camera vertical flip")m.setAddress(adress+"/cam/vmirror");     
-     else if(name == "Camera color")m.setAddress(adress+"/cam/color/1234");
+     else if(name == "Camera color")m.setAddress(adress+"/cam/color");
      else if(name == "Camera Volume")m.setAddress(adress+"/cam/volume");
      else if(name == "Camera Greenscreen")m.setAddress(adress+"/cam/greenscreen");
 
@@ -192,7 +192,7 @@ void oscMessages::setOscMessageQuadOptions(ofAbstractParameter &e,ofxOscMessage 
 //QuadOptions
      //GreenScreen
      if(name == "gs threshold")m.setAddress(adress+"/greenscreen/threshold");
-     else if(name == "gs color")m.setAddress(adress+"/greenscreen/color/1234");
+     else if(name == "gs color")m.setAddress(adress+"/greenscreen/color");
      //timeline
      else if(name == "use Timeline")m.setAddress("/projection/timeline/toggle");
      else if(name == "Timeline seconds")m.setAddress("/projection/timeline/duration");
@@ -241,8 +241,8 @@ void oscMessages::setOscMessageQuadOptions(ofAbstractParameter &e,ofxOscMessage 
           m.addIntArg(1);
      }
 //solid color
-     else if(name == "sh solid colors onOff")m.setAddress(adress+"/solid/show");
-     else if(name == "sh Solid Colors")m.setAddress(adress+"/solid/color/1234");
+     else if(name == "Solid colors onOff")m.setAddress(adress+"/solid/show");
+     else if(name == "Solid Colors")m.setAddress(adress+"/solid/color");
 
 
 // /*    else if(name == "modesetup on/off")m.setAddress("/projection/mode/setup/toggle");
@@ -271,9 +271,9 @@ void oscMessages::setOscMessageQuadOptions(ofAbstractParameter &e,ofxOscMessage 
      else if(name == "cc y")m.setAddress(adress+"/crop/circular/y");
      else if(name == "cc radius")m.setAddress(adress+"/crop/circular/radius");
 //transition
-     else if(name == "sh Trans colors onOff")m.setAddress(adress+"/solid/trans/show");
-     else if(name == "sh Transition Colors")m.setAddress(adress+"/solid/trans/color/1234");
-     else if(name == "sh ts duration")m.setAddress(adress+"/solid/trans/duration");
+     else if(name == "Trans colors onOff")m.setAddress(adress+"/solid/trans/show");
+     else if(name == "Transition Colors")m.setAddress(adress+"/solid/trans/color");
+     else if(name == "ts duration")m.setAddress(adress+"/solid/trans/duration");
 
      if(setParameters)setTheParameters(e,m);
 }
