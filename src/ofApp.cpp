@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-    //ofSetLogLevel(OF_LOG_VERBOSE);
+    ofSetLogLevel(OF_LOG_VERBOSE);
 
     ofSetFrameRate(35);
     sender.setup(HOST, PORT);
@@ -22,7 +22,8 @@ void ofApp::setup()
 
     video_color_r = 10; video_color_g = 10; video_color_b = 10; video_color_a = 10;
 
-    //setupPreviewVideo();
+    //device selection maybe better through an xml conf file
+    setupPreviewVideo(1);
     setupInputPages();
     setupQuadOptionsPages();
     setupQuadSelectionPages();
@@ -79,12 +80,12 @@ void ofApp::setup()
 
 }
 
-void ofApp::setupPreviewVideo(){
+void ofApp::setupPreviewVideo(int device=5){
     camWidth = 320;  // try to grab at this size.
     camHeight = 240;
 
-    //we can now get back a list of devices.
-    vector<ofVideoDevice> devices = vidGrabber.listDevices();
+    //we can now get back a list of devices
+   /* vector<ofVideoDevice> devices = vidGrabber.listDevices();
 
     for(unsigned int i = 0; i < devices.size(); i++){
         if(devices[i].bAvailable){
@@ -92,12 +93,15 @@ void ofApp::setupPreviewVideo(){
         }else{
             ofLogNotice() << devices[i].id << ": " << devices[i].deviceName << " - unavailable ";
         }
-    }
-    vidGrabber.setDeviceID(4);
-    vidGrabber.setDesiredFrameRate(30);
-    vidGrabber.setVerbose(false);
-    //vidGrabber.setPixelFormat(parseDesiredPixelFormat("RGB"));
-    vidGrabber.initGrabber(camWidth, camHeight);
+    }*/
+    cout<<"device"<<device<<endl;
+    vidGrabber.setVerbose(true);
+    vidGrabber.setDeviceID(device);
+    vidGrabber.setDesiredFrameRate(15);
+    vidGrabber.setPixelFormat(OF_PIXELS_YUY2 );
+    //vidGrabber.initGrabber(camWidth, camHeight);
+    vidGrabber.setup(camWidth, camHeight);
+
 }
 void ofApp::setupQuadSelectionPages(){
      //QuadSelection----------------------------------------
@@ -324,7 +328,7 @@ void ofApp::draw()
     inputPages.draw();
     guiOptionPanel.draw();
     quadOptionsPages.draw();
-    //vidGrabber.draw(460,100);
+    vidGrabber.draw(460,100);
     samplerPage.draw();
 
 }
