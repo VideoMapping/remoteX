@@ -12,6 +12,7 @@
 #include "guiSampler.h"
 #include "guiOptions.h"
 #include "guiQuadOptions.h"
+#include "ofxXmlSettings.h"
 
 #define HOST "localhost"
 #define PORT 12345
@@ -162,6 +163,9 @@ class ofApp : public ofBaseApp
     int nbOfCam=4;
     int SharedSamplerIndex,SharedSamplerBufferIndex=0;
 
+    // xml
+    bool configOk;
+    ofxXmlSettings XML;
 
     ofTrueTypeFont font;
 

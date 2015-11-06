@@ -18,12 +18,24 @@ void ofApp::setup()
     //ofEnableSmoothing();
     ofSetCircleResolution(60);
 
+    // read xml config file
+    configOk = XML.loadFile("config.xml");
+    if(!configOk)
+    {
+        cout << "WARNING: config file config.xml not found!" << endl << endl;
+    }
+    else
+    {
+        cout << "using config file config.xml" << endl;
+    }
 
+    //get value from xml
+    int preview_device = XML.getValue("PREVIEW:DEVICE",1);
 
     video_color_r = 10; video_color_g = 10; video_color_b = 10; video_color_a = 10;
 
     //device selection maybe better through an xml conf file
-    setupPreviewVideo(1);
+    setupPreviewVideo(preview_device);
     setupInputPages();
     setupQuadOptionsPages();
     setupQuadSelectionPages();
@@ -77,6 +89,11 @@ void ofApp::setup()
     samplerPage.add(&guiSamplerPanel2);
     ofAddListener(samplerParametersClass.parameterChangedE(),this,&ofApp::guiEvent);
     ofAddListener(samplerParametersClassSecond.parameterChangedE(),this,&ofApp::guiEvent);
+
+
+    // free xml reader from config file
+    cout << "setup done! playing now" << endl << endl;
+    XML.clear();
 
 }
 
