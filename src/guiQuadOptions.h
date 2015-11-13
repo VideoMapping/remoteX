@@ -5,7 +5,7 @@ class GuiQuadOptions {
 public:
     void setup();
     void draw();
-    
+
     ofParameterGroup quadOptionsCropParameters;
     ofParameter<float> gQSliderCrRcTop;
     ofParameter<float> gQSliderCrRcRight;
@@ -30,7 +30,8 @@ public:
     ofParameter<bool> gQtoggleMaskEdit;
     ofParameterGroup quadOptionsGreenscreenParameters;
     ofParameter<float> gQSliderGsThreshold;
-    ofParameter<ofColor> gQSliderGsColors;
+    //ofParameter<ofColor> gQSliderGsColors;
+    ofParameter<ofFloatColor> gQSliderGsColors;
     ofParameterGroup quadOptionsSurfaceParameters;
     ofParameter<bool> gQtoggleSuShowHide;
     ofParameter<bool> gQtoggleSuTimeline;
@@ -60,9 +61,11 @@ public:
     ofParameterGroup quadOptionsParametersSecond;
     ofParameterGroup quadOptionsParametersThird;
     ofParameter<bool> gQtoggSCOnOff;
-    ofParameter<ofColor> gQcolorSC;
+    //ofParameter<ofColor> gQcolorSC;
+    ofParameter<ofFloatColor> gQcolorSC;
     ofParameter<bool> gQtoggTSOnOff;
-    ofParameter<ofColor> gQcolorTS;
+    //ofParameter<ofColor> gQcolorTS;
+    ofParameter<ofFloatColor> gQcolorTS;
     ofParameter<float> gQfsliderTSduration;
 
 };

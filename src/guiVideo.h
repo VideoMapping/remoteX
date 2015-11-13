@@ -8,7 +8,7 @@ class GuiVideo {
 public:
     void setup();
     void draw();
-    
+
     ofParameterGroup videoParameters;
     ofParameter<bool> gVtoggleOnOff;
     ofParameter<bool> gVtoggleLoad;
@@ -17,7 +17,7 @@ public:
     ofParameter<bool> gVtoggKeepAspect;
     ofParameter<bool> gVtoggHflip;
     ofParameter<bool> gVtoggVflip;
-    ofParameter<ofColor> gVcolor;
+    ofParameter<ofFloatColor> gVcolor;
     ofParameter<float>  gVfsliderSpeed;
     ofParameter<bool> gVtoggLoop;
     ofParameter<bool> gVtoggGreenscreen;

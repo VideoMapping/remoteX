@@ -131,7 +131,7 @@ void ofApp::setupQuadSelectionPages(){
     guiQuadSelectionPanelSecond.setShowHeader(false);
 
     vector<ofParameter<bool>> quads;
-    for(int i=0;i<72;i++){
+    for(int i=0;i<73;i++){
         quads.push_back(ofParameter<bool>(to_string(i),false));
     }
     for(unsigned int i = 0; i < 36; i++) {
@@ -140,12 +140,14 @@ void ofApp::setupQuadSelectionPages(){
         quadSelectionParametersClass.add(quads.at(i));
         //guiQuadSelectionPanel.add(new ofxToggle(quads.at(i).set(to_string(i),false),20, 20));
     }
-    for(unsigned int i = 36; i < quads.size(); i++) {
+    for(unsigned int i = 36; i < quads.size()-1; i++) {
         //guiQuadSelectionPanelSecond.add(new ofxToggle(quads.at(i).set(to_string(i),false),20, 20));
         guiQuadSelectionPanelSecond.add(new ofxMinimalToggle(quads.at(i),24, 24));
         quadSelectionParametersClass.add(quads.at(i));
     }
-    quadSelectionParametersClass.getBool("3")=true;
+    //quadSelectionParametersClass.getBool("3")=true;
+    guiQuadSelectionPanelSecond.add(new ofxMinimalToggle(quads.at(72).set("add quad",false),90, 24));
+    quadSelectionParametersClass.add(quads.at(72));
     //Groups
     guiQuadSelectionPanelGroup.setup("Groups","",770,00);
     guiQuadSelectionPanelGroup.setAlignHorizontal();
@@ -361,6 +363,17 @@ void ofApp::guiEventQuadOptions(ofAbstractParameter &e){
     }
 }
 void ofApp::guiEvent(ofAbstractParameter &e){
+        cout<<e.getName()<<endl;
+    if (quadSelectionParametersClass.size()==1){
+        for(unsigned int i=0;i<quadSelectionParametersClass.size();i++){
+            if(quadSelectionParametersClass.getBool(i)){
+                activeQuad=i;
+                ofxOscMessage m;
+                msg.setActiveQuad(m,activeQuad);
+                sender.sendMessage(m);
+            }
+        }
+    }
         for(unsigned int i=0;i<quadSelectionParametersClass.size();i++){
 
             if(quadSelectionParametersClass.getBool(i)){
@@ -394,7 +407,24 @@ void ofApp::guiEventInputs(ofAbstractParameter &e){
 
 }
 void ofApp::guiEventQuad(ofAbstractParameter &e){
-    if(e.cast<bool>()){
+    if (quadSelectionParametersClass.size()==1){
+        for(unsigned int i=0;i<quadSelectionParametersClass.size();i++){
+            if(quadSelectionParametersClass.getBool(i)){
+                activeQuad=i;
+                ofxOscMessage m;
+                msg.setActiveQuad(m,activeQuad);
+                sender.sendMessage(m);
+            }
+        }
+    }
+    if (e.getName()=="add quad"){
+        ofxOscMessage m;
+        m.setAddress("/surface/add");
+        m.addIntArg(0);
+        sender.sendMessage(m);
+        cout << m.getAddress() +" " +to_string(m.getArgAsFloat(0))<< endl;
+    }
+    else if(e.cast<bool>()){
         activeQuad=atoi(e.getName().c_str());
         ofxOscMessage m;
         msg.setActiveQuad(m,activeQuad);
