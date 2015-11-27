@@ -50,7 +50,6 @@ void oscMessages::setTheParameters(ofAbstractParameter &e,ofxOscMessage &m){
                m.addFloatArg(tmp.y);
           }
           else if(e.type() == typeid(ofParameter<ofVec3f>).name()){
-
                ofVec3f tmp=e.cast<ofVec3f>();
                m.addFloatArg(tmp.x);
                m.addFloatArg(tmp.y);
@@ -64,7 +63,7 @@ void oscMessages::setTheParameters(ofAbstractParameter &e,ofxOscMessage &m){
                m.addFloatArg(tmp.a);
           }
           else if(e.type() == typeid(ofParameter<ofFloatColor>).name()){
-               ofColor tmp=e.cast<ofColor>();
+               ofFloatColor tmp=e.cast<ofFloatColor>();
                m.addFloatArg(tmp.r);
                m.addFloatArg(tmp.g);
                m.addFloatArg(tmp.b);
