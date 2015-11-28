@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-    //ofSetLogLevel(OF_LOG_VERBOSE);
+    ofSetLogLevel(OF_LOG_VERBOSE);
 
     ofSetFrameRate(35);
     sender.setup(HOST, PORT);
@@ -18,11 +18,24 @@ void ofApp::setup()
     //ofEnableSmoothing();
     ofSetCircleResolution(60);
 
+    // read xml config file
+    configOk = XML.loadFile("config.xml");
+    if(!configOk)
+    {
+        cout << "WARNING: config file config.xml not found!" << endl << endl;
+    }
+    else
+    {
+        cout << "using config file config.xml" << endl;
+    }
 
+    //get value from xml
+    int preview_device = XML.getValue("PREVIEW:DEVICE",1);
 
     video_color_r = 10; video_color_g = 10; video_color_b = 10; video_color_a = 10;
 
-    //setupPreviewVideo();
+    //device selection maybe better through an xml conf file
+    setupPreviewVideo(preview_device);
     setupInputPages();
     setupQuadOptionsPages();
     setupQuadSelectionPages();
@@ -77,14 +90,19 @@ void ofApp::setup()
     ofAddListener(samplerParametersClass.parameterChangedE(),this,&ofApp::guiEvent);
     ofAddListener(samplerParametersClassSecond.parameterChangedE(),this,&ofApp::guiEvent);
 
+
+    // free xml reader from config file
+    cout << "setup done! playing now" << endl << endl;
+    XML.clear();
+
 }
 
-void ofApp::setupPreviewVideo(){
+void ofApp::setupPreviewVideo(int device=5){
     camWidth = 320;  // try to grab at this size.
     camHeight = 240;
 
-    //we can now get back a list of devices.
-    vector<ofVideoDevice> devices = vidGrabber.listDevices();
+    //we can now get back a list of devices
+   /* vector<ofVideoDevice> devices = vidGrabber.listDevices();
 
     for(unsigned int i = 0; i < devices.size(); i++){
         if(devices[i].bAvailable){
@@ -92,12 +110,15 @@ void ofApp::setupPreviewVideo(){
         }else{
             ofLogNotice() << devices[i].id << ": " << devices[i].deviceName << " - unavailable ";
         }
-    }
-    vidGrabber.setDeviceID(4);
-    vidGrabber.setDesiredFrameRate(30);
-    vidGrabber.setVerbose(false);
-    //vidGrabber.setPixelFormat(parseDesiredPixelFormat("RGB"));
-    vidGrabber.initGrabber(camWidth, camHeight);
+    }*/
+    cout<<"device"<<device<<endl;
+    vidGrabber.setVerbose(true);
+    vidGrabber.setDeviceID(device);
+    vidGrabber.setDesiredFrameRate(15);
+    vidGrabber.setPixelFormat(OF_PIXELS_YUY2 );
+    //vidGrabber.initGrabber(camWidth, camHeight);
+    vidGrabber.setup(camWidth, camHeight);
+
 }
 void ofApp::setupQuadSelectionPages(){
      //QuadSelection----------------------------------------
@@ -110,7 +131,7 @@ void ofApp::setupQuadSelectionPages(){
     guiQuadSelectionPanelSecond.setShowHeader(false);
 
     vector<ofParameter<bool>> quads;
-    for(int i=0;i<72;i++){
+    for(int i=0;i<73;i++){
         quads.push_back(ofParameter<bool>(to_string(i),false));
     }
     for(unsigned int i = 0; i < 36; i++) {
@@ -119,12 +140,14 @@ void ofApp::setupQuadSelectionPages(){
         quadSelectionParametersClass.add(quads.at(i));
         //guiQuadSelectionPanel.add(new ofxToggle(quads.at(i).set(to_string(i),false),20, 20));
     }
-    for(unsigned int i = 36; i < quads.size(); i++) {
+    for(unsigned int i = 36; i < quads.size()-1; i++) {
         //guiQuadSelectionPanelSecond.add(new ofxToggle(quads.at(i).set(to_string(i),false),20, 20));
         guiQuadSelectionPanelSecond.add(new ofxMinimalToggle(quads.at(i),24, 24));
         quadSelectionParametersClass.add(quads.at(i));
     }
-    quadSelectionParametersClass.getBool("3")=true;
+    //quadSelectionParametersClass.getBool("3")=true;
+    guiQuadSelectionPanelSecond.add(new ofxMinimalToggle(quads.at(72).set("add quad",false),90, 24));
+    quadSelectionParametersClass.add(quads.at(72));
     //Groups
     guiQuadSelectionPanelGroup.setup("Groups","",770,00);
     guiQuadSelectionPanelGroup.setAlignHorizontal();
@@ -324,7 +347,7 @@ void ofApp::draw()
     inputPages.draw();
     guiOptionPanel.draw();
     quadOptionsPages.draw();
-    //vidGrabber.draw(460,100);
+    vidGrabber.draw(460,100);
     samplerPage.draw();
 
 }
@@ -340,6 +363,17 @@ void ofApp::guiEventQuadOptions(ofAbstractParameter &e){
     }
 }
 void ofApp::guiEvent(ofAbstractParameter &e){
+        cout<<e.getName()<<endl;
+    if (quadSelectionParametersClass.size()==1){
+        for(unsigned int i=0;i<quadSelectionParametersClass.size();i++){
+            if(quadSelectionParametersClass.getBool(i)){
+                activeQuad=i;
+                ofxOscMessage m;
+                msg.setActiveQuad(m,activeQuad);
+                sender.sendMessage(m);
+            }
+        }
+    }
         for(unsigned int i=0;i<quadSelectionParametersClass.size();i++){
 
             if(quadSelectionParametersClass.getBool(i)){
@@ -373,7 +407,24 @@ void ofApp::guiEventInputs(ofAbstractParameter &e){
 
 }
 void ofApp::guiEventQuad(ofAbstractParameter &e){
-    if(e.cast<bool>()){
+    if (quadSelectionParametersClass.size()==1){
+        for(unsigned int i=0;i<quadSelectionParametersClass.size();i++){
+            if(quadSelectionParametersClass.getBool(i)){
+                activeQuad=i;
+                ofxOscMessage m;
+                msg.setActiveQuad(m,activeQuad);
+                sender.sendMessage(m);
+            }
+        }
+    }
+    if (e.getName()=="add quad"){
+        ofxOscMessage m;
+        m.setAddress("/surface/add");
+        m.addIntArg(0);
+        sender.sendMessage(m);
+        cout << m.getAddress() +" " +to_string(m.getArgAsFloat(0))<< endl;
+    }
+    else if(e.cast<bool>()){
         activeQuad=atoi(e.getName().c_str());
         ofxOscMessage m;
         msg.setActiveQuad(m,activeQuad);

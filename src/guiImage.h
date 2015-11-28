@@ -5,7 +5,7 @@ class GuiImage {
 public:
     void setup();
     void draw();
-    
+
     ofParameterGroup imageParameters;
     ofParameter<bool> gItoggleOnOff;
     ofParameter<bool> gItoggleLoad;
@@ -14,6 +14,7 @@ public:
     ofParameter<bool> gItoggKeepAspect;
     ofParameter<bool> gItoggHflip;
     ofParameter<bool> gItoggVflip;
-    ofParameter<ofColor> gIcolor;
+    //ofParameter<ofColor> gIcolor;
+    ofParameter<ofFloatColor> gIcolor;
     ofParameter<bool> gItoggGreenscreen;
 };

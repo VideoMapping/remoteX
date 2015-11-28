@@ -45,13 +45,12 @@ void oscMessages::setTheParameters(ofAbstractParameter &e,ofxOscMessage &m){
                m.addFloatArg(e.cast<float>().get());
           }
           else if(e.type() == typeid(ofParameter<ofVec2f>).name()){
-               ofVec2f tmp=e.cast<ofVec2f>();         
+               ofVec2f tmp=e.cast<ofVec2f>();
                m.addFloatArg(tmp.x);
                m.addFloatArg(tmp.y);
           }
           else if(e.type() == typeid(ofParameter<ofVec3f>).name()){
-           
-               ofVec3f tmp=e.cast<ofVec3f>();         
+               ofVec3f tmp=e.cast<ofVec3f>();
                m.addFloatArg(tmp.x);
                m.addFloatArg(tmp.y);
                m.addFloatArg(tmp.z);
@@ -63,15 +62,22 @@ void oscMessages::setTheParameters(ofAbstractParameter &e,ofxOscMessage &m){
                m.addFloatArg(tmp.b);
                m.addFloatArg(tmp.a);
           }
+          else if(e.type() == typeid(ofParameter<ofFloatColor>).name()){
+               ofFloatColor tmp=e.cast<ofFloatColor>();
+               m.addFloatArg(tmp.r);
+               m.addFloatArg(tmp.g);
+               m.addFloatArg(tmp.b);
+               m.addFloatArg(tmp.a);
+          }
 }
 void oscMessages::setVideo(ofAbstractParameter &e,ofxOscMessage &m,string adress){
      string name=e.getName();
-     if(name == "Video On/Off")m.setAddress(adress+"/video/show");     
+     if(name == "Video On/Off")m.setAddress(adress+"/video/show");
      else if(name == "Load Video")m.setAddress("/active/video/load");
-     else if(name == "Scale Video")m.setAddress(adress+"/video/mult/xy");  
+     else if(name == "Scale Video")m.setAddress(adress+"/video/mult/xy");
      else if(name == "Fit Video to quad")m.setAddress(adress+"/video/fit");
-     else if(name == "Keep Video aspect ratio")m.setAddress(adress+"/video/keepaspect");     
-     else if(name == "Video Horizontal flip")m.setAddress(adress+"/video/hmirror");     
+     else if(name == "Keep Video aspect ratio")m.setAddress(adress+"/video/keepaspect");
+     else if(name == "Video Horizontal flip")m.setAddress(adress+"/video/hmirror");
      else if(name == "Video Vertical flip")m.setAddress(adress+"/video/vmirror");
      else if(name == "Video color")m.setAddress(adress+"/video/color");
      else if(name == "Video Audio Volume")m.setAddress(adress+"/video/volume");
@@ -84,13 +90,13 @@ void oscMessages::setImage(ofAbstractParameter &e,ofxOscMessage &m,string adress
      string name=e.getName();
      //     //image
 
-     if(name == "Image On/Off")m.setAddress(adress+"/img/show");     
-     else if(name == "Load Image")m.setAddress("/active/img/load");     
-     else if(name == "Fit image to quad")m.setAddress(adress+"/img/fit");     
+     if(name == "Image On/Off")m.setAddress(adress+"/img/show");
+     else if(name == "Load Image")m.setAddress("/active/img/load");
+     else if(name == "Fit image to quad")m.setAddress(adress+"/img/fit");
      else if(name == "Keep image aspect ratio")m.setAddress(adress+"/img/keepaspect");
-     else if(name == "Scale Image")m.setAddress(adress+"/img/mult/xy");  
-     else if(name == "Image horizontal flip")m.setAddress(adress+"/img/hmirror");     
-     else if(name == "Image vertical flip")m.setAddress(adress+"/img/vmirror");     
+     else if(name == "Scale Image")m.setAddress(adress+"/img/mult/xy");
+     else if(name == "Image horizontal flip")m.setAddress(adress+"/img/hmirror");
+     else if(name == "Image vertical flip")m.setAddress(adress+"/img/vmirror");
      else if(name == "Image Greenscreen")m.setAddress(adress+"/img/greenscreen");
      else if(name == "Image color")m.setAddress(adress+"/img/color");
 
@@ -99,16 +105,16 @@ void oscMessages::setKinect(ofAbstractParameter &e,ofxOscMessage &m,string adres
      string name=e.getName();
      //Kinect------------------------------------------------------------------
      if(name == "Kinect On/Off")m.setAddress(adress+"/kinect/show");
-     else if(name == "Kinect close/open")m.setAddress(adress+"/kinect/close");     
-     else if(name == "Kinect show image")m.setAddress(adress+"/kinect/show/image");     
-     else if(name == "Kinect grayscale")m.setAddress(adress+"/kinect/show/grayscale");     
-     else if(name == "Kinect mask")m.setAddress(adress+"/kinect/mask");     
-     else if(name == "Kinect detect")m.setAddress(adress+"/kinect/contour");     
-     else if(name == "Scale Kinect")m.setAddress(adress+"/kinect/mult/xy");     
+     else if(name == "Kinect close/open")m.setAddress(adress+"/kinect/close");
+     else if(name == "Kinect show image")m.setAddress(adress+"/kinect/show/image");
+     else if(name == "Kinect grayscale")m.setAddress(adress+"/kinect/show/grayscale");
+     else if(name == "Kinect mask")m.setAddress(adress+"/kinect/mask");
+     else if(name == "Kinect detect")m.setAddress(adress+"/kinect/contour");
+     else if(name == "Scale Kinect")m.setAddress(adress+"/kinect/mult/xy");
      else if(name == "Kinect threshold near")m.setAddress(adress+"/kinect/threshold/near");
      else if(name == "Kinect threshold far")m.setAddress(adress+"/kinect/threshold/far");
      else if(name == "Kinect angle")m.setAddress(adress+"/kinect/angle");
-     else if(name == "Kinect blur")m.setAddress(adress+"/kinect/blur");     
+     else if(name == "Kinect blur")m.setAddress(adress+"/kinect/blur");
      else if(name == "Kinect smooth")m.setAddress(adress+"/kinect/contour/smooth");
      else if(name == "Kinect simplify")m.setAddress(adress+"/kinect/contour/simplelse ify");
      else if(name == "Kinect min blob")m.setAddress(adress+"/kinect/contour/area/min");
@@ -120,11 +126,11 @@ void oscMessages::setCamera(ofAbstractParameter &e,ofxOscMessage &m,string adres
      //--camera----------------------------------------------------------
 
      if(name == "Camera On/Off")m.setAddress(adress+"/cam/show");
-     else if(name == "Scale Camera")m.setAddress(adress+"/cam/mult/xy");     
-     else if(name == "Fit Camera to quad")m.setAddress(adress+"/cam/fit");     
-     else if(name == "Keep Camera aspect ratio")m.setAddress(adress+"/cam/keepaspect");     
-     else if(name == "Camera horizontal flip")m.setAddress(adress+"/cam/hmirror");     
-     else if(name == "Camera vertical flip")m.setAddress(adress+"/cam/vmirror");     
+     else if(name == "Scale Camera")m.setAddress(adress+"/cam/mult/xy");
+     else if(name == "Fit Camera to quad")m.setAddress(adress+"/cam/fit");
+     else if(name == "Keep Camera aspect ratio")m.setAddress(adress+"/cam/keepaspect");
+     else if(name == "Camera horizontal flip")m.setAddress(adress+"/cam/hmirror");
+     else if(name == "Camera vertical flip")m.setAddress(adress+"/cam/vmirror");
      else if(name == "Camera color")m.setAddress(adress+"/cam/color");
      else if(name == "Camera Volume")m.setAddress(adress+"/cam/volume");
      else if(name == "Camera Greenscreen")m.setAddress(adress+"/cam/greenscreen");
@@ -144,7 +150,7 @@ void oscMessages::setCamera(ofAbstractParameter &e,ofxOscMessage &m,string adres
 void oscMessages::set3d(ofAbstractParameter &e,ofxOscMessage &m,string adress){
      string name=e.getName();
      //     //3d model
-     if(name == "Load 3d")m.setAddress("/active/3d/load");     
+     if(name == "Load 3d")m.setAddress("/active/3d/load");
      else if(name == "3d Scale")m.setAddress(adress+"/3d/scale/xyz");
      else if(name == "3d Rotate")m.setAddress(adress+"/3d/rotate/xyz");
      else if(name == "3d Move")m.setAddress(adress+"/3d/move/xyz");
@@ -175,10 +181,10 @@ void oscMessages::set3d(ofAbstractParameter &e,ofxOscMessage &m,string adress){
 void oscMessages::setSlideshow(ofAbstractParameter &e,ofxOscMessage &m,string adress){
      string name=e.getName();
      if(name == "Slideshow On/Off")m.setAddress(adress+"/slideshow/show");
-     else if(name == "Load Slideshow")m.setAddress("/active/slideshow/folder");     
-     else if(name == "Fit Slideshow to quad")m.setAddress(adress+"/slideshow/fit");     
-     else if(name == "Kinecteep Slideshow aspect ratio")m.setAddress(adress+"/slideshow/keep_aspect");     
-     else if(name == "sh Greenscreen")m.setAddress(adress+"/slideshow/greenscreen");     
+     else if(name == "Load Slideshow")m.setAddress("/active/slideshow/folder");
+     else if(name == "Fit Slideshow to quad")m.setAddress(adress+"/slideshow/fit");
+     else if(name == "Kinecteep Slideshow aspect ratio")m.setAddress(adress+"/slideshow/keep_aspect");
+     else if(name == "sh Greenscreen")m.setAddress(adress+"/slideshow/greenscreen");
      else if(name == "sh ts duration")m.setAddress(adress+"/slideshow/duration");
 }
 void oscMessages::setOscMessageQuadOptions(ofAbstractParameter &e,ofxOscMessage &m, int quad){

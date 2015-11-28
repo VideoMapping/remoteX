@@ -12,6 +12,7 @@
 #include "guiSampler.h"
 #include "guiOptions.h"
 #include "guiQuadOptions.h"
+#include "ofxXmlSettings.h"
 
 #define HOST "localhost"
 #define PORT 12345
@@ -25,7 +26,7 @@ class ofApp : public ofBaseApp
     void setupInputPages();
     void setupQuadOptionsPages();
     void setupQuadSelectionPages();
-    void setupPreviewVideo();
+    void setupPreviewVideo(int device);
 	void update();
 	void draw();
 	void exit();
@@ -46,7 +47,7 @@ class ofApp : public ofBaseApp
     ofxPanelExtended guiVideoPanel;
     ofParameterGroup videoParametersClass;
     GuiVideo videoGroup;
-    ofxGuiPage videoPage; 
+    ofxGuiPage videoPage;
     //ImagePanel
     ofxPanelExtended guiImagePanel;
     ofParameterGroup imageParametersClass;
@@ -58,7 +59,7 @@ class ofApp : public ofBaseApp
     ofParameterGroup kinectParametersSecondClass;
     ofxPanelExtended guiKinectPanel2;
     GuiKinect kinectGroup;
-    ofxGuiPage kinectPage; 
+    ofxGuiPage kinectPage;
     //CameraPanel
     ofParameterGroup cameraParametersClass;
     ofxPanelExtended guiCameraPanel;
@@ -73,8 +74,8 @@ class ofApp : public ofBaseApp
     ofParameter<bool> cam2;
     ofParameter<bool> cam3;
     ofParameterGroup camMatrixParameters;
-    ofxGuiMatrix matrixSampler; 
-    ofxGuiMatrix matrixBuffer; 
+    ofxGuiMatrix matrixSampler;
+    ofxGuiMatrix matrixBuffer;
     //3dPanel
     ofParameterGroup Parameters3dClass;
     ofxPanelExtended gui3dPanel;
@@ -91,7 +92,7 @@ class ofApp : public ofBaseApp
     GuiSlideshow slideshowGroup;
     ofxGuiPage slideshowPage;
     //Input pages
-    ofxTabbedPages inputPages; 
+    ofxTabbedPages inputPages;
 
     //optionsPanel
     ofxPanelExtended guiOptionPanel;
@@ -120,7 +121,7 @@ class ofApp : public ofBaseApp
     ofParameterGroup quadOptionsParametersClassScTs;
     ofxPanelExtended guiQuadOptionsPanelScTs;
     ofxGuiPage quadOptionsEffectsPage2;
-    ofxTabbedPages quadOptionsPages; 
+    ofxTabbedPages quadOptionsPages;
     GuiQuadOptions quadOptionsGroup;
     //SamplerPanel
     ofxPanelExtended guiSamplerPanel;
@@ -130,7 +131,7 @@ class ofApp : public ofBaseApp
     ofParameterGroup samplerParametersClassCamBuf;
     ofxGuiMatrix matrixSamCam;
     ofxGuiMatrix matrixBufferSam;
-    ofxGuiPage  samplerPage; 
+    ofxGuiPage  samplerPage;
     GuiSampler samplerGroup;
     //previewVideo
 
@@ -162,6 +163,9 @@ class ofApp : public ofBaseApp
     int nbOfCam=4;
     int SharedSamplerIndex,SharedSamplerBufferIndex=0;
 
+    // xml
+    bool configOk;
+    ofxXmlSettings XML;
 
     ofTrueTypeFont font;
 

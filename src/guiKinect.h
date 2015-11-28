@@ -8,7 +8,7 @@ class GuiKinect {
 public:
     void setup();
     void draw();
-    
+
     ofParameterGroup kinectParameters;
     ofParameter<bool> gKtoggleOnOff;
     ofParameter<bool> gKtoggleLoad;
@@ -21,7 +21,8 @@ public:
     ofParameter<bool> gKtoggKeepAspect;
     ofParameter<bool> gKtoggHflip;
     ofParameter<bool> gKtoggVflip;
-    ofParameter<ofColor> gKcolor;
+    //ofParameter<ofColor> gKcolor;
+    ofParameter<ofFloatColor> gKcolor;
     ofParameter<bool> gKtoggGreenscreen;
     ofParameterGroup kinectParametersSecond;
     ofParameter<float>  gKfsliderTrshNear;
